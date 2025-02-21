@@ -1,0 +1,85 @@
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --header-blue: #b7d7e8;
+    --nav-gray: rgb(241, 241, 241);
+
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 5fr;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+h1, h2, h3, h4, h5 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+h1 {
+    grid-column: 1 / 3;
+    padding: 4rem;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 500;
+    background-color: var(--header-blue);
+}
+
+nav {
+    grid-row: 2 / 3;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    background-color: var(--nav-gray);
+    font-size: 1.8rem;
+}
+
+nav > h2 {
+    font-size: 2.2rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+nav > button {
+    padding: 0px;
+    border: none;
+    width: max-content;
+    margin-left: 1rem;
+    background-color: var(--nav-gray);
+}
+
+nav > button:last-child {
+    margin-top: 2rem;
+}
+
+nav > button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+main {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
