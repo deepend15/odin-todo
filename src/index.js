@@ -15,3 +15,16 @@ personalBtn.addEventListener("click", loadPersonal);
 workBtn.addEventListener("click", loadWork);
 hobbiesBtn.addEventListener("click", loadHobbies);
 groceryBtn.addEventListener("click", loadGrocery);
+
+
+function toggleNavButtonHighlighted(e) {
+    e.target.classList.toggle("nav-button-highlighted");
+}
+
+const navButtonWrappers = document.querySelectorAll(".nav-button-wrapper");
+
+navButtonWrappers.forEach((wrapper) => {
+    wrapper.addEventListener("mouseenter", toggleNavButtonHighlighted);
+    wrapper.addEventListener("mouseleave", toggleNavButtonHighlighted);
+});
+

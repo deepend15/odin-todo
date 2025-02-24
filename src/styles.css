@@ -56,7 +56,6 @@ nav {
     padding: 3rem;
     display: flex;
     flex-direction: column;
-    gap: 1.8rem;
     background-color: var(--nav-gray);
 }
 
@@ -66,7 +65,14 @@ nav > h2 {
     margin-bottom: 2rem;
 }
 
-nav > button {
+.nav-button-wrapper {
+    /* below extends the div past the parent nav's padding */
+
+    margin: 0 -3rem;
+    padding: 0.9rem 3rem;
+}
+
+.nav-button-wrapper > button {
     font-size: 1.8rem;
     padding: 0px;
     border: none;
@@ -75,7 +81,7 @@ nav > button {
     background-color: var(--nav-gray);
 }
 
-nav > button:hover {
+.nav-button-wrapper > button:hover {
     cursor: pointer;
     text-decoration: underline;
 }
@@ -102,6 +108,13 @@ nav > button:hover {
 
 .nav-add-and-remove-buttons > button:active {
     background-color: var(--nav-button-active);
+}
+
+.nav-button-highlighted {
+    background-color: var(--header-blue);
+    button {
+        background-color: var(--header-blue);
+    }
 }
 
 main {
