@@ -17,7 +17,7 @@ html {
 :root {
     --header-blue: #b7d7e8;
     --nav-gray: rgb(241, 241, 241);
-    --nav-button-active: rgb(219, 219, 219);
+    --project-button-active: rgb(219, 219, 219);
 }
 
 body {
@@ -65,14 +65,14 @@ nav > h2 {
     margin-bottom: 2rem;
 }
 
-.nav-button-wrapper {
+.project-button-wrapper {
     /* below extends the div past the parent nav's padding */
 
     margin: 0 -3rem;
     padding: 0.9rem 3rem;
 }
 
-.nav-button-wrapper > button {
+.project-button-wrapper > button {
     font-size: 1.8rem;
     padding: 0px;
     border: none;
@@ -81,12 +81,7 @@ nav > h2 {
     background-color: var(--nav-gray);
 }
 
-.nav-button-wrapper > button:hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.nav-add-and-remove-buttons {
+.add-and-remove-project-buttons {
     margin-top: 2rem;
     display: grid;
     grid-template-columns: max-content;
@@ -94,7 +89,7 @@ nav > h2 {
     gap: 1.5rem;
 }
 
-.nav-add-and-remove-buttons > button {
+.add-and-remove-project-buttons > button {
     padding: 8px 14px;
     border-radius: 16px;
     border: none;
@@ -102,19 +97,37 @@ nav > h2 {
     box-shadow: 0 0 5px silver;
 }
 
-.nav-add-and-remove-buttons > button:hover {
+.add-and-remove-project-buttons > button:hover {
     box-shadow: 0 0 8px gray;
 }
 
-.nav-add-and-remove-buttons > button:active {
-    background-color: var(--nav-button-active);
+.add-and-remove-project-buttons > button:active {
+    background-color: var(--project-button-active);
 }
 
-.nav-button-highlighted {
+.project-button-highlighted {
+    box-shadow: 0 10px 10px -10px silver;
+    background-color: #d7ebf7;
+    button {
+        background-color: #d7ebf7;
+        cursor: pointer;
+    }
+    button:hover {
+        text-decoration: underline;
+    }
+}
+
+.project-button-selected {
+    box-shadow: 0 10px 10px -10px silver;
     background-color: var(--header-blue);
     button {
         background-color: var(--header-blue);
     }
+    z-index: 1;
+}
+
+.project-button-selected.project-button-highlighted {
+    box-shadow: 0 12px 8px -8px silver;
 }
 
 main {
@@ -124,6 +137,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: white;
 }
 
 main > h3 {
