@@ -1,11 +1,11 @@
 export const todos = (function () {
+    const myTodos = [];
+
+    const getAllTodos = () => myTodos;
+    
     function createTodo(title, description, dueDate, priority, project) {
         return { title, description, dueDate, priority, project }
     };
-
-    const myTodos = [];
-
-    const getTodos = () => myTodos;
 
     function addTodo(title, description, dueDate, priority, project) 
         {
@@ -13,5 +13,5 @@ export const todos = (function () {
             myTodos.push(newTodo);
         };
 
-    return { getTodos, addTodo };
+    return { getAllTodos, addTodo };
 })();
