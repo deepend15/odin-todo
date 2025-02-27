@@ -3,6 +3,7 @@ import { loadPersonal } from "./personal-page.js";
 import { loadWork } from "./work-page.js";
 import { loadHobbies } from "./hobbies-page.js";
 import { loadGrocery } from "./grocery-page.js";
+import { todos } from "./todo-objects.js";
 
 const personalBtn = document.querySelector(".personal-btn");
 const workBtn = document.querySelector(".work-btn");
