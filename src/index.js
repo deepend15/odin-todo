@@ -1,4 +1,7 @@
 import "./styles.css";
+import { loadToday } from "./today-page.js";
+import { loadAll } from "./all-page.js";
+import { loadCompleted } from "./completed-page.js";
 import { loadPersonal } from "./personal-page.js";
 import { loadWork } from "./work-page.js";
 import { loadHobbies } from "./hobbies-page.js";
@@ -10,14 +13,17 @@ const personalBtn = document.querySelector(".personal-btn");
 const workBtn = document.querySelector(".work-btn");
 const hobbiesBtn = document.querySelector(".hobbies-btn");
 const groceryBtn = document.querySelector(".grocery-btn");
+const todayBtn = document.querySelector(".today-btn");
+const allBtn = document.querySelector(".all-btn");
+const completedBtn = document.querySelector(".completed-btn");
 
-const projectButtonWrappers = document.querySelectorAll(".project-button-wrapper");
+const navListButtonWrappers = document.querySelectorAll(".nav-list-button-wrapper");
 
-loadPersonal();
-personalBtn.parentElement.classList.add("project-button-selected");
+loadToday();
+todayBtn.parentElement.classList.add("todo-button-selected");
 
 const addInitialProjects = (function () {
-    for (const wrapper of projectButtonWrappers) {
+    for (const wrapper of navListButtonWrappers) {
         projects.addProject(wrapper.firstElementChild.textContent.slice(2).toLowerCase());
     };
 })();
@@ -34,10 +40,29 @@ function getCurrentProject() {
 }
 
 function unselectCurrentProject() {
-    projectButtonWrappers.forEach((wrapper) => {
+    navListButtonWrappers.forEach((wrapper) => {
         wrapper.classList.remove("project-button-selected");
+        wrapper.classList.remove("todo-button-selected");
     });
 }
+
+todayBtn.parentElement.addEventListener("click", () => {
+    loadToday();
+    unselectCurrentProject();
+    todayBtn.parentElement.classList.add("todo-button-selected");
+});
+
+allBtn.parentElement.addEventListener("click", () => {
+    loadAll();
+    unselectCurrentProject();
+    allBtn.parentElement.classList.add("todo-button-selected");
+});
+
+completedBtn.parentElement.addEventListener("click", () => {
+    loadCompleted();
+    unselectCurrentProject();
+    completedBtn.parentElement.classList.add("todo-button-selected");
+});
 
 personalBtn.parentElement.addEventListener("click", () => {
     loadPersonal();
@@ -63,12 +88,12 @@ groceryBtn.parentElement.addEventListener("click", () => {
     groceryBtn.parentElement.classList.add("project-button-selected");
 });
 
-function toggleProjectButtonHighlighted(e) {
-    e.target.classList.toggle("project-button-highlighted");
+function toggleNavListButtonHighlighted(e) {
+    e.target.classList.toggle("nav-list-button-highlighted");
 }
 
-projectButtonWrappers.forEach((wrapper) => {
-    wrapper.addEventListener("mouseenter", toggleProjectButtonHighlighted);
-    wrapper.addEventListener("mouseleave", toggleProjectButtonHighlighted);
+navListButtonWrappers.forEach((wrapper) => {
+    wrapper.addEventListener("mouseenter", toggleNavListButtonHighlighted);
+    wrapper.addEventListener("mouseleave", toggleNavListButtonHighlighted);
 });
 
