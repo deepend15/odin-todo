@@ -35,12 +35,16 @@ console.log(projects.getAllProjects());
 function getCurrentProject() {
     const match = [];
     const selectedProject = document.querySelector(".project-button-selected");
-    for (const project of projects.getAllProjects()) {
-        if (project.title === selectedProject.firstElementChild.textContent.slice(2).toLowerCase()) {
-            match.push(project);
-        };
-    };
-    return match[0];
+    if (selectedProject) {
+        for (const project of projects.getAllProjects()) {
+            if (project.title === selectedProject.firstElementChild.textContent.slice(2).toLowerCase()) {
+                match.push(project);
+            }
+        }
+        return match[0];
+    } else {
+        console.log('There is no selected project.');
+    }
 }
 
 function unselectCurrentProject() {
