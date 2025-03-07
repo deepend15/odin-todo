@@ -23,10 +23,14 @@ loadToday();
 todayBtn.parentElement.classList.add("todo-button-selected");
 
 const addInitialProjects = (function () {
-    for (const wrapper of navListButtonWrappers) {
+    const projectNav = document.querySelector(".project-nav");
+    const projectButtonWrappers = projectNav.querySelectorAll(".nav-list-button-wrapper");
+    for (const wrapper of projectButtonWrappers) {
         projects.addProject(wrapper.firstElementChild.textContent.slice(2).toLowerCase());
     };
 })();
+
+console.log(projects.getAllProjects());
 
 function getCurrentProject() {
     const match = [];

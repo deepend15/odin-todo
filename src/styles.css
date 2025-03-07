@@ -37,6 +37,10 @@ h1, h2, h3, h4, h5 {
     font-weight: inherit;
 }
 
+ul {
+    list-style: none;
+}
+
 header {
     grid-column: 1 / 3;
     padding: 4rem;
@@ -127,7 +131,15 @@ nav > h2 {
     button {
         background-color: var(--header-blue);
     }
+
+    /* if the row directly below 'selected' is highlighted, 'selected' will retain its
+    box-shadow, creating a layered effect over the highlighted row.
+    
+    'position:relative' is needed because the rows are li's (if they were divs, this would
+    not be needed).
+    */
     z-index: 1;
+    position: relative;
 }
 
 .project-button-selected.nav-list-button-highlighted,
