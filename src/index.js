@@ -30,6 +30,8 @@ const addInitialProjects = (function () {
     };
 })();
 
+// todos.addTodo('Call Mom', 'make sure to call Mom, she worries', '03-12-2025', 1, 'personal', 'no');
+
 console.log(projects.getAllProjects());
 
 function getCurrentProject() {
@@ -47,7 +49,7 @@ function getCurrentProject() {
     }
 }
 
-function unselectCurrentProject() {
+function unselectCurrentTab() {
     navListButtonWrappers.forEach((wrapper) => {
         wrapper.classList.remove("project-button-selected");
         wrapper.classList.remove("todo-button-selected");
@@ -56,43 +58,43 @@ function unselectCurrentProject() {
 
 todayBtn.parentElement.addEventListener("click", () => {
     loadToday();
-    unselectCurrentProject();
+    unselectCurrentTab();
     todayBtn.parentElement.classList.add("todo-button-selected");
 });
 
 allBtn.parentElement.addEventListener("click", () => {
     loadAll();
-    unselectCurrentProject();
+    unselectCurrentTab();
     allBtn.parentElement.classList.add("todo-button-selected");
 });
 
 completedBtn.parentElement.addEventListener("click", () => {
     loadCompleted();
-    unselectCurrentProject();
+    unselectCurrentTab();
     completedBtn.parentElement.classList.add("todo-button-selected");
 });
 
 personalBtn.parentElement.addEventListener("click", () => {
     loadPersonal();
-    unselectCurrentProject();
+    unselectCurrentTab();
     personalBtn.parentElement.classList.add("project-button-selected");
 });
 
 workBtn.parentElement.addEventListener("click", () => {
     loadWork();
-    unselectCurrentProject();
+    unselectCurrentTab();
     workBtn.parentElement.classList.add("project-button-selected");
 });
 
 hobbiesBtn.parentElement.addEventListener("click", () => {
     loadHobbies();
-    unselectCurrentProject();
+    unselectCurrentTab();
     hobbiesBtn.parentElement.classList.add("project-button-selected");
 });
 
 groceryBtn.parentElement.addEventListener("click", () => {
     loadGrocery();
-    unselectCurrentProject();
+    unselectCurrentTab();
     groceryBtn.parentElement.classList.add("project-button-selected");
 });
 

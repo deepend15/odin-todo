@@ -3,13 +3,13 @@ export const todos = (function () {
 
     const getAllTodos = () => myTodos;
     
-    function createTodo(title, description, dueDate, priority, project) {
-        return { title, description, dueDate, priority, project }
+    function createTodo(title, description, dueDate, priority, project, isComplete ) {
+        return { title, description, dueDate, priority, project, isComplete }
     };
 
-    function addTodo(title, description, dueDate, priority, project) 
+    function addTodo(title, description, dueDate, priority, project, isComplete) 
         {
-            let newTodo = createTodo(title, description, dueDate, priority, project);
+            let newTodo = createTodo(title, description, dueDate, priority, project, isComplete);
             myTodos.push(newTodo);
         };
 
