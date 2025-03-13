@@ -6,6 +6,9 @@ export function loadCompleted() {
     const title = document.createElement("h3");
     title.textContent = "Completed Todos";
     mainDiv.appendChild(title);
+    const todoContainer = document.createElement("div");
+    todoContainer.classList.add("todo-container");
+    mainDiv.appendChild(todoContainer);
     if (todos.getAllTodos()[0] === undefined) {
         const todosTextDiv = document.createElement("div");
         todosTextDiv.classList.add("todos-text-div");
@@ -15,6 +18,6 @@ export function loadCompleted() {
         const todosTextLine2 = document.createElement("p");
         todosTextLine2.textContent = "But we believe in you! \u00A0\uD83D\uDCAB";
         todosTextDiv.appendChild(todosTextLine2);
-        mainDiv.appendChild(todosTextDiv);
+        todoContainer.appendChild(todosTextDiv);
     };
 }

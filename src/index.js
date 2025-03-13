@@ -2,10 +2,7 @@ import "./styles.css";
 import { loadToday } from "./today-page.js";
 import { loadAll } from "./all-page.js";
 import { loadCompleted } from "./completed-page.js";
-import { loadPersonal } from "./personal-page.js";
-import { loadWork } from "./work-page.js";
-import { loadHobbies } from "./hobbies-page.js";
-import { loadGrocery } from "./grocery-page.js";
+import { loadProjectPage } from "./projects-pages.js";
 import { todos } from "./todo-objects.js";
 import { projects } from "./projects.js";
 
@@ -30,24 +27,9 @@ const addInitialProjects = (function () {
     };
 })();
 
-// todos.addTodo('Call Mom', 'make sure to call Mom, she worries', '03-12-2025', 1, 'personal', 'no');
+todos.addTodo('Call Mom', 'make sure to call Mom, she worries', '03-12-2025', 1, 'personal', 'no');
 
 console.log(projects.getAllProjects());
-
-function getCurrentProject() {
-    const match = [];
-    const selectedProject = document.querySelector(".project-button-selected");
-    if (selectedProject) {
-        for (const project of projects.getAllProjects()) {
-            if (project.title === selectedProject.firstElementChild.textContent.slice(2).toLowerCase()) {
-                match.push(project);
-            }
-        }
-        return match[0];
-    } else {
-        console.log('There is no selected project.');
-    }
-}
 
 function unselectCurrentTab() {
     navListButtonWrappers.forEach((wrapper) => {
@@ -57,45 +39,45 @@ function unselectCurrentTab() {
 }
 
 todayBtn.parentElement.addEventListener("click", () => {
-    loadToday();
     unselectCurrentTab();
     todayBtn.parentElement.classList.add("todo-button-selected");
+    loadToday();
 });
 
 allBtn.parentElement.addEventListener("click", () => {
-    loadAll();
     unselectCurrentTab();
     allBtn.parentElement.classList.add("todo-button-selected");
+    loadAll();
 });
 
 completedBtn.parentElement.addEventListener("click", () => {
-    loadCompleted();
     unselectCurrentTab();
     completedBtn.parentElement.classList.add("todo-button-selected");
+    loadCompleted();
 });
 
 personalBtn.parentElement.addEventListener("click", () => {
-    loadPersonal();
     unselectCurrentTab();
     personalBtn.parentElement.classList.add("project-button-selected");
+    loadProjectPage();
 });
 
 workBtn.parentElement.addEventListener("click", () => {
-    loadWork();
     unselectCurrentTab();
     workBtn.parentElement.classList.add("project-button-selected");
+    loadProjectPage();
 });
 
 hobbiesBtn.parentElement.addEventListener("click", () => {
-    loadHobbies();
     unselectCurrentTab();
     hobbiesBtn.parentElement.classList.add("project-button-selected");
+    loadProjectPage();
 });
 
 groceryBtn.parentElement.addEventListener("click", () => {
-    loadGrocery();
     unselectCurrentTab();
     groceryBtn.parentElement.classList.add("project-button-selected");
+    loadProjectPage();
 });
 
 function toggleNavListButtonHighlighted(e) {

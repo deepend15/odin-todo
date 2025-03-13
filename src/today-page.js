@@ -6,6 +6,9 @@ export function loadToday() {
     const title = document.createElement("h3");
     title.textContent = "Today's Todos";
     mainDiv.appendChild(title);
+    const todoContainer = document.createElement("div");
+    todoContainer.classList.add("todo-container");
+    mainDiv.appendChild(todoContainer);
     const addTodoPageBtn = document.createElement("button");
     addTodoPageBtn.classList.add("add-todo-page-button");
     addTodoPageBtn.textContent = `+ Add Todo`;
@@ -13,7 +16,7 @@ export function loadToday() {
         const todosTextDiv = document.createElement("div");
         todosTextDiv.classList.add("todos-text-div");
         todosTextDiv.textContent = `\u2705\u00A0 Nice! You don't have any todos for today.`;
-        mainDiv.appendChild(todosTextDiv);
+        todoContainer.appendChild(todosTextDiv);
         mainDiv.appendChild(addTodoPageBtn);
     };
 }
