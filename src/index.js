@@ -27,7 +27,7 @@ const addInitialProjects = (function () {
     };
 })();
 
-todos.addTodo('Call Mom', 'make sure to call Mom, she worries', '03-12-2025', 1, 'personal', 'no');
+// todos.addTodo('Call Mom', 'make sure to call Mom, she worries', '03-12-2025', 1, 'personal', 'no');
 
 console.log(projects.getAllProjects());
 
