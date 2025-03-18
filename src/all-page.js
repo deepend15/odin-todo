@@ -1,18 +1,24 @@
 import { todos } from "./todo-objects.js";
+import { capitalize } from "./capitalize-fn.js";
 
 export function loadAll() {
     const allTodos = todos.getAllTodos();
+
     const mainDiv = document.querySelector("main");
     mainDiv.textContent = "";
+
     const title = document.createElement("h3");
     title.textContent = "All Todos";
     mainDiv.appendChild(title);
+
     const todoContainer = document.createElement("div");
     todoContainer.classList.add("todo-container");
     mainDiv.appendChild(todoContainer);
+
     const addTodoPageBtn = document.createElement("button");
     addTodoPageBtn.classList.add("add-todo-page-button");
     addTodoPageBtn.textContent = `+ Add Todo`;
+
     if (allTodos.length === 0) {
         const todosTextDiv = document.createElement("div");
         todosTextDiv.classList.add("todos-text-div");
@@ -40,7 +46,7 @@ export function loadAll() {
             const projectName = document.createElement("p");
             projectName.textContent = `Project: ${todo.project}`;
             const isComplete = document.createElement("p");
-            isComplete.textContent = `Is complete: ${todo.isComplete}`;
+            isComplete.textContent = `Completed? ${capitalize(todo.isComplete)}`;
             todoDiv.append(title, description, dueDate, priority, projectName, isComplete);
             todoContainer.appendChild(todoDiv);
         }
