@@ -16,21 +16,6 @@ const completedBtn = document.querySelector(".completed-btn");
 
 const navListButtonWrappers = document.querySelectorAll(".nav-list-button-wrapper");
 
-loadToday();
-todayBtn.parentElement.classList.add("todo-button-selected");
-
-const addInitialProjects = (function () {
-    const projectNav = document.querySelector(".project-nav");
-    const projectButtonWrappers = projectNav.querySelectorAll(".nav-list-button-wrapper");
-    for (const wrapper of projectButtonWrappers) {
-        projects.addProject(wrapper.firstElementChild.textContent.slice(2).toLowerCase());
-    };
-})();
-
-// todos.addTodo('Call Mom', 'make sure to call Mom, she worries', '03-12-2025', 1, 'personal', 'no');
-
-console.log(projects.getAllProjects());
-
 function unselectCurrentTab() {
     navListButtonWrappers.forEach((wrapper) => {
         wrapper.classList.remove("project-button-selected");
@@ -89,3 +74,25 @@ navListButtonWrappers.forEach((wrapper) => {
     wrapper.addEventListener("mouseleave", toggleNavListButtonHighlighted);
 });
 
+const addInitialProjects = (function () {
+    const projectNav = document.querySelector(".project-nav");
+    const projectButtonWrappers = projectNav.querySelectorAll(".nav-list-button-wrapper");
+    for (const wrapper of projectButtonWrappers) {
+        projects.addProject(wrapper.firstElementChild.textContent.slice(2).toLowerCase());
+    };
+})();
+
+console.log(projects.getAllProjects());
+
+todos.addTodo('Call Mom', 'make sure to call Mom, she worries', '2025-03-12T00:00:00', 1, 'personal', 'no');
+
+todos.addTodo('Do Laundry', 'do your laundry you heathen', '2025-03-20T00:00:00', 3, 'personal', 'no');
+
+todos.addTodo('Meeting with Joe', 'discuss important business', '2025-03-24T00:00:00', 1, 'work', 'no');
+
+todos.addTodo(`Shoot 100 3's`, 'gotta improve that stroke', '2025-03-22T00:00:00', 2, 'hobbies', 'no');
+
+todos.addTodo('Feed the Dog', 'dog needs to be fed', '2025-03-18T00:00:00', 1, 'personal', 'no');
+
+loadToday();
+todayBtn.parentElement.classList.add("todo-button-selected");
