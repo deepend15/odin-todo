@@ -1,4 +1,5 @@
 import { todos } from "./todo-objects.js";
+import { capitalize } from "./capitalize-fn.js";
 
 export function loadProjectPage() {
     const allTodos = todos.getAllTodos();
@@ -11,12 +12,6 @@ export function loadProjectPage() {
         return selectedProjectName;
     };
     const currentProject = getCurrentProject();
-
-    function capitalize(str) {
-        const firstLetter = str.charAt(0).toUpperCase();
-        const rest = str.slice(1);
-        return firstLetter + rest;
-    }
     const currentProjectCapitalized = capitalize(currentProject);
 
     const title = document.createElement("h3");
@@ -69,7 +64,7 @@ export function loadProjectPage() {
                 const projectName = document.createElement("p");
                 projectName.textContent = `Project: ${todo.project}`;
                 const isComplete = document.createElement("p");
-                isComplete.textContent = `Is complete: ${todo.isComplete}`;
+                isComplete.textContent = `Completed? ${capitalize(todo.isComplete)}`;
                 todoDiv.append(title, description, dueDate, priority, projectName, isComplete);
                 todoContainer.appendChild(todoDiv);
             };
