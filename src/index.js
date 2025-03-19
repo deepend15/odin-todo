@@ -92,7 +92,7 @@ todos.addTodo('Meeting with Joe', 'discuss important business', '2025-03-24T00:0
 
 todos.addTodo(`Shoot 100 3's`, 'gotta improve that stroke', '2025-03-22T00:00:00', 2, 'hobbies', 'no');
 
-todos.addTodo('Feed the Dog', 'dog needs to be fed', '2025-03-18T00:00:00', 1, 'personal', 'yes');
+todos.addTodo('Feed the Dog', 'dog needs to be fed', '2025-03-19T00:00:00', 1, 'personal', 'no');
 
 loadToday();
 todayBtn.parentElement.classList.add("todo-button-selected");

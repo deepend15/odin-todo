@@ -152,11 +152,10 @@ nav > h2 {
 main {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    padding: 3rem;
+    padding: 3rem 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
     gap: 4rem;
 }
 
@@ -184,4 +183,33 @@ main > h3 {
     border-radius: 22px;
     border: none;
     box-shadow: 0 0 7px silver;
+}
+
+.todo-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 50px;
+    row-gap: 40px;
+}
+
+.todo-div {
+    padding: 20px 10px;
+    width: 195px;
+    height: 115px;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 2px 0 1px lightgray;
+}
+
+.todo-div > p:first-child {
+    font-size: 1.9rem;
+}
+
+.todo-div > p:last-child {
+    font-size: 1.4rem;
 }

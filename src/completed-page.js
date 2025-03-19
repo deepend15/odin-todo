@@ -1,6 +1,6 @@
 import { todos } from "./todo-objects.js";
 import { format } from "date-fns";
-import { capitalize } from "./capitalize-fn.js";
+// import { capitalize } from "./capitalize-fn.js";
 
 export function loadCompleted() {
     const mainDiv = document.querySelector("main");
@@ -34,17 +34,9 @@ export function loadCompleted() {
             todoDiv.classList.add("todo-div");
             const title = document.createElement("p");
             title.textContent = todo.title;
-            const description = document.createElement("p");
-            description.textContent = todo.description;
             const dueDate = document.createElement("p");
             dueDate.textContent = `Due: ${format(new Date(todo.dueDate), 'MM/dd/yyyy')}`;
-            const priority = document.createElement("p");
-            priority.textContent = `Priority: ${todo.priority}`;
-            const projectName = document.createElement("p");
-            projectName.textContent = `Project: ${todo.project}`;
-            const isComplete = document.createElement("p");
-            isComplete.textContent = `Completed? ${capitalize(todo.isComplete)}`;
-            todoDiv.append(title, description, dueDate, priority, projectName, isComplete);
+            todoDiv.append(title, dueDate);
             todoContainer.appendChild(todoDiv);
         }
     }
