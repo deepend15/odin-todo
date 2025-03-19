@@ -1,5 +1,5 @@
 import { todos } from "./todo-objects.js";
-import { isToday } from "date-fns";
+import { format, isToday } from "date-fns";
 import { capitalize } from "./capitalize-fn.js";
 
 export function loadToday() {
@@ -43,7 +43,7 @@ export function loadToday() {
             const description = document.createElement("p");
             description.textContent = todo.description;
             const dueDate = document.createElement("p");
-            dueDate.textContent = `Due: ${todo.dueDate}`;
+            dueDate.textContent = `Due: ${format(new Date(todo.dueDate), 'MM/dd/yyyy')}`;
             const priority = document.createElement("p");
             priority.textContent = `Priority: ${todo.priority}`;
             const projectName = document.createElement("p");
