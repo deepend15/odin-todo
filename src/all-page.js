@@ -2,8 +2,6 @@ import { todos } from "./todo-objects.js";
 import { capitalize } from "./capitalize-fn.js";
 
 export function loadAll() {
-    const allTodos = todos.getAllTodos();
-
     const mainDiv = document.querySelector("main");
     mainDiv.textContent = "";
 
@@ -19,11 +17,13 @@ export function loadAll() {
     addTodoPageBtn.classList.add("add-todo-page-button");
     addTodoPageBtn.textContent = `+ Add Todo`;
 
+    const allTodos = todos.getAllTodos().filter(todo => todo.isComplete === 'no');
+
     if (allTodos.length === 0) {
         const todosTextDiv = document.createElement("div");
         todosTextDiv.classList.add("todos-text-div");
         const todosTextLine1 = document.createElement("p");
-        todosTextLine1.textContent = "You haven't created any todos yet.";
+        todosTextLine1.textContent = "You don't have any new todos.";
         todosTextDiv.appendChild(todosTextLine1);
         const todosTextLine2 = document.createElement("p");
         todosTextLine2.textContent = "\uD83D\uDCDD\u00A0 Add one now to get started!";

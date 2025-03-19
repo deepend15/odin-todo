@@ -3,8 +3,6 @@ import { isToday } from "date-fns";
 import { capitalize } from "./capitalize-fn.js";
 
 export function loadToday() {
-    const allTodos = todos.getAllTodos();
-
     const mainDiv = document.querySelector("main");
     mainDiv.textContent = "";
 
@@ -20,7 +18,14 @@ export function loadToday() {
     addTodoPageBtn.classList.add("add-todo-page-button");
     addTodoPageBtn.textContent = `+ Add Todo`;
 
-    const todaysTodos = allTodos.filter(todo => isToday(new Date(todo.dueDate)));
+    const allTodos = todos.getAllTodos();
+
+    function getTodaysTodos(array) {
+        return array
+            .filter(todo => isToday(new Date(todo.dueDate)))
+            .filter(todo => todo.isComplete === 'no');
+    }
+    const todaysTodos = getTodaysTodos(allTodos);
 
     if (todaysTodos.length === 0) {
         const todosTextDiv = document.createElement("div");
