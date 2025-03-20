@@ -29,6 +29,7 @@ export function loadCompleted() {
         todosTextDiv.appendChild(todosTextLine2);
         todoContainer.appendChild(todosTextDiv);
     } else {
+        completedTodos.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
         for (const todo of completedTodos) {
             const todoDiv = document.createElement("div");
             todoDiv.classList.add("todo-div");

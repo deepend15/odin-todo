@@ -57,6 +57,7 @@ export function loadProjectPage() {
         mainDiv.appendChild(addTodoPageBtn);
     } else {
         mainDiv.insertBefore(addTodoPageBtn, todoContainer);
+        currentProjectTodos.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
         for (const todo of currentProjectTodos) {
             const todoDiv = document.createElement("div");
             todoDiv.classList.add("todo-div");
