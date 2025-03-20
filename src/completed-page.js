@@ -33,6 +33,7 @@ export function loadCompleted() {
         for (const todo of completedTodos) {
             const todoDiv = document.createElement("div");
             todoDiv.classList.add("todo-div");
+            todoDiv.classList.add("completed");
             const title = document.createElement("p");
             title.textContent = todo.title;
             const dueDate = document.createElement("p");

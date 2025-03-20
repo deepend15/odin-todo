@@ -1,5 +1,5 @@
 import { todos } from "./todo-objects.js";
-import { format } from "date-fns";
+import { format, endOfYesterday } from "date-fns";
 import { capitalize } from "./capitalize-fn.js";
 
 export function loadProjectPage() {
@@ -61,6 +61,21 @@ export function loadProjectPage() {
         for (const todo of currentProjectTodos) {
             const todoDiv = document.createElement("div");
             todoDiv.classList.add("todo-div");
+            switch(todo.priority) {
+                case 1:
+                    todoDiv.classList.add("p1");
+                    break;
+                case 2:
+                    todoDiv.classList.add("p2");
+                    break;
+                case 3:
+                    todoDiv.classList.add("p3");
+                    break;
+            }
+            let yesterday = endOfYesterday();
+            if (new Date(todo.dueDate) <= yesterday) {
+                todoDiv.classList.add("overdue");
+            }
             const title = document.createElement("p");
             title.textContent = todo.title;
             const dueDate = document.createElement("p");

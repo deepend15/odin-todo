@@ -197,13 +197,29 @@ main > h3 {
     padding: 20px 10px;
     width: 195px;
     height: 115px;
-    border: 2px solid lightgray;
+    border-width: 2px;
+    border: 2px solid lightblue;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
-    box-shadow: 0 2px 0 1px lightgray;
+    box-shadow: 0 2px 0 1px lightblue;
+}
+
+.p1 {
+    border-color: yellow;
+    box-shadow: 0 2px 0 1px yellow;
+}
+
+.completed {
+    border-color: lightgreen;
+    box-shadow: 0 2px 0 1px lightgreen;
+}
+
+.overdue {
+    border-color: red;
+    box-shadow: 0 2px 0 1px red;
 }
 
 .todo-div > p:first-child {
