@@ -38,17 +38,9 @@ export function loadToday() {
         for (const todo of todaysTodos) {
             const todoDiv = document.createElement("div");
             todoDiv.classList.add("todo-div");
-            switch(todo.priority) {
-                case 1:
-                    todoDiv.classList.add("p1");
-                    break;
-                case 2:
-                    todoDiv.classList.add("p2");
-                    break;
-                case 3:
-                    todoDiv.classList.add("p3");
-                    break;
-            }
+            if (todo.priority === 1) {
+                todoDiv.classList.add("p1");
+            };
             const title = document.createElement("p");
             title.textContent = todo.title;
             const dueDate = document.createElement("p");
