@@ -248,21 +248,25 @@ main h3 {
     justify-content: space-between;
     text-align: center;
     box-shadow: 0 2px 0 1px lightblue;
+    background-color: rgb(243, 252, 255);
 }
 
 .p1 {
     border-color: yellow;
     box-shadow: 0 2px 0 1px yellow;
+    background-color: rgb(255, 255, 244);
 }
 
 .completed {
     border-color: lightgreen;
     box-shadow: 0 2px 0 1px lightgreen;
+    background-color: rgb(237, 255, 237);
 }
 
 .overdue {
     border-color: red;
     box-shadow: 0 2px 0 1px red;
+    background-color: rgb(255, 246, 248);
 }
 
 .todo-div > p:first-child {
