@@ -1,5 +1,5 @@
 import { todos } from "./todo-objects.js";
-import { format, isToday, endOfYesterday, toDate } from "date-fns";
+import { format, isToday, endOfYesterday } from "date-fns";
 // import { capitalize } from "./capitalize-fn.js";
 
 export function loadToday() {

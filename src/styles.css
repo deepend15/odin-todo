@@ -69,6 +69,10 @@ nav > h2 {
     margin-bottom: 1.8rem;
 }
 
+.todo-nav {
+    margin-bottom: 3rem;
+}
+
 .nav-list-button-wrapper {
     /* below extends the div past the parent nav's padding */
 
@@ -85,9 +89,9 @@ nav > h2 {
     background-color: var(--nav-gray);
 }
 
-.add-todo-button-wrapper {
+/* .add-todo-button-wrapper {
     margin: 1.2rem 0rem 3rem 0.9rem;
-}
+} */
 
 .add-remove-project-buttons-wrapper {
     margin: 1.5rem 0rem 2rem 0.9rem;

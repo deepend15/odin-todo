@@ -1,18 +1,20 @@
 import "./styles.css";
 import { loadToday } from "./today-page.js";
+import { loadUpcoming } from "./upcoming-page.js";
 import { loadAll } from "./all-page.js";
 import { loadCompleted } from "./completed-page.js";
 import { loadProjectPage } from "./projects-pages.js";
 import { todos } from "./todo-objects.js";
 import { projects } from "./projects.js";
 
+const todayBtn = document.querySelector(".today-btn");
+const upcomingBtn = document.querySelector(".upcoming-btn");
+const allBtn = document.querySelector(".all-btn");
+const completedBtn = document.querySelector(".completed-btn");
 const personalBtn = document.querySelector(".personal-btn");
 const workBtn = document.querySelector(".work-btn");
 const hobbiesBtn = document.querySelector(".hobbies-btn");
 const groceryBtn = document.querySelector(".grocery-btn");
-const todayBtn = document.querySelector(".today-btn");
-const allBtn = document.querySelector(".all-btn");
-const completedBtn = document.querySelector(".completed-btn");
 
 const navListButtonWrappers = document.querySelectorAll(".nav-list-button-wrapper");
 
@@ -27,6 +29,12 @@ todayBtn.parentElement.addEventListener("click", () => {
     unselectCurrentTab();
     todayBtn.parentElement.classList.add("todo-button-selected");
     loadToday();
+});
+
+upcomingBtn.parentElement.addEventListener("click", () => {
+    unselectCurrentTab();
+    upcomingBtn.parentElement.classList.add("todo-button-selected");
+    loadUpcoming();
 });
 
 allBtn.parentElement.addEventListener("click", () => {
