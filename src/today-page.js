@@ -1,5 +1,5 @@
 import { todos } from "./todo-objects.js";
-import { format, isToday } from "date-fns";
+import { format, isToday, endOfYesterday, toDate } from "date-fns";
 // import { capitalize } from "./capitalize-fn.js";
 
 export function loadToday() {
@@ -12,15 +12,24 @@ export function loadToday() {
 
     const legend = document.createElement("div");
     legend.classList.add("legend");
-    const legendLine = document.createElement("div");
-    legendLine.classList.add("legend-line");
-    const legendColorWrapper = document.createElement("div");
-    legendColorWrapper.classList.add("priority-color-wrapper");
-    legendLine.appendChild(legendColorWrapper);
-    const legendLineText = document.createElement("p");
-    legendLineText.textContent = `= priority 1`;
-    legendLine.appendChild(legendLineText);
-    legend.appendChild(legendLine);
+    const legendLine1 = document.createElement("div");
+    legendLine1.classList.add("legend-line");
+    const legendColorWrapper1 = document.createElement("div");
+    legendColorWrapper1.classList.add("overdue-color-wrapper");
+    legendLine1.appendChild(legendColorWrapper1);
+    const line1Text = document.createElement("p");
+    line1Text.textContent = `= overdue`;
+    legendLine1.appendChild(line1Text);
+    legend.appendChild(legendLine1);
+    const legendLine2 = document.createElement("div");
+    legendLine2.classList.add("legend-line");
+    const legendColorWrapper2 = document.createElement("div");
+    legendColorWrapper2.classList.add("priority-color-wrapper");
+    legendLine2.appendChild(legendColorWrapper2);
+    const line2Text = document.createElement("p");
+    line2Text.textContent = `= priority 1`;
+    legendLine2.appendChild(line2Text);
+    legend.appendChild(legendLine2);
     topLine.appendChild(legend);
 
     const title = document.createElement("h3");
@@ -37,9 +46,11 @@ export function loadToday() {
 
     const allTodos = todos.getAllTodos();
 
+    let yesterday = endOfYesterday();
+
     function getTodaysTodos(array) {
         return array
-            .filter(todo => isToday(todo.dueDate))
+            .filter(todo => isToday(todo.dueDate) || todo.dueDate <= yesterday)
             .filter(todo => todo.isComplete === 'no');
     }
     const todaysTodos = getTodaysTodos(allTodos);
@@ -52,11 +63,15 @@ export function loadToday() {
         mainDiv.appendChild(addTodoPageBtn);
     } else {
         mainDiv.insertBefore(addTodoPageBtn, todoContainer);
+        todaysTodos.sort((a, b) => a.dueDate - b.dueDate);
         for (const todo of todaysTodos) {
             const todoDiv = document.createElement("div");
             todoDiv.classList.add("todo-div");
             if (todo.priority === 1) {
                 todoDiv.classList.add("p1");
+            };
+            if (todo.dueDate <= yesterday) {
+                todoDiv.classList.add("overdue");
             };
             const title = document.createElement("p");
             title.textContent = todo.title;
