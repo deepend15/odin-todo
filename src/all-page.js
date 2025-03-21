@@ -59,7 +59,7 @@ export function loadAll() {
         mainDiv.appendChild(addTodoPageBtn);
     } else {
         mainDiv.insertBefore(addTodoPageBtn, todoContainer);
-        allTodos.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+        allTodos.sort((a, b) => a.dueDate - b.dueDate);
         for (const todo of allTodos) {
             const todoDiv = document.createElement("div");
             todoDiv.classList.add("todo-div");
@@ -67,13 +67,13 @@ export function loadAll() {
                 todoDiv.classList.add("p1");
             };
             let yesterday = endOfYesterday();
-            if (new Date(todo.dueDate) <= yesterday) {
+            if (todo.dueDate <= yesterday) {
                 todoDiv.classList.add("overdue");
             };
             const title = document.createElement("p");
             title.textContent = todo.title;
             const dueDate = document.createElement("p");
-            dueDate.textContent = `Due: ${format(new Date(todo.dueDate), 'MM/dd/yyyy')}`;
+            dueDate.textContent = `Due: ${format(todo.dueDate, 'MM/dd/yyyy')}`;
             todoDiv.append(title, dueDate);
             todoContainer.appendChild(todoDiv);
         }

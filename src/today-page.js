@@ -39,7 +39,7 @@ export function loadToday() {
 
     function getTodaysTodos(array) {
         return array
-            .filter(todo => isToday(new Date(todo.dueDate)))
+            .filter(todo => isToday(todo.dueDate))
             .filter(todo => todo.isComplete === 'no');
     }
     const todaysTodos = getTodaysTodos(allTodos);
@@ -61,7 +61,7 @@ export function loadToday() {
             const title = document.createElement("p");
             title.textContent = todo.title;
             const dueDate = document.createElement("p");
-            dueDate.textContent = `Due: ${format(new Date(todo.dueDate), 'MM/dd/yyyy')}`;
+            dueDate.textContent = `Due: ${format(todo.dueDate, 'MM/dd/yyyy')}`;
             todoDiv.append(title, dueDate);
             todoContainer.appendChild(todoDiv);
         }

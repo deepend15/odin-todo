@@ -32,7 +32,7 @@ export function loadCompleted() {
         todosTextDiv.appendChild(todosTextLine2);
         todoContainer.appendChild(todosTextDiv);
     } else {
-        completedTodos.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+        completedTodos.sort((a, b) => a.dueDate - b.dueDate);
         for (const todo of completedTodos) {
             const todoDiv = document.createElement("div");
             todoDiv.classList.add("todo-div");
@@ -40,7 +40,7 @@ export function loadCompleted() {
             const title = document.createElement("p");
             title.textContent = todo.title;
             const dueDate = document.createElement("p");
-            dueDate.textContent = `Due: ${format(new Date(todo.dueDate), 'MM/dd/yyyy')}`;
+            dueDate.textContent = `Due: ${format(todo.dueDate, 'MM/dd/yyyy')}`;
             todoDiv.append(title, dueDate);
             todoContainer.appendChild(todoDiv);
         }
