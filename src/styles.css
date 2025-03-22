@@ -207,6 +207,7 @@ main h3 {
 
 .completed-title-wrapper {
     min-height: 3.9rem;
+    margin-bottom: 1rem;
     display: grid;
     place-items: center;
 }

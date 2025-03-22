@@ -94,7 +94,7 @@ console.log(projects.getAllProjects());
 
 todos.addTodo('Call Mom', 'make sure to call Mom, she worries', new Date('2025-03-12T00:00:00'), 1, 'personal', 'no');
 
-todos.addTodo('Do Laundry', 'do your laundry you heathen', new Date('2025-03-21T00:00:00'), 3, 'personal', 'no');
+todos.addTodo('Do Laundry', 'do your laundry you heathen', new Date('2025-03-29T00:00:00'), 3, 'personal', 'no');
 
 todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-03-24T00:00:00'), 1, 'work', 'no');
 
