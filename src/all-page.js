@@ -61,7 +61,9 @@ export function loadAll() {
         mainDiv.insertBefore(addTodoPageBtn, todoContainer);
         allTodos.sort((a, b) => a.dueDate - b.dueDate);
         for (const todo of allTodos) {
-            const todoDiv = document.createElement("div");
+            const todoDivContainer = document.createElement("div");
+            todoDivContainer.classList.add("todo-div-container");
+            const todoDiv = document.createElement("button");
             todoDiv.classList.add("todo-div");
             if (todo.priority === 1) {
                 todoDiv.classList.add("p1");
@@ -75,7 +77,8 @@ export function loadAll() {
             const dueDate = document.createElement("p");
             dueDate.textContent = `Due: ${format(todo.dueDate, 'MM/dd/yyyy')}`;
             todoDiv.append(title, dueDate);
-            todoContainer.appendChild(todoDiv);
+            todoDivContainer.appendChild(todoDiv);
+            todoContainer.appendChild(todoDivContainer);
         }
     }
 }

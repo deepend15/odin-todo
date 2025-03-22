@@ -51,7 +51,7 @@ header {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-weight: 500;
 }
 
@@ -207,7 +207,6 @@ main h3 {
 
 .completed-title-wrapper {
     min-height: 3.9rem;
-    margin-bottom: 1rem;
     display: grid;
     place-items: center;
 }
@@ -225,52 +224,70 @@ main h3 {
 
 .add-todo-page-button {
     padding: 12px 22px;
-    margin-bottom: 1rem;
-    font-size: 2rem;
+    font-size: 1.8rem;
     background-color: var(--nav-gray);
     border-radius: 22px;
     border: none;
-    box-shadow: 0 0 7px silver;
+    box-shadow: 0 0 8px rgb(193, 193, 193);
 }
 
 .todo-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    column-gap: 50px;
-    row-gap: 40px;
+    gap: 20px;
+}
+
+.todo-div-container {
+    width: 215px;
+    height: 135px;
+    display: grid;
+    place-items: center;
 }
 
 .todo-div {
     padding: 20px 10px;
     width: 195px;
     height: 115px;
-    border-width: 2px;
-    border: 2px solid lightblue;
+    border-color: lightblue;
+    border-style: solid;
+    border-top-width: 2px;
+    border-right-width: 3px;
+    border-left-width: 3px;
+    border-bottom-width: 5px;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-rows: 1fr min-content;
     text-align: center;
-    box-shadow: 0 2px 0 1px lightblue;
     background-color: rgb(243, 252, 255);
 }
 
+.todo-div:hover {
+    padding: 28px 18px;
+    cursor: pointer;
+    width: 215px;
+    height: 135px;
+    p:first-child {
+        font-size: 2.1rem;
+    }
+    p:last-child {
+        font-size: 1.6rem;
+    }
+    box-shadow: 0 0 10px 1px rgb(220, 220, 220);
+}
+
 .p1 {
-    border-color: yellow;
-    box-shadow: 0 2px 0 1px yellow;
-    background-color: rgb(255, 255, 244);
+    border-color: rgb(247, 247, 0);
+    background-color: rgb(255, 254, 236);
 }
 
 .completed {
     border-color: lightgreen;
-    box-shadow: 0 2px 0 1px lightgreen;
     background-color: rgb(237, 255, 237);
 }
 
 .overdue {
-    border-color: red;
-    box-shadow: 0 2px 0 1px red;
+    border-color: rgb(255, 75, 75);
     background-color: rgb(255, 246, 248);
 }
 
