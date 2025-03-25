@@ -6,16 +6,16 @@ export function activateAddTodoButton() {
     const dialogDueDate = addTodoDialog.querySelector("#dueDate");
     const dialogPriority = addTodoDialog.querySelector("#priority");
     const dialogProject = addTodoDialog.querySelector("#project");
-    const dialogIsComplete = addTodoDialog.querySelector("#isComplete");
+    // const dialogNoRadioBtn = addTodoDialog.querySelector("#no");
 
     addTodoBtn.addEventListener("click", () => {
         addTodoDialog.showModal();
         dialogTodoName.value = "";
         dialogDescription.value = "";
         dialogDueDate.value = "";
-        dialogPriority.value = "Normal";
+        dialogPriority.value = "2 - Normal";
         dialogProject.value = "Personal";
-        dialogIsComplete.value = "No";
+        // dialogNoRadioBtn.setAttribute("checked", true);
         addTodoDialog.returnValue = "";
     })
 }

@@ -231,6 +231,137 @@ main h3 {
     box-shadow: 0 0 8px rgb(193, 193, 193);
 }
 
+::backdrop {
+    background-color: rgb(0, 0, 0, 0.3);
+}
+
+#add-todo-dialog {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 3rem;
+    width: max(45rem, 40%);
+}
+
+#add-todo-dialog > form {
+    font-size: 1.8rem;
+    display: grid;
+    gap: 2rem;
+    justify-items: center;
+}
+
+#add-todo-dialog > form > h4 {
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+
+#add-todo-dialog > form > p {
+    font-size: 1.7rem;
+}
+
+.add-todo-container {
+    width: 100%;
+    margin: 1.3rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.3rem;
+}
+
+.add-todo-container > p,
+.isCompletedLine {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.add-todo-container > p > input,
+.add-todo-container > p > select,
+.add-todo-container > p > textarea,
+.radio-buttons {
+    width: 70%;
+}
+
+.add-todo-container > p > label,
+.isCompletedLine > p {
+    width: 30%;
+}
+
+.add-todo-container > p > input,
+.add-todo-container > p > textarea {
+    padding: 0.5rem 0.8rem;
+}
+
+.add-todo-container > p > select {
+    padding: 0.5rem;
+}
+
+.add-todo-container > p > textarea {
+    resize: vertical;
+    font-size: 1.6rem;
+    line-height: 1.5;
+}
+
+.radio-buttons {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.radio-buttons > div {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+}
+
+.radio-buttons input[type="radio"] {
+    appearance: none;
+}
+
+.radio-buttons input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    position: relative;
+}
+
+.radio-buttons input[type="radio"]::before {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    background-color: #71b4d7;
+    visibility: hidden;
+    content: " ";
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+}
+
+.radio-buttons input[type="radio"]:checked {
+    border-color: #71b4d7;
+}
+
+.radio-buttons input[type="radio"]:checked::before {
+    visibility: visible;
+}
+
+.radio-buttons input[type="radio"]:hover {
+    border-color: #4b8db0;
+}
+
+.radio-buttons input[type="radio"]:hover::before {
+    background-color: #4b8db0;
+}
+
+.add-todo-dialog-buttons {
+    display: flex;
+    gap: 3rem;
+}
+
+.add-todo-dialog-buttons > button {
+    padding: 0.5rem 3rem;
+}
+
 .todo-container {
     display: flex;
     flex-wrap: wrap;

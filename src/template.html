@@ -56,11 +56,11 @@
             <div class="add-todo-container">
                 <p>
                     <label for="todoName"><span aria-label="required">*</span>Name:</label>
-                    <input type="text" id="todoName" name="todoName" required>
+                    <input type="text" id="todoName" name="todoName" autofocus required>
                 </p>
                 <p>
                     <label for="description">Description:</label>
-                    <input type="text" id="description" name="description">
+                     <textarea name="description" id="description"></textarea>
                 </p>
                 <p>
                     <label for="dueDate"><span aria-label="required">*</span>Due Date:</label>
@@ -68,16 +68,32 @@
                 </p>
                 <p>
                     <label for="priority"><span aria-label="required">*</span>Priority:</label>
-                    <input type="text" id="priority" name="priority" required>
+                    <select name="priority" id="priority" required>
+                        <option selected>2 - Normal</option>
+                        <option>1 - High</option>
+                    </select>
                 </p>
                 <p>
                     <label for="project"><span aria-label="required">*</span>Project:</label>
                     <input type="text" id="project" name="project" required>
                 </p>
-                <p>
-                    <label for="isComplete"><span aria-label="required">*</span>Is complete?</label>
+                <!-- <p>
+                    <label for="isComplete"><span aria-label="required">*</span>Completed?</label>
                     <input type="text" id="isComplete" name="isComplete" required>
-                </p>
+                </p> -->
+                <div class="isCompletedLine">
+                    <p><span aria-label="required">*</span>Completed?</p>
+                    <div class="radio-buttons">
+                        <div>
+                            <input type="radio" id="yes" name="isComplete" value="yes">
+                            <label for="yes">Yes</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="no" name="isComplete" value="no" checked>
+                            <label for="no">No</label>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="add-todo-dialog-buttons">
                 <button class="cancel-button">Cancel</button>
