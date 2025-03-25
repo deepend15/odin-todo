@@ -6,7 +6,6 @@ export function activateAddTodoButton() {
     const dialogDueDate = addTodoDialog.querySelector("#dueDate");
     const dialogPriority = addTodoDialog.querySelector("#priority");
     const dialogProject = addTodoDialog.querySelector("#project");
-    // const dialogNoRadioBtn = addTodoDialog.querySelector("#no");
 
     addTodoBtn.addEventListener("click", () => {
         addTodoDialog.showModal();
@@ -15,7 +14,6 @@ export function activateAddTodoButton() {
         dialogDueDate.value = "";
         dialogPriority.value = "2 - Normal";
         dialogProject.value = "Personal";
-        // dialogNoRadioBtn.setAttribute("checked", true);
         addTodoDialog.returnValue = "";
     })
 }
