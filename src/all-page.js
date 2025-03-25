@@ -40,9 +40,9 @@ export function loadAll() {
     todoContainer.classList.add("todo-container");
     mainDiv.appendChild(todoContainer);
 
-    const addTodoPageBtn = document.createElement("button");
-    addTodoPageBtn.classList.add("add-todo-page-button");
-    addTodoPageBtn.textContent = `+ Add Todo`;
+    const addTodoBtn = document.createElement("button");
+    addTodoBtn.classList.add("add-todo-button");
+    addTodoBtn.textContent = `+ Add Todo`;
 
     const allTodos = todos.getAllTodos().filter(todo => todo.isComplete === 'no');
 
@@ -56,9 +56,9 @@ export function loadAll() {
         todosTextLine2.textContent = "\uD83D\uDCDD\u00A0 Add one now to get started!";
         todosTextDiv.appendChild(todosTextLine2);
         todoContainer.appendChild(todosTextDiv);
-        mainDiv.appendChild(addTodoPageBtn);
+        mainDiv.appendChild(addTodoBtn);
     } else {
-        mainDiv.insertBefore(addTodoPageBtn, todoContainer);
+        mainDiv.insertBefore(addTodoBtn, todoContainer);
         allTodos.sort((a, b) => a.dueDate - b.dueDate);
         for (const todo of allTodos) {
             const todoDivContainer = document.createElement("div");

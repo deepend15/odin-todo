@@ -49,5 +49,41 @@
         </ul>
     </nav>
     <main></main>
+    <dialog id="add-todo-dialog">
+        <form action="" method="">
+            <h4>New Todo</h4>
+            <p><span aria-label="required">*</span> = required field</p>
+            <div class="add-todo-container">
+                <p>
+                    <label for="todoName"><span aria-label="required">*</span>Name:</label>
+                    <input type="text" id="todoName" name="todoName" required>
+                </p>
+                <p>
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description">
+                </p>
+                <p>
+                    <label for="dueDate"><span aria-label="required">*</span>Due Date:</label>
+                    <input type="text" id="dueDate" name="dueDate" required>
+                </p>
+                <p>
+                    <label for="priority"><span aria-label="required">*</span>Priority:</label>
+                    <input type="text" id="priority" name="priority" required>
+                </p>
+                <p>
+                    <label for="project"><span aria-label="required">*</span>Project:</label>
+                    <input type="text" id="project" name="project" required>
+                </p>
+                <p>
+                    <label for="isComplete"><span aria-label="required">*</span>Is complete?</label>
+                    <input type="text" id="isComplete" name="isComplete" required>
+                </p>
+            </div>
+            <div class="add-todo-dialog-buttons">
+                <button class="cancel-button">Cancel</button>
+                <button class="ok-button" formmethod="dialog">OK</button>
+            </div>
+        </form>
+    </dialog>
 </body>
 </html>

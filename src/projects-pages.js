@@ -62,9 +62,9 @@ export function loadProjectPage() {
     todoContainer.classList.add("todo-container");
     mainDiv.appendChild(todoContainer);
 
-    const addTodoPageBtn = document.createElement("button");
-    addTodoPageBtn.classList.add("add-todo-page-button");
-    addTodoPageBtn.textContent = `+ Add Todo`;
+    const addTodoBtn = document.createElement("button");
+    addTodoBtn.classList.add("add-todo-button");
+    addTodoBtn.textContent = `+ Add Todo`;
 
     const allTodos = todos.getAllTodos();
 
@@ -80,9 +80,9 @@ export function loadProjectPage() {
         todosTextDiv.classList.add("todos-text-div");
         todosTextDiv.textContent = `No todos for this project.`;
         todoContainer.appendChild(todosTextDiv);
-        mainDiv.appendChild(addTodoPageBtn);
+        mainDiv.appendChild(addTodoBtn);
     } else {
-        mainDiv.insertBefore(addTodoPageBtn, todoContainer);
+        mainDiv.insertBefore(addTodoBtn, todoContainer);
         currentProjectTodos.sort((a, b) => a.dueDate - b.dueDate);
         for (const todo of currentProjectTodos) {
             const todoDivContainer = document.createElement("div");

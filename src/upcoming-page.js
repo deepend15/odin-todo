@@ -30,9 +30,9 @@ export function loadUpcoming() {
     todoContainer.classList.add("todo-container");
     mainDiv.appendChild(todoContainer);
 
-    const addTodoPageBtn = document.createElement("button");
-    addTodoPageBtn.classList.add("add-todo-page-button");
-    addTodoPageBtn.textContent = `+ Add Todo`;
+    const addTodoBtn = document.createElement("button");
+    addTodoBtn.classList.add("add-todo-button");
+    addTodoBtn.textContent = `+ Add Todo`;
 
     const allTodos = todos.getAllTodos();
 
@@ -50,9 +50,9 @@ export function loadUpcoming() {
         todosTextDiv.classList.add("todos-text-div");
         todosTextDiv.textContent = `\uD83D\uDE4C\u00A0 Woo-hoo! You don't have any upcoming todos.`;
         todoContainer.appendChild(todosTextDiv);
-        mainDiv.appendChild(addTodoPageBtn);
+        mainDiv.appendChild(addTodoBtn);
     } else {
-        mainDiv.insertBefore(addTodoPageBtn, todoContainer);
+        mainDiv.insertBefore(addTodoBtn, todoContainer);
         upcomingTodos.sort((a, b) => a.dueDate - b.dueDate);
         for (const todo of upcomingTodos) {
             const todoDivContainer = document.createElement("div");

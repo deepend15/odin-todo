@@ -1,5 +1,6 @@
 import { todos } from "./todo-objects.js";
 import { format, isToday, endOfYesterday } from "date-fns";
+import { activateAddTodoButton } from "./add-todo-btn.js";
 // import { capitalize } from "./capitalize-fn.js";
 
 export function loadToday() {
@@ -40,9 +41,9 @@ export function loadToday() {
     todoContainer.classList.add("todo-container");
     mainDiv.appendChild(todoContainer);
 
-    const addTodoPageBtn = document.createElement("button");
-    addTodoPageBtn.classList.add("add-todo-page-button");
-    addTodoPageBtn.textContent = `+ Add Todo`;
+    const addTodoBtn = document.createElement("button");
+    addTodoBtn.classList.add("add-todo-button");
+    addTodoBtn.textContent = `+ Add Todo`;
 
     const allTodos = todos.getAllTodos();
 
@@ -60,9 +61,9 @@ export function loadToday() {
         todosTextDiv.classList.add("todos-text-div");
         todosTextDiv.textContent = `\u2705\u00A0 Nice! You don't have any todos for today.`;
         todoContainer.appendChild(todosTextDiv);
-        mainDiv.appendChild(addTodoPageBtn);
+        mainDiv.appendChild(addTodoBtn);
     } else {
-        mainDiv.insertBefore(addTodoPageBtn, todoContainer);
+        mainDiv.insertBefore(addTodoBtn, todoContainer);
         todaysTodos.sort((a, b) => a.dueDate - b.dueDate);
         for (const todo of todaysTodos) {
             const todoDivContainer = document.createElement("div");
@@ -84,4 +85,6 @@ export function loadToday() {
             todoContainer.appendChild(todoDivContainer);
         }
     }
+
+    activateAddTodoButton();
 }
