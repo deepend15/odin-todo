@@ -1,6 +1,5 @@
 import { todos } from "./todo-objects.js";
 import { format } from "date-fns";
-// import { capitalize } from "./capitalize-fn.js";
 
 export function loadCompleted() {
     const mainDiv = document.querySelector("main");

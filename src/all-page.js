@@ -1,6 +1,6 @@
 import { todos } from "./todo-objects.js";
 import { format, endOfYesterday } from "date-fns";
-// import { capitalize } from "./capitalize-fn.js";
+import { activateAddTodoButton } from "./add-todo-btn.js";
 
 export function loadAll() {
     const mainDiv = document.querySelector("main");
@@ -81,4 +81,6 @@ export function loadAll() {
             todoContainer.appendChild(todoDivContainer);
         }
     }
+
+    activateAddTodoButton();
 }

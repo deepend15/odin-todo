@@ -86,21 +86,21 @@ const addInitialProjects = (function () {
     const projectNav = document.querySelector(".project-nav");
     const projectButtonWrappers = projectNav.querySelectorAll(".nav-list-button-wrapper");
     for (const wrapper of projectButtonWrappers) {
-        projects.addProject(wrapper.firstElementChild.textContent.slice(2).toLowerCase());
+        projects.addProject(wrapper.firstElementChild.textContent.slice(2));
     };
 })();
 
 console.log(projects.getAllProjects());
 
-todos.addTodo('Call Mom', 'make sure to call Mom, she worries', new Date('2025-03-12T00:00:00'), 1, 'personal', 'no');
+todos.addTodo('Call Mom', 'make sure to call Mom, she worries', new Date('2025-03-12T00:00:00'), 1, 'Personal', 'no');
 
-todos.addTodo('Do Laundry', 'do your laundry you heathen', new Date('2025-03-28T00:00:00'), 3, 'personal', 'no');
+todos.addTodo('Do Laundry', 'do your laundry you heathen', new Date('2025-03-28T00:00:00'), 2, 'Personal', 'no');
 
-todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-03-26T00:00:00'), 1, 'work', 'no');
+todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-03-26T00:00:00'), 1, 'Work', 'no');
 
-todos.addTodo(`Shoot 100 3's`, 'gotta improve that stroke', new Date('2025-03-29T00:00:00'), 2, 'hobbies', 'no');
+todos.addTodo(`Shoot 100 3's`, 'gotta improve that stroke', new Date('2025-03-29T00:00:00'), 2, 'Hobbies', 'no');
 
-todos.addTodo('Feed the Dog', 'dog needs to be fed', new Date('2025-03-20T00:00:00'), 1, 'personal', 'yes');
+todos.addTodo('Feed the Dog', 'dog needs to be fed', new Date('2025-03-20T00:00:00'), 1, 'Personal', 'yes');
 
 console.log(todos.getAllTodos());
 

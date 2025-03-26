@@ -1,6 +1,6 @@
 import { todos } from "./todo-objects.js";
 import { format, endOfYesterday } from "date-fns";
-import { capitalize } from "./capitalize-fn.js";
+import { activateAddTodoButton } from "./add-todo-btn.js";
 
 export function loadProjectPage() {
     const mainDiv = document.querySelector("main");
@@ -34,25 +34,24 @@ export function loadProjectPage() {
 
     function getCurrentProject() {
         const selectedProject = document.querySelector(".project-button-selected");
-        const selectedProjectName = selectedProject.firstElementChild.textContent.slice(2).toLowerCase();
+        const selectedProjectName = selectedProject.firstElementChild.textContent.slice(2);
         return selectedProjectName;
     }
     const currentProject = getCurrentProject();
-    const currentProjectCapitalized = capitalize(currentProject);
 
     const title = document.createElement("h3");
-    title.textContent = currentProjectCapitalized;
+    title.textContent = currentProject;
     switch(currentProject) {
-        case 'personal':
+        case 'Personal':
             title.textContent += "\u00A0\u00A0\uD83C\uDFE1";
             break;
-        case 'work':
+        case 'Work':
             title.textContent += "\u00A0\u00A0\uD83D\uDCBB";
             break;
-        case 'hobbies': 
+        case 'Hobbies': 
             title.textContent += "\u00A0\uD83C\uDFC6";
             break;
-        case 'grocery':
+        case 'Grocery':
             title.textContent += "\u00A0\uD83C\uDF4E";
             break;
     }
@@ -105,4 +104,6 @@ export function loadProjectPage() {
             todoContainer.appendChild(todoDivContainer);
         }
     }
+
+    activateAddTodoButton();
 }

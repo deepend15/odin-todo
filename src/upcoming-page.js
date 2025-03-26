@@ -1,5 +1,6 @@
 import { todos } from "./todo-objects.js";
 import { format, isToday, endOfToday } from "date-fns";
+import { activateAddTodoButton } from "./add-todo-btn.js";
 
 export function loadUpcoming() {
     const mainDiv = document.querySelector("main");
@@ -71,4 +72,6 @@ export function loadUpcoming() {
             todoContainer.appendChild(todoDivContainer);
         }
     }
+
+    activateAddTodoButton();
 }

@@ -1,7 +1,6 @@
 import { todos } from "./todo-objects.js";
 import { format, isToday, endOfYesterday } from "date-fns";
 import { activateAddTodoButton } from "./add-todo-btn.js";
-// import { capitalize } from "./capitalize-fn.js";
 
 export function loadToday() {
     const mainDiv = document.querySelector("main");
