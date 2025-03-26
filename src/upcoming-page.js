@@ -1,5 +1,4 @@
-import { todos } from "./todo-objects.js";
-import { format, isToday, endOfToday } from "date-fns";
+import { showTodos } from "./display-todos.js";
 import { activateAddTodoButton } from "./add-todo-btn.js";
 
 export function loadUpcoming() {
@@ -31,47 +30,7 @@ export function loadUpcoming() {
     todoContainer.classList.add("todo-container");
     mainDiv.appendChild(todoContainer);
 
-    const addTodoBtn = document.createElement("button");
-    addTodoBtn.classList.add("add-todo-button");
-    addTodoBtn.textContent = `+ Add Todo`;
-
-    const allTodos = todos.getAllTodos();
-
-    let today = endOfToday();
-
-    function getUpcomingTodos(array) {
-        return array
-            .filter(todo => todo.dueDate > today)
-            .filter(todo => todo.isComplete === 'no');
-    }
-    const upcomingTodos = getUpcomingTodos(allTodos);
-
-    if (upcomingTodos.length === 0) {
-        const todosTextDiv = document.createElement("div");
-        todosTextDiv.classList.add("todos-text-div");
-        todosTextDiv.textContent = `\uD83D\uDE4C\u00A0 Woo-hoo! You don't have any upcoming todos.`;
-        todoContainer.appendChild(todosTextDiv);
-        mainDiv.appendChild(addTodoBtn);
-    } else {
-        mainDiv.insertBefore(addTodoBtn, todoContainer);
-        upcomingTodos.sort((a, b) => a.dueDate - b.dueDate);
-        for (const todo of upcomingTodos) {
-            const todoDivContainer = document.createElement("div");
-            todoDivContainer.classList.add("todo-div-container");
-            const todoDiv = document.createElement("button");
-            todoDiv.classList.add("todo-div");
-            if (todo.priority === 1) {
-                todoDiv.classList.add("p1");
-            };
-            const title = document.createElement("p");
-            title.textContent = todo.title;
-            const dueDate = document.createElement("p");
-            dueDate.textContent = `Due: ${format(todo.dueDate, 'MM/dd/yyyy')}`;
-            todoDiv.append(title, dueDate);
-            todoDivContainer.appendChild(todoDiv);
-            todoContainer.appendChild(todoDivContainer);
-        }
-    }
+    showTodos().showUpcomingTodos();
 
     activateAddTodoButton();
 }

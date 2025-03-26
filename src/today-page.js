@@ -1,5 +1,4 @@
-import { todos } from "./todo-objects.js";
-import { format, isToday, endOfYesterday } from "date-fns";
+import { showTodos } from "./display-todos.js";
 import { activateAddTodoButton } from "./add-todo-btn.js";
 
 export function loadToday() {
@@ -40,50 +39,7 @@ export function loadToday() {
     todoContainer.classList.add("todo-container");
     mainDiv.appendChild(todoContainer);
 
-    const addTodoBtn = document.createElement("button");
-    addTodoBtn.classList.add("add-todo-button");
-    addTodoBtn.textContent = `+ Add Todo`;
-
-    const allTodos = todos.getAllTodos();
-
-    let yesterday = endOfYesterday();
-
-    function getTodaysTodos(array) {
-        return array
-            .filter(todo => isToday(todo.dueDate) || todo.dueDate <= yesterday)
-            .filter(todo => todo.isComplete === 'no');
-    }
-    const todaysTodos = getTodaysTodos(allTodos);
-
-    if (todaysTodos.length === 0) {
-        const todosTextDiv = document.createElement("div");
-        todosTextDiv.classList.add("todos-text-div");
-        todosTextDiv.textContent = `\u2705\u00A0 Nice! You don't have any todos for today.`;
-        todoContainer.appendChild(todosTextDiv);
-        mainDiv.appendChild(addTodoBtn);
-    } else {
-        mainDiv.insertBefore(addTodoBtn, todoContainer);
-        todaysTodos.sort((a, b) => a.dueDate - b.dueDate);
-        for (const todo of todaysTodos) {
-            const todoDivContainer = document.createElement("div");
-            todoDivContainer.classList.add("todo-div-container");
-            const todoDiv = document.createElement("button");
-            todoDiv.classList.add("todo-div");
-            if (todo.priority === 1) {
-                todoDiv.classList.add("p1");
-            };
-            if (todo.dueDate <= yesterday) {
-                todoDiv.classList.add("overdue");
-            };
-            const title = document.createElement("p");
-            title.textContent = todo.title;
-            const dueDate = document.createElement("p");
-            dueDate.textContent = `Due: ${format(todo.dueDate, 'MM/dd/yyyy')}`;
-            todoDiv.append(title, dueDate);
-            todoDivContainer.appendChild(todoDiv);
-            todoContainer.appendChild(todoDivContainer);
-        }
-    }
+    showTodos().showTodaysTodos();
 
     activateAddTodoButton();
 }
