@@ -15,6 +15,7 @@
     "scripts": {
         "build": "webpack --config webpack.prod.js",
         "dev": "webpack serve --open --config webpack.dev.js",
+        "push": "git push origin main",
         "deploy": "git subtree push --prefix dist origin gh-pages"
     },
     "dependencies": {
