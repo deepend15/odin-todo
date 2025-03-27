@@ -96,7 +96,7 @@ todos.addTodo('Call Mom', 'make sure to call Mom, she worries', new Date('2025-0
 
 todos.addTodo('Do Laundry', 'do your laundry you heathen', new Date('2025-03-28T00:00:00'), 2, 'Personal', 'no');
 
-todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-03-26T00:00:00'), 1, 'Work', 'no');
+todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-03-27T00:00:00'), 1, 'Work', 'no');
 
 todos.addTodo(`Shoot 100 3's`, 'gotta improve that stroke', new Date('2025-03-29T00:00:00'), 2, 'Hobbies', 'no');
 
