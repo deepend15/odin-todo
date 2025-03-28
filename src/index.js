@@ -6,6 +6,7 @@ import { loadCompleted } from "./completed-page.js";
 import { loadProjectPage } from "./projects-pages.js";
 import { todos } from "./todo-objects.js";
 import { projects } from "./projects.js";
+import { addTodoDialogController } from "./add-todo-btn.js";
 
 const todayBtn = document.querySelector(".today-btn");
 const upcomingBtn = document.querySelector(".upcoming-btn");
@@ -96,7 +97,7 @@ todos.addTodo('Call Mom', 'make sure to call Mom, she worries', new Date('2025-0
 
 todos.addTodo('Do Laundry', 'do your laundry you heathen', new Date('2025-03-28T00:00:00'), 2, 'Personal', 'no');
 
-todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-03-27T00:00:00'), 1, 'Work', 'no');
+todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-03-28T00:00:00'), 1, 'Work', 'no');
 
 todos.addTodo(`Shoot 100 3's`, 'gotta improve that stroke', new Date('2025-03-29T00:00:00'), 2, 'Hobbies', 'no');
 
@@ -106,3 +107,5 @@ console.log(todos.getAllTodos());
 
 loadToday();
 todayBtn.parentElement.classList.add("todo-button-selected");
+addTodoDialogController().activateCancelBtn();
+addTodoDialogController().activateDialogClose();

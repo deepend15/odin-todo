@@ -15,5 +15,9 @@ export function loadCompleted() {
     todoContainer.classList.add("todo-container");
     mainDiv.appendChild(todoContainer);
 
+    const addTodoBtnContainer = document.createElement("div");
+    addTodoBtnContainer.classList.add("add-todo-btn-container");
+    mainDiv.appendChild(addTodoBtnContainer);
+
     showTodos().showCompletedTodos();
 }

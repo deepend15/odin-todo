@@ -1,6 +1,8 @@
 import { projects } from "./projects.js";
+import { todos } from "./todo-objects.js";
+import { showTodos } from "./display-todos.js";
 
-export function activateAddTodoButton() {
+export function addTodoDialogController() {
     const addTodoBtn = document.querySelector(".add-todo-button");
     const addTodoDialog = document.querySelector("#add-todo-dialog");
     const dialogTodoName = addTodoDialog.querySelector("#todoName");
@@ -46,16 +48,16 @@ export function activateAddTodoButton() {
             projectOption.textContent = project.title;
             dialogProject.appendChild(projectOption);
         }
-    }
+    };
 
     function dialogEscBtn(e) {
         if (e.key === "Escape") {
             addTodoDialog.close("cancel");
             console.log(addTodoDialog.returnValue);
         }
-    }
+    };
 
-    addTodoBtn.addEventListener("click", () => {
+    function openDialog() {
         dialogTodoName.value = "";
         dialogDescription.value = "";
         dialogDueDate.value = "";
@@ -67,16 +69,45 @@ export function activateAddTodoButton() {
         radioNo.checked = true;
         addTodoDialog.showModal();
         window.addEventListener("keydown", dialogEscBtn);
-    })
+        addTodoDialog.addEventListener("close", () => window.removeEventListener("keydown", dialogEscBtn));
+    };
 
-    cancelBtn.addEventListener("click", (e) => {
+    function activateAddTodoBtn() {
+        addTodoBtn.addEventListener("click", openDialog);
+    };
+
+    function closeViaCancel() {
         addTodoDialog.close("cancel");
         const checkedRadioBtn = addTodoDialog.querySelector("input[name=isComplete]:checked");
         console.log(addTodoDialog.returnValue);
         console.log(`${dialogTodoName.value}, ${dialogDescription.value}, ${dialogDueDate.value}, ${dialogPriority.value}, ${dialogProject.value}, ${checkedRadioBtn.value}`);
-    })
+    };
 
-    addTodoDialog.addEventListener("close", () => {
-        window.removeEventListener("keydown", dialogEscBtn);
-    })
-}
+    function activateCancelBtn() {
+        cancelBtn.addEventListener("click", closeViaCancel);
+    };
+
+    function closeDialog() {
+        const dueDateEnd = "T00:00:00";
+        const dueDateValue = new Date((dialogDueDate.value + dueDateEnd));
+        let priorityValue;
+        if (dialogPriority.value === "2 - Normal") {
+            priorityValue = 2;
+        } else {
+            priorityValue = 1;
+        };
+        const checkedRadioBtn = addTodoDialog.querySelector("input[name=isComplete]:checked");
+        if (addTodoDialog.returnValue === "cancel") {
+            return;
+        } else {
+            todos.addTodo(dialogTodoName.value, dialogDescription.value, dueDateValue, priorityValue, dialogProject.value, checkedRadioBtn.value);
+            showTodos().showTodaysTodos();
+        };
+    };
+
+    function activateDialogClose() {
+        addTodoDialog.addEventListener("close", closeDialog);
+    };
+
+    return { activateAddTodoBtn, activateCancelBtn, activateDialogClose };
+};

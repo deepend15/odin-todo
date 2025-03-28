@@ -1,5 +1,4 @@
 import { showTodos } from "./display-todos.js";
-import { activateAddTodoButton } from "./add-todo-btn.js";
 
 export function loadUpcoming() {
     const mainDiv = document.querySelector("main");
@@ -30,7 +29,9 @@ export function loadUpcoming() {
     todoContainer.classList.add("todo-container");
     mainDiv.appendChild(todoContainer);
 
-    showTodos().showUpcomingTodos();
+    const addTodoBtnContainer = document.createElement("div");
+    addTodoBtnContainer.classList.add("add-todo-btn-container");
+    mainDiv.appendChild(addTodoBtnContainer);
 
-    activateAddTodoButton();
+    showTodos().showUpcomingTodos();
 }
