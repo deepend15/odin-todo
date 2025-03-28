@@ -159,10 +159,6 @@ export function showTodos() {
         addTodoBtnContainer.textContent = "";
         todoContainer.textContent = "";
 
-        const addTodoBtn = document.createElement("button");
-        addTodoBtn.classList.add("add-todo-button");
-        addTodoBtn.textContent = `+ Add Todo`;
-
         const completedTodos = allTodos.filter(todo => todo.isComplete === 'yes');
 
         if (completedTodos.length === 0) {
