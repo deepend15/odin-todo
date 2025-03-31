@@ -12,10 +12,10 @@ const todayBtn = document.querySelector(".today-btn");
 const upcomingBtn = document.querySelector(".upcoming-btn");
 const allBtn = document.querySelector(".all-btn");
 const completedBtn = document.querySelector(".completed-btn");
-const personalBtn = document.querySelector(".personal-btn");
-const workBtn = document.querySelector(".work-btn");
-const hobbiesBtn = document.querySelector(".hobbies-btn");
-const groceryBtn = document.querySelector(".grocery-btn");
+
+const projectNav = document.querySelector(".project-nav");
+const projectNavChildren = Array.from(projectNav.children);
+const projectRows = projectNavChildren.filter(row => row.classList.contains("nav-list-button-wrapper"));
 
 const navListButtonWrappers = document.querySelectorAll(".nav-list-button-wrapper");
 
@@ -50,28 +50,12 @@ completedBtn.parentElement.addEventListener("click", () => {
     loadCompleted();
 });
 
-personalBtn.parentElement.addEventListener("click", () => {
-    unselectCurrentTab();
-    personalBtn.parentElement.classList.add("project-button-selected");
-    loadProjectPage();
-});
-
-workBtn.parentElement.addEventListener("click", () => {
-    unselectCurrentTab();
-    workBtn.parentElement.classList.add("project-button-selected");
-    loadProjectPage();
-});
-
-hobbiesBtn.parentElement.addEventListener("click", () => {
-    unselectCurrentTab();
-    hobbiesBtn.parentElement.classList.add("project-button-selected");
-    loadProjectPage();
-});
-
-groceryBtn.parentElement.addEventListener("click", () => {
-    unselectCurrentTab();
-    groceryBtn.parentElement.classList.add("project-button-selected");
-    loadProjectPage();
+projectRows.forEach((row) => {
+    row.addEventListener("click", () => {
+        unselectCurrentTab();
+        row.classList.add("project-button-selected");
+        loadProjectPage();
+    });
 });
 
 function toggleNavListButtonHighlighted(e) {
