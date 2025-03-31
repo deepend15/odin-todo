@@ -89,10 +89,6 @@ nav > h2 {
     background-color: var(--nav-gray);
 }
 
-/* .add-todo-button-wrapper {
-    margin: 1.2rem 0rem 3rem 0.9rem;
-} */
-
 .add-remove-project-buttons-wrapper {
     margin: 1.5rem 0rem 2rem 0.9rem;
     display: grid;
@@ -355,11 +351,22 @@ main h3 {
 
 .add-todo-dialog-buttons {
     display: flex;
-    gap: 3rem;
+    gap: 4rem;
 }
 
 .add-todo-dialog-buttons > button {
-    padding: 0.5rem 3rem;
+    padding: 0.6rem 3rem;
+    background-color: var(--nav-gray);
+    border-radius: 14px;
+    border: 1px solid gray;
+}
+
+.add-todo-dialog-buttons > button:hover {
+    background-color: lightgray;
+}
+
+.add-todo-dialog-buttons > button:active {
+    background-color: var(--nav-gray);
 }
 
 .todo-container {
