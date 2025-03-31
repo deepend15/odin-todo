@@ -104,8 +104,8 @@ export function addTodoDialogController() {
             const navRows = Array.from(document.querySelectorAll(".nav-list-button-wrapper"));
             const selectedRowArray = navRows
                 .filter(row =>
-                (row.classList.contains("todo-button-selected")) ||
-                (row.classList.contains("project-button-selected")));
+                row.classList.contains("todo-button-selected") ||
+                row.classList.contains("project-button-selected"));
             const selectedRow = selectedRowArray[0];
             if (selectedRow.classList.contains("todo-button-selected")) {
                 switch (selectedRow.firstElementChild.textContent.slice(2)) {
