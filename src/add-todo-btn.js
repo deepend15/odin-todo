@@ -100,7 +100,14 @@ export function addTodoDialogController() {
                 priorityValue = 1;
             };
             const checkedRadioBtn = addTodoDialog.querySelector("input[name=isComplete]:checked");
-            todos.addTodo(dialogTodoName.value, dialogDescription.value, dueDateValue, priorityValue, dialogProject.value, checkedRadioBtn.value);
+            const projectName = dialogProject.value.toLowerCase();
+            const allTodos = todos.getAllTodos();
+            const projectTodos = allTodos.filter(todo => todo.project === dialogProject.value);
+            const numberOfProjectTodos = projectTodos.length;
+            const newID = numberOfProjectTodos + 1;
+            const projectID = projectName + `-` + newID.toString();
+            todos.addTodo(dialogTodoName.value, dialogDescription.value, dueDateValue, priorityValue, dialogProject.value, checkedRadioBtn.value, projectID);
+            console.log(allTodos);
             const navRows = Array.from(document.querySelectorAll(".nav-list-button-wrapper"));
             const selectedRowArray = navRows
                 .filter(row =>
