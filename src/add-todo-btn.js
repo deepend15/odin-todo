@@ -88,20 +88,40 @@ export function addTodoDialogController() {
     };
 
     function closeDialog() {
-        const dueDateEnd = "T00:00:00";
-        const dueDateValue = new Date((dialogDueDate.value + dueDateEnd));
-        let priorityValue;
-        if (dialogPriority.value === "2 - Normal") {
-            priorityValue = 2;
-        } else {
-            priorityValue = 1;
-        };
-        const checkedRadioBtn = addTodoDialog.querySelector("input[name=isComplete]:checked");
         if (addTodoDialog.returnValue === "cancel") {
             return;
         } else {
+            const dueDateEnd = "T00:00:00";
+            const dueDateValue = new Date((dialogDueDate.value + dueDateEnd));
+            let priorityValue;
+            if (dialogPriority.value === "2 - Normal") {
+                priorityValue = 2;
+            } else {
+                priorityValue = 1;
+            };
+            const checkedRadioBtn = addTodoDialog.querySelector("input[name=isComplete]:checked");
             todos.addTodo(dialogTodoName.value, dialogDescription.value, dueDateValue, priorityValue, dialogProject.value, checkedRadioBtn.value);
-            showTodos().showTodaysTodos();
+            const navRows = Array.from(document.querySelectorAll(".nav-list-button-wrapper"));
+            const selectedRowArray = navRows
+                .filter(row =>
+                (row.classList.contains("todo-button-selected")) ||
+                (row.classList.contains("project-button-selected")));
+            const selectedRow = selectedRowArray[0];
+            if (selectedRow.classList.contains("todo-button-selected")) {
+                switch (selectedRow.firstElementChild.textContent.slice(2)) {
+                    case 'Today':
+                        showTodos().showTodaysTodos();
+                        break;
+                    case 'Upcoming':
+                        showTodos().showUpcomingTodos();
+                        break;
+                    case 'All':
+                        showTodos().showAllTodos();
+                        break;
+                }
+            } else {
+                showTodos().showProjectTodos();
+            };
         };
     };
 

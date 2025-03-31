@@ -95,11 +95,11 @@ console.log(projects.getAllProjects());
 
 todos.addTodo('Call Mom', 'make sure to call Mom, she worries', new Date('2025-03-12T00:00:00'), 1, 'Personal', 'no');
 
-todos.addTodo('Do Laundry', 'do your laundry you heathen', new Date('2025-03-28T00:00:00'), 2, 'Personal', 'no');
+todos.addTodo('Do Laundry', 'do your laundry you heathen', new Date('2025-03-30T00:00:00'), 2, 'Personal', 'no');
 
-todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-03-28T00:00:00'), 1, 'Work', 'no');
+todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-04-03T00:00:00'), 1, 'Work', 'no');
 
-todos.addTodo(`Shoot 100 3's`, 'gotta improve that stroke', new Date('2025-03-29T00:00:00'), 2, 'Hobbies', 'no');
+todos.addTodo(`Shoot 100 3's`, 'gotta improve that stroke', new Date('2025-04-05T00:00:00'), 2, 'Hobbies', 'no');
 
 todos.addTodo('Feed the Dog', 'dog needs to be fed', new Date('2025-03-20T00:00:00'), 1, 'Personal', 'yes');
 
