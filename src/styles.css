@@ -231,7 +231,7 @@ main h3 {
     background-color: rgb(0, 0, 0, 0.3);
 }
 
-#add-todo-dialog {
+#todo-dialog {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -239,19 +239,19 @@ main h3 {
     width: max(45rem, 40%);
 }
 
-#add-todo-dialog > form {
+#todo-dialog > form {
     font-size: 1.8rem;
     display: grid;
     gap: 2rem;
     justify-items: center;
 }
 
-#add-todo-dialog > form > h4 {
+#todo-dialog > form > h4 {
     font-size: 2.5rem;
     font-weight: 500;
 }
 
-#add-todo-dialog > form > p {
+#todo-dialog > form > p {
     font-size: 1.7rem;
 }
 
@@ -349,23 +349,23 @@ main h3 {
     background-color: #4b8db0;
 }
 
-.add-todo-dialog-buttons {
+.todo-dialog-buttons {
     display: flex;
     gap: 4rem;
 }
 
-.add-todo-dialog-buttons > button {
+.todo-dialog-buttons > button {
     padding: 0.6rem 3rem;
     background-color: var(--nav-gray);
     border-radius: 14px;
     border: 1px solid gray;
 }
 
-.add-todo-dialog-buttons > button:hover {
+.todo-dialog-buttons > button:hover {
     background-color: lightgray;
 }
 
-.add-todo-dialog-buttons > button:active {
+.todo-dialog-buttons > button:active {
     background-color: var(--nav-gray);
 }
 

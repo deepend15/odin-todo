@@ -46,9 +46,9 @@
         </ul>
     </nav>
     <main></main>
-    <dialog id="add-todo-dialog">
+    <dialog id="todo-dialog">
         <form action="" method="">
-            <h4>New Todo</h4>
+            <h4></h4>
             <p><span aria-label="required">*</span> = required field</p>
             <div class="add-todo-container">
                 <p>
@@ -89,11 +89,62 @@
                     </div>
                 </div>
             </div>
-            <div class="add-todo-dialog-buttons">
+            <div class="todo-dialog-buttons">
                 <button class="cancel-button" type="button">Cancel</button>
                 <button class="ok-button" formmethod="dialog">OK</button>
             </div>
         </form>
     </dialog>
+    <!-- <dialog id="edit-todo-dialog">
+        <form action="" method="">
+            <h4>View/Edit Todo</h4>
+            <p><span aria-label="required">*</span> = required field</p>
+            <div class="add-todo-container">
+                <p>
+                    <label for="todoName"><span aria-label="required">*</span>Name:</label>
+                    <input type="text" id="todoName" name="todoName" autofocus required disabled>
+                </p>
+                <p>
+                    <label for="description">Description:</label>
+                     <textarea name="description" id="description" disabled></textarea>
+                </p>
+                <p>
+                    <label for="dueDate"><span aria-label="required">*</span>Due Date:</label>
+                    <input type="date" id="dueDate" name="dueDate" required disabled>
+                </p>
+                <p>
+                    <label for="priority"><span aria-label="required">*</span>Priority:</label>
+                    <select name="priority" id="priority" required disabled>
+                        <option selected>2 - Normal</option>
+                        <option>1 - High</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="project"><span aria-label="required">*</span>Project:</label>
+                     <select name="project" id="project" required disabled>
+                     </select>
+                </p>
+                <div class="isCompletedLine">
+                    <p><span aria-label="required">*</span>Completed?</p>
+                    <div class="radio-buttons">
+                        <div>
+                            <input type="radio" id="editYes" name="isComplete" value="yes">
+                            <label for="yes">Yes</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="editNo" name="isComplete" value="no">
+                            <label for="no">No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </div>
+            <div class="add-todo-dialog-buttons">
+                <button class="cancel-button" type="button">Cancel</button>
+                <button class="ok-button" formmethod="dialog">OK</button>
+            </div>
+        </form>
+    </dialog> -->
 </body>
 </html>

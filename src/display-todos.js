@@ -1,6 +1,6 @@
 import { todos } from "./todo-objects.js";
 import { format, isToday, endOfYesterday, endOfToday } from "date-fns";
-import { addTodoDialogController } from "./add-todo-btn.js";
+import { todoDialogController } from "./todo-dialog.js";
 
 export function showTodos() {
     const mainDiv = document.querySelector("main");
@@ -40,7 +40,7 @@ export function showTodos() {
                 todoDivContainer.classList.add("todo-div-container");
                 const todoDiv = document.createElement("button");
                 todoDiv.classList.add("todo-div");
-                todoDiv.classList.add(todo.projectID);
+                todoDiv.dataset.projectId = todo.projectID;
                 if (todo.priority === 1) {
                     todoDiv.classList.add("p1");
                 };
@@ -57,7 +57,8 @@ export function showTodos() {
             }
         }
 
-        addTodoDialogController().activateAddTodoBtn();
+        todoDialogController().activateAddTodoBtn();
+        todoDialogController().activateTodoButtons();
     };
 
     function showUpcomingTodos() {
@@ -91,7 +92,7 @@ export function showTodos() {
                 todoDivContainer.classList.add("todo-div-container");
                 const todoDiv = document.createElement("button");
                 todoDiv.classList.add("todo-div");
-                todoDiv.classList.add(todo.projectID);
+                todoDiv.dataset.projectId = todo.projectID;
                 if (todo.priority === 1) {
                     todoDiv.classList.add("p1");
                 };
@@ -105,7 +106,8 @@ export function showTodos() {
             }
         }
 
-        addTodoDialogController().activateAddTodoBtn();
+        todoDialogController().activateAddTodoBtn();
+        todoDialogController().activateTodoButtons();
     };
 
     function showAllTodos() {
@@ -137,7 +139,7 @@ export function showTodos() {
                 todoDivContainer.classList.add("todo-div-container");
                 const todoDiv = document.createElement("button");
                 todoDiv.classList.add("todo-div");
-                todoDiv.classList.add(todo.projectID);
+                todoDiv.dataset.projectId = todo.projectID;
                 if (todo.priority === 1) {
                     todoDiv.classList.add("p1");
                 };
@@ -155,7 +157,8 @@ export function showTodos() {
             }
         }
 
-        addTodoDialogController().activateAddTodoBtn();
+        todoDialogController().activateAddTodoBtn();
+        todoDialogController().activateTodoButtons();
     };
 
     function showCompletedTodos() {
@@ -181,7 +184,7 @@ export function showTodos() {
                 todoDivContainer.classList.add("todo-div-container");
                 const todoDiv = document.createElement("button");
                 todoDiv.classList.add("todo-div");
-                todoDiv.classList.add(todo.projectID);
+                todoDiv.dataset.projectId = todo.projectID;
                 todoDiv.classList.add("completed");
                 const title = document.createElement("p");
                 title.textContent = todo.title;
@@ -192,6 +195,8 @@ export function showTodos() {
                 todoContainer.appendChild(todoDivContainer);
             }
         }
+
+        todoDialogController().activateTodoButtons();
     };
 
     function showProjectTodos() {
@@ -230,7 +235,7 @@ export function showTodos() {
                 todoDivContainer.classList.add("todo-div-container");
                 const todoDiv = document.createElement("button");
                 todoDiv.classList.add("todo-div");
-                todoDiv.classList.add(todo.projectID);
+                todoDiv.dataset.projectId = todo.projectID;
                 if (todo.priority === 1) {
                     todoDiv.classList.add("p1");
                 };
@@ -248,7 +253,8 @@ export function showTodos() {
             }
         }
 
-        addTodoDialogController().activateAddTodoBtn();
+        todoDialogController().activateAddTodoBtn();
+        todoDialogController().activateTodoButtons();
     };
 
     return { showTodaysTodos, showUpcomingTodos, showAllTodos, showCompletedTodos, showProjectTodos };

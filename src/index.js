@@ -6,7 +6,7 @@ import { loadCompleted } from "./completed-page.js";
 import { loadProjectPage } from "./projects-pages.js";
 import { todos } from "./todo-objects.js";
 import { projects } from "./projects.js";
-import { addTodoDialogController } from "./add-todo-btn.js";
+import { todoDialogController } from "./todo-dialog.js";
 
 const todayBtn = document.querySelector(".today-btn");
 const upcomingBtn = document.querySelector(".upcoming-btn");
@@ -91,5 +91,5 @@ console.log(todos.getAllTodos());
 
 loadToday();
 todayBtn.parentElement.classList.add("todo-button-selected");
-addTodoDialogController().activateCancelBtn();
-addTodoDialogController().activateDialogClose();
+todoDialogController().activateCancelBtn();
+todoDialogController().activateDialogClose();
