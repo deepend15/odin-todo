@@ -1,7 +1,11 @@
 import { projects } from "./projects.js";
 import { todos } from "./todo-objects.js";
-import { showTodos } from "./display-todos.js";
 import { format } from "date-fns";
+import { loadToday } from "./today-page.js";
+import { loadUpcoming } from "./upcoming-page.js";
+import { loadAll } from "./all-page.js";
+import { loadCompleted } from "./completed-page.js";
+import { loadProjectPage } from "./projects-pages.js";
 
 export function todoDialogController() {
     const addTodoBtn = document.querySelector(".add-todo-button");
@@ -75,8 +79,8 @@ export function todoDialogController() {
         } else {
             todoH4.textContent = `View/Edit Todo`;
             const allTodos = todos.getAllTodos();
-            const currentTodoID = e.currentTarget.dataset.projectId;
-            const currentTodoArray = allTodos.filter(todo => todo.projectID === currentTodoID);
+            const currentTodoID = e.currentTarget.dataset.todoId;
+            const currentTodoArray = allTodos.filter(todo => todo.todoID === currentTodoID);
             const currentTodo = currentTodoArray[0];
             currentTodo.targeted = 'yes';
             dialogTodoName.value = currentTodo.title;
@@ -106,6 +110,7 @@ export function todoDialogController() {
             };
         }
         todoDialog.showModal();
+        console.log(todos.getAllTodos());
         window.addEventListener("keydown", dialogEscBtn);
         todoDialog.addEventListener("close", () => window.removeEventListener("keydown", dialogEscBtn));
     }
@@ -132,51 +137,31 @@ export function todoDialogController() {
     };
 
     function closeDialog() {
+        const dueDateEnd = "T00:00:00";
+        const dueDateValue = new Date((dialogDueDate.value + dueDateEnd));
+        let priorityValue;
+        if (dialogPriority.value === "2 - Normal") {
+            priorityValue = 2;
+        } else {
+            priorityValue = 1;
+        };
+        const checkedRadioBtn = todoDialog.querySelector("input[name=isComplete]:checked");
+
+        const allTodos = todos.getAllTodos();
+
         if (todoH4.textContent === "Add Todo") {
             if (todoDialog.returnValue === "cancel") {
                 return;
             } else {
-                const dueDateEnd = "T00:00:00";
-                const dueDateValue = new Date((dialogDueDate.value + dueDateEnd));
-                let priorityValue;
-                if (dialogPriority.value === "2 - Normal") {
-                    priorityValue = 2;
-                } else {
-                    priorityValue = 1;
-                };
-                const checkedRadioBtn = todoDialog.querySelector("input[name=isComplete]:checked");
                 const projectName = dialogProject.value.toLowerCase();
-                const allTodos = todos.getAllTodos();
                 const projectTodos = allTodos.filter(todo => todo.project === dialogProject.value);
                 const numberOfProjectTodos = projectTodos.length;
                 const newID = numberOfProjectTodos + 1;
-                const projectID = projectName + `-` + newID.toString();
-                todos.addTodo(dialogTodoName.value, dialogDescription.value, dueDateValue, priorityValue, dialogProject.value, checkedRadioBtn.value, projectID);
+                const todoID = projectName + `-` + newID.toString();
+                todos.addTodo(dialogTodoName.value, dialogDescription.value, dueDateValue, priorityValue, dialogProject.value, checkedRadioBtn.value, todoID);
                 console.log(allTodos);
-                const navRows = Array.from(document.querySelectorAll(".nav-list-button-wrapper"));
-                const selectedRowArray = navRows
-                    .filter(row =>
-                    row.classList.contains("todo-button-selected") ||
-                    row.classList.contains("project-button-selected"));
-                const selectedRow = selectedRowArray[0];
-                if (selectedRow.classList.contains("todo-button-selected")) {
-                    switch (selectedRow.firstElementChild.textContent.slice(2)) {
-                        case 'Today':
-                            showTodos().showTodaysTodos();
-                            break;
-                        case 'Upcoming':
-                            showTodos().showUpcomingTodos();
-                            break;
-                        case 'All':
-                            showTodos().showAllTodos();
-                            break;
-                    }
-                } else {
-                    showTodos().showProjectTodos();
-                };
             } 
         } else {
-            const allTodos = todos.getAllTodos();
             const targetedTodoArray = allTodos.filter(todo => todo.targeted === 'yes');
             const targetedTodo = targetedTodoArray[0];
             if (todoDialog.returnValue === "cancel") {
@@ -185,61 +170,56 @@ export function todoDialogController() {
             } else {
                 targetedTodo.title = dialogTodoName.value;
                 targetedTodo.description = dialogDescription.value;
-                const dueDateEnd = "T00:00:00";
-                const dueDateValue = new Date((dialogDueDate.value + dueDateEnd));
                 targetedTodo.dueDate = dueDateValue;
-                let priorityValue;
-                if (dialogPriority.value === "2 - Normal") {
-                    priorityValue = 2;
-                } else {
-                    priorityValue = 1;
-                };
                 targetedTodo.priority = priorityValue;
                 if (targetedTodo.project !== dialogProject.value) {
                     const currentProjectTodos = allTodos.filter(todo => todo.project === targetedTodo.project && !(todo.targeted));
-                    const targetedTodoIDNumber = Number(targetedTodo.projectID.at(-1));
+                    const targetedTodoIDNumber = Number(targetedTodo.todoID.at(-1));
                     for (const todo of currentProjectTodos) {
-                        const todoIDNumber = Number(todo.projectID.at(-1));
+                        const todoIDNumber = Number(todo.todoID.at(-1));
                         if (todoIDNumber > targetedTodoIDNumber) {
                             const newTodoIDNumber = todoIDNumber - 1;
-                            todo.projectID = todo.project.toLowerCase() + `-` + newTodoIDNumber.toString();
+                            todo.todoID = todo.project.toLowerCase() + `-` + newTodoIDNumber.toString();
                         };
                     };
                     const newProjectName = dialogProject.value.toLowerCase();
                     const newProjectTodos = allTodos.filter(todo => todo.project === dialogProject.value);
                     const numberOfNewProjectTodos = newProjectTodos.length;
                     const targetedTodoNewID = numberOfNewProjectTodos + 1;
-                    const targetedTodoNewProjectID = newProjectName + `-` + targetedTodoNewID.toString();
+                    const targetedTodoNewTodoID = newProjectName + `-` + targetedTodoNewID.toString();
                     targetedTodo.project = dialogProject.value;
-                    targetedTodo.projectID = targetedTodoNewProjectID;
-                    const checkedRadioBtn = todoDialog.querySelector("input[name=isComplete]:checked");
-                    targetedTodo.isComplete = checkedRadioBtn.value;
-                    console.log(targetedTodo.isComplete);
-                    delete targetedTodo.targeted;
+                    targetedTodo.todoID = targetedTodoNewTodoID;
                 };
-                const navRows = Array.from(document.querySelectorAll(".nav-list-button-wrapper"));
-                const selectedRowArray = navRows
-                    .filter(row =>
-                    row.classList.contains("todo-button-selected") ||
-                    row.classList.contains("project-button-selected"));
-                const selectedRow = selectedRowArray[0];
-                if (selectedRow.classList.contains("todo-button-selected")) {
-                    switch (selectedRow.firstElementChild.textContent.slice(2)) {
-                        case 'Today':
-                            showTodos().showTodaysTodos();
-                            break;
-                        case 'Upcoming':
-                            showTodos().showUpcomingTodos();
-                            break;
-                        case 'All':
-                            showTodos().showAllTodos();
-                            break;
-                    }
-                } else {
-                    showTodos().showProjectTodos();
-                };
+                targetedTodo.isComplete = checkedRadioBtn.value;
+                delete targetedTodo.targeted;
+                console.log(allTodos);
             }
         };
+
+        const navRows = Array.from(document.querySelectorAll(".nav-list-button-wrapper"));
+        const selectedRowArray = navRows
+            .filter(row =>
+            row.classList.contains("todo-button-selected") ||
+            row.classList.contains("project-button-selected"));
+        const selectedRow = selectedRowArray[0];
+        if (selectedRow.classList.contains("todo-button-selected")) {
+            switch (selectedRow.firstElementChild.textContent.slice(2)) {
+                case 'Today':
+                    loadToday();
+                    break;
+                case 'Upcoming':
+                    loadUpcoming();
+                    break;
+                case 'All':
+                    loadAll();
+                    break;
+                case 'Completed':
+                    loadCompleted();
+                    break;
+            }
+        } else {
+            loadProjectPage();
+        }
     };
 
     function activateDialogClose() {

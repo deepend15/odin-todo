@@ -40,7 +40,7 @@ export function showTodos() {
                 todoDivContainer.classList.add("todo-div-container");
                 const todoDiv = document.createElement("button");
                 todoDiv.classList.add("todo-div");
-                todoDiv.dataset.projectId = todo.projectID;
+                todoDiv.dataset.todoId = todo.todoID;
                 if (todo.priority === 1) {
                     todoDiv.classList.add("p1");
                 };
@@ -92,7 +92,7 @@ export function showTodos() {
                 todoDivContainer.classList.add("todo-div-container");
                 const todoDiv = document.createElement("button");
                 todoDiv.classList.add("todo-div");
-                todoDiv.dataset.projectId = todo.projectID;
+                todoDiv.dataset.todoId = todo.todoID;
                 if (todo.priority === 1) {
                     todoDiv.classList.add("p1");
                 };
@@ -139,7 +139,7 @@ export function showTodos() {
                 todoDivContainer.classList.add("todo-div-container");
                 const todoDiv = document.createElement("button");
                 todoDiv.classList.add("todo-div");
-                todoDiv.dataset.projectId = todo.projectID;
+                todoDiv.dataset.todoId = todo.todoID;
                 if (todo.priority === 1) {
                     todoDiv.classList.add("p1");
                 };
@@ -184,7 +184,7 @@ export function showTodos() {
                 todoDivContainer.classList.add("todo-div-container");
                 const todoDiv = document.createElement("button");
                 todoDiv.classList.add("todo-div");
-                todoDiv.dataset.projectId = todo.projectID;
+                todoDiv.dataset.todoId = todo.todoID;
                 todoDiv.classList.add("completed");
                 const title = document.createElement("p");
                 title.textContent = todo.title;
@@ -235,7 +235,7 @@ export function showTodos() {
                 todoDivContainer.classList.add("todo-div-container");
                 const todoDiv = document.createElement("button");
                 todoDiv.classList.add("todo-div");
-                todoDiv.dataset.projectId = todo.projectID;
+                todoDiv.dataset.todoId = todo.todoID;
                 if (todo.priority === 1) {
                     todoDiv.classList.add("p1");
                 };
