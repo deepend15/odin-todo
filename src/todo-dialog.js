@@ -12,7 +12,6 @@ export function todoDialogController() {
     const todoBtns = document.querySelectorAll(".todo-div");
     const todoDialog = document.querySelector("#todo-dialog");
     const todoH4 = todoDialog.querySelector("h4");
-    // const dialogTodoName = todoDialog.querySelector("#todoName");
     const nameLine = todoDialog.querySelector(".name-line");
     const dialogDescription = todoDialog.querySelector("#description");
     const dialogDueDate = todoDialog.querySelector("#dueDate");
@@ -120,9 +119,9 @@ export function todoDialogController() {
             editNameBtn.addEventListener("click", () => {
                 nameLine.textContent = "";
                 createNameInput();
-                const dialogName = todoDialog.querySelector("#todoName");
-                dialogName.value = currentTodo.title;
-                dialogName.focus();
+                const dialogTodoName = todoDialog.querySelector("#todoName");
+                dialogTodoName.value = currentTodo.title;
+                dialogTodoName.focus();
             });
             dialogDescription.value = currentTodo.description;
             dialogDueDate.value = format(currentTodo.dueDate, 'yyyy-MM-dd');
@@ -183,7 +182,7 @@ export function todoDialogController() {
         const allTodos = todos.getAllTodos();
 
         if (todoH4.textContent === "Add Todo") {
-            const dialogName = todoDialog.querySelector("#todoName");
+            const dialogTodoName = todoDialog.querySelector("#todoName");
             if (todoDialog.returnValue === "cancel") {
                 return;
             } else {
@@ -192,7 +191,7 @@ export function todoDialogController() {
                 const numberOfProjectTodos = projectTodos.length;
                 const newID = numberOfProjectTodos + 1;
                 const todoID = projectName + `-` + newID.toString();
-                todos.addTodo(dialogName.value, dialogDescription.value, dueDateValue, priorityValue, dialogProject.value, checkedRadioBtn.value, todoID);
+                todos.addTodo(dialogTodoName.value, dialogDescription.value, dueDateValue, priorityValue, dialogProject.value, checkedRadioBtn.value, todoID);
                 console.log(allTodos);
             } 
         } else {
