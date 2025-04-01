@@ -12,7 +12,8 @@ export function todoDialogController() {
     const todoBtns = document.querySelectorAll(".todo-div");
     const todoDialog = document.querySelector("#todo-dialog");
     const todoH4 = todoDialog.querySelector("h4");
-    const dialogTodoName = todoDialog.querySelector("#todoName");
+    // const dialogTodoName = todoDialog.querySelector("#todoName");
+    const nameLine = todoDialog.querySelector(".name-line");
     const dialogDescription = todoDialog.querySelector("#description");
     const dialogDueDate = todoDialog.querySelector("#dueDate");
     const dialogPriority = todoDialog.querySelector("#priority");
@@ -66,9 +67,28 @@ export function todoDialogController() {
 
     function openTodoDialog(e) {
         todoDialog.returnValue = "";
+        nameLine.textContent = "";
+
+        function createNameInput() {
+            const nameLabel = document.createElement("label");
+            nameLabel.setAttribute("for", "todoName");
+            const requiredSpan = document.createElement("span");
+            requiredSpan.setAttribute("aria-label", "required");
+            requiredSpan.textContent = `*`;
+            nameLabel.append(requiredSpan, `Name:`);
+            nameLine.appendChild(nameLabel);
+            const nameInput = document.createElement("input");
+            nameInput.setAttribute("type", "text");
+            nameInput.setAttribute("id", "todoName");
+            nameInput.setAttribute("name", "todoName");
+            nameInput.setAttribute("autofocus", "");
+            nameInput.setAttribute("required", "");
+            nameLine.appendChild(nameInput);
+        };
+
         if (e.currentTarget.classList.contains("add-todo-button")) {
             todoH4.textContent = `Add Todo`;
-            dialogTodoName.value = "";
+            createNameInput();
             dialogDescription.value = "";
             dialogDueDate.value = "";
             dialogPriority.value = "2 - Normal";
@@ -83,7 +103,27 @@ export function todoDialogController() {
             const currentTodoArray = allTodos.filter(todo => todo.todoID === currentTodoID);
             const currentTodo = currentTodoArray[0];
             currentTodo.targeted = 'yes';
-            dialogTodoName.value = currentTodo.title;
+            const name = document.createElement("p");
+            name.textContent = `Name:`;
+            nameLine.appendChild(name);
+            const editNameDiv = document.createElement("div");
+            editNameDiv.classList.add("edit-todo-name-div");
+            const nameText = document.createElement("p");
+            nameText.textContent = currentTodo.title;
+            editNameDiv.appendChild(nameText);
+            const editNameBtn = document.createElement("button");
+            editNameBtn.classList.add("edit-name-button");
+            editNameBtn.setAttribute("type", "button");
+            editNameBtn.textContent = `edit`;
+            editNameDiv.appendChild(editNameBtn);
+            nameLine.appendChild(editNameDiv);
+            editNameBtn.addEventListener("click", () => {
+                nameLine.textContent = "";
+                createNameInput();
+                const dialogName = todoDialog.querySelector("#todoName");
+                dialogName.value = currentTodo.title;
+                dialogName.focus();
+            });
             dialogDescription.value = currentTodo.description;
             dialogDueDate.value = format(currentTodo.dueDate, 'yyyy-MM-dd');
             if (currentTodo.priority === 1) {
@@ -125,15 +165,8 @@ export function todoDialogController() {
         });
     }
 
-    function closeViaCancel() {
-        todoDialog.close("cancel");
-        const checkedRadioBtn = todoDialog.querySelector("input[name=isComplete]:checked");
-        console.log(todoDialog.returnValue);
-        console.log(`${dialogTodoName.value}, ${dialogDescription.value}, ${dialogDueDate.value}, ${dialogPriority.value}, ${dialogProject.value}, ${checkedRadioBtn.value}`);
-    };
-
     function activateCancelBtn() {
-        cancelBtn.addEventListener("click", closeViaCancel);
+        cancelBtn.addEventListener("click", () => todoDialog.close("cancel"));
     };
 
     function closeDialog() {
@@ -150,6 +183,7 @@ export function todoDialogController() {
         const allTodos = todos.getAllTodos();
 
         if (todoH4.textContent === "Add Todo") {
+            const dialogName = todoDialog.querySelector("#todoName");
             if (todoDialog.returnValue === "cancel") {
                 return;
             } else {
@@ -158,7 +192,7 @@ export function todoDialogController() {
                 const numberOfProjectTodos = projectTodos.length;
                 const newID = numberOfProjectTodos + 1;
                 const todoID = projectName + `-` + newID.toString();
-                todos.addTodo(dialogTodoName.value, dialogDescription.value, dueDateValue, priorityValue, dialogProject.value, checkedRadioBtn.value, todoID);
+                todos.addTodo(dialogName.value, dialogDescription.value, dueDateValue, priorityValue, dialogProject.value, checkedRadioBtn.value, todoID);
                 console.log(allTodos);
             } 
         } else {
@@ -168,7 +202,9 @@ export function todoDialogController() {
                 delete targetedTodo.targeted;
                 return;
             } else {
-                targetedTodo.title = dialogTodoName.value;
+                if (nameLine.lastElementChild.id === "todoName") {
+                    targetedTodo.title = nameLine.lastElementChild.value;
+                };
                 targetedTodo.description = dialogDescription.value;
                 targetedTodo.dueDate = dueDateValue;
                 targetedTodo.priority = priorityValue;

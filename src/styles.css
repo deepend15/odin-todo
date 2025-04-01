@@ -274,11 +274,13 @@ main h3 {
 .add-todo-container > p > input,
 .add-todo-container > p > select,
 .add-todo-container > p > textarea,
+.add-todo-container > p > div,
 .radio-buttons {
     width: 70%;
 }
 
 .add-todo-container > p > label,
+.add-todo-container > p > p,
 .isCompletedLine > p {
     width: 30%;
 }
@@ -347,6 +349,23 @@ main h3 {
 
 .radio-buttons input[type="radio"]:hover::before {
     background-color: #4b8db0;
+}
+
+.edit-todo-name-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-name-button {
+    border: none;
+    font-size: 1.6rem;
+    background-color: white;
+    color: blue;
+}
+
+.edit-name-button:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .todo-dialog-buttons {
