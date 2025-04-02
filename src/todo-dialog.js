@@ -116,6 +116,7 @@ export function todoDialogController() {
             const currentTodoArray = allTodos.filter(todo => todo.todoID === currentTodoID);
             const currentTodo = currentTodoArray[0];
             currentTodo.targeted = 'yes';
+            console.log(allTodos.indexOf(currentTodo));
             const name = document.createElement("p");
             name.textContent = `Name:`;
             nameLine.appendChild(name);
@@ -191,6 +192,7 @@ export function todoDialogController() {
             deleteBtnSecondLine.textContent = `todo`;
             deleteTodoBtn.append(deleteBtnFirstLine, deleteBtnSecondLine);
             todoDialogBtns.appendChild(deleteTodoBtn);
+            deleteTodoBtn.addEventListener("click", () => todoDialog.close("delete"));
         }
         todoDialog.showModal();
         console.log(todos.getAllTodos());
@@ -242,12 +244,31 @@ export function todoDialogController() {
         } else {
             const targetedTodoArray = allTodos.filter(todo => todo.targeted === 'yes');
             const targetedTodo = targetedTodoArray[0];
+
             const deleteTodoBtn = todoDialog.querySelector(".delete-todo-btn");
+
+            function adjustProjectTodoIDs() {
+                const currentProjectTodos = allTodos.filter(todo => todo.project === targetedTodo.project && !(todo.targeted));
+                const targetedTodoIDNumber = Number(targetedTodo.todoID.at(-1));
+                for (const todo of currentProjectTodos) {
+                    const todoIDNumber = Number(todo.todoID.at(-1));
+                    if (todoIDNumber > targetedTodoIDNumber) {
+                        const newTodoIDNumber = todoIDNumber - 1;
+                        todo.todoID = todo.project.toLowerCase() + `-` + newTodoIDNumber.toString();
+                    };
+                };
+            }
+
             if (todoDialog.returnValue === "cancel") {
                 deleteTodoBtn.remove();
                 okBtn.removeAttribute("autofocus");
                 delete targetedTodo.targeted;
                 return;
+            } else if (todoDialog.returnValue === "delete") {
+                adjustProjectTodoIDs();
+                allTodos.splice(allTodos.indexOf(targetedTodo), 1);
+                deleteTodoBtn.remove();
+                console.log(allTodos);
             } else {
                 if (nameLine.lastElementChild.id === "todoName") {
                     targetedTodo.title = nameLine.lastElementChild.value;
@@ -258,15 +279,7 @@ export function todoDialogController() {
                 targetedTodo.dueDate = dueDateValue;
                 targetedTodo.priority = priorityValue;
                 if (targetedTodo.project !== dialogProject.value) {
-                    const currentProjectTodos = allTodos.filter(todo => todo.project === targetedTodo.project && !(todo.targeted));
-                    const targetedTodoIDNumber = Number(targetedTodo.todoID.at(-1));
-                    for (const todo of currentProjectTodos) {
-                        const todoIDNumber = Number(todo.todoID.at(-1));
-                        if (todoIDNumber > targetedTodoIDNumber) {
-                            const newTodoIDNumber = todoIDNumber - 1;
-                            todo.todoID = todo.project.toLowerCase() + `-` + newTodoIDNumber.toString();
-                        };
-                    };
+                    adjustProjectTodoIDs();
                     const newProjectName = dialogProject.value.toLowerCase();
                     const newProjectTodos = allTodos.filter(todo => todo.project === dialogProject.value);
                     const numberOfNewProjectTodos = newProjectTodos.length;
