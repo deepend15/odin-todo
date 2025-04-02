@@ -81,7 +81,7 @@ todos.addTodo('Call Mom', 'make sure to call Mom, she worries', new Date('2025-0
 
 todos.addTodo('Do Laundry', 'do your laundry you heathen', new Date('2025-04-04T00:00:00'), 2, 'Personal', 'no', 'personal-2');
 
-todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-04-01T00:00:00'), 1, 'Work', 'no', 'work-1');
+todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-04-02T00:00:00'), 1, 'Work', 'no', 'work-1');
 
 todos.addTodo(`Shoot 100 3's`, 'gotta improve that stroke', new Date('2025-04-05T00:00:00'), 2, 'Hobbies', 'no', 'hobbies-1');
 

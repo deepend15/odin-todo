@@ -11,6 +11,7 @@ export function todoDialogController() {
     const addTodoBtn = document.querySelector(".add-todo-button");
     const todoBtns = document.querySelectorAll(".todo-div");
     const todoDialog = document.querySelector("#todo-dialog");
+    const todoDialogBtns = todoDialog.querySelector(".todo-dialog-buttons");
     const todoH4 = todoDialog.querySelector("h4");
     const nameLine = todoDialog.querySelector(".name-line");
     const descriptionLine = todoDialog.querySelector(".description-line");
@@ -20,6 +21,7 @@ export function todoDialogController() {
     const radioYes = todoDialog.querySelector("#yes");
     const radioNo = todoDialog.querySelector("#no");
     const cancelBtn = todoDialog.querySelector(".cancel-button");
+    const okBtn = todoDialog.querySelector(".ok-button");
 
     function addProjectSelections() {
         function getCurrentProject() {
@@ -179,6 +181,16 @@ export function todoDialogController() {
                 radioYes.checked = false;
                 radioNo.checked = true;
             };
+            okBtn.setAttribute("autofocus", "");
+            const deleteTodoBtn = document.createElement("button");
+            deleteTodoBtn.classList.add("delete-todo-btn");
+            deleteTodoBtn.setAttribute("type", "button");
+            const deleteBtnFirstLine = document.createElement("p");
+            deleteBtnFirstLine.textContent = `- delete`;
+            const deleteBtnSecondLine = document.createElement("p");
+            deleteBtnSecondLine.textContent = `todo`;
+            deleteTodoBtn.append(deleteBtnFirstLine, deleteBtnSecondLine);
+            todoDialogBtns.appendChild(deleteTodoBtn);
         }
         todoDialog.showModal();
         console.log(todos.getAllTodos());
@@ -230,7 +242,10 @@ export function todoDialogController() {
         } else {
             const targetedTodoArray = allTodos.filter(todo => todo.targeted === 'yes');
             const targetedTodo = targetedTodoArray[0];
+            const deleteTodoBtn = todoDialog.querySelector(".delete-todo-btn");
             if (todoDialog.returnValue === "cancel") {
+                deleteTodoBtn.remove();
+                okBtn.removeAttribute("autofocus");
                 delete targetedTodo.targeted;
                 return;
             } else {
@@ -261,6 +276,8 @@ export function todoDialogController() {
                     targetedTodo.todoID = targetedTodoNewTodoID;
                 };
                 targetedTodo.isComplete = checkedRadioBtn.value;
+                deleteTodoBtn.remove();
+                okBtn.removeAttribute("autofocus");
                 delete targetedTodo.targeted;
                 console.log(allTodos);
             }

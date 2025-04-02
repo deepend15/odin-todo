@@ -376,21 +376,41 @@ main h3 {
 .todo-dialog-buttons {
     display: flex;
     gap: 4rem;
+    align-items: center;
 }
 
-.todo-dialog-buttons > button {
+.todo-dialog-buttons > button:not(.delete-todo-btn) {
+    height: min-content;
     padding: 0.6rem 3rem;
     background-color: var(--nav-gray);
     border-radius: 14px;
     border: 1px solid gray;
 }
 
-.todo-dialog-buttons > button:hover {
+.todo-dialog-buttons > button:not(.delete-todo-btn):hover {
     background-color: lightgray;
 }
 
-.todo-dialog-buttons > button:active {
+.todo-dialog-buttons > button:not(.delete-todo-btn):active {
     background-color: var(--nav-gray);
+}
+
+.delete-todo-btn {
+    padding: 0.4rem 2.4rem;
+    background-color: red;
+    color: white;
+    border-radius: 25px;
+    border: 2px outset silver;
+    flex-shrink: 0;
+}
+
+.delete-todo-btn:hover {
+    background-color: rgb(217, 0, 0);
+}
+
+.delete-todo-btn:active {
+    border-style: inset;
+    background-color: rgb(200, 0, 0);
 }
 
 .todo-container {
