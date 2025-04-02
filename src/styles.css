@@ -274,7 +274,7 @@ main h3 {
 .add-todo-container > p > input,
 .add-todo-container > p > select,
 .add-todo-container > p > textarea,
-.add-todo-container > p > div,
+.edit-name-and-description-div,
 .radio-buttons {
     width: 70%;
 }
@@ -351,19 +351,24 @@ main h3 {
     background-color: #4b8db0;
 }
 
-.edit-todo-name-div {
+.edit-name-and-description-div {
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
 }
 
-.edit-name-button {
+.edit-name-and-description-div > p {
+    line-height: 1.5;
+} 
+
+.edit-button {
     border: none;
     font-size: 1.6rem;
     background-color: white;
     color: blue;
 }
 
-.edit-name-button:hover {
+.edit-button:hover {
     text-decoration: underline;
     cursor: pointer;
 }

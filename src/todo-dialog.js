@@ -13,7 +13,7 @@ export function todoDialogController() {
     const todoDialog = document.querySelector("#todo-dialog");
     const todoH4 = todoDialog.querySelector("h4");
     const nameLine = todoDialog.querySelector(".name-line");
-    const dialogDescription = todoDialog.querySelector("#description");
+    const descriptionLine = todoDialog.querySelector(".description-line");
     const dialogDueDate = todoDialog.querySelector("#dueDate");
     const dialogPriority = todoDialog.querySelector("#priority");
     const dialogProject = todoDialog.querySelector("#project");
@@ -67,6 +67,7 @@ export function todoDialogController() {
     function openTodoDialog(e) {
         todoDialog.returnValue = "";
         nameLine.textContent = "";
+        descriptionLine.textContent = "";
 
         function createNameInput() {
             const nameLabel = document.createElement("label");
@@ -85,10 +86,21 @@ export function todoDialogController() {
             nameLine.appendChild(nameInput);
         };
 
+        function createDescriptionTextArea() {
+            const descriptionLabel = document.createElement("label");
+            descriptionLabel.setAttribute("for", "description");
+            descriptionLabel.textContent = `Description:`;
+            descriptionLine.appendChild(descriptionLabel);
+            const descriptionTextArea = document.createElement("textarea");
+            descriptionTextArea.setAttribute("name", "description");
+            descriptionTextArea.setAttribute("id", "description");
+            descriptionLine.appendChild(descriptionTextArea);
+        }
+
         if (e.currentTarget.classList.contains("add-todo-button")) {
             todoH4.textContent = `Add Todo`;
             createNameInput();
-            dialogDescription.value = "";
+            createDescriptionTextArea();
             dialogDueDate.value = "";
             dialogPriority.value = "2 - Normal";
             dialogProject.textContent = "";
@@ -106,12 +118,12 @@ export function todoDialogController() {
             name.textContent = `Name:`;
             nameLine.appendChild(name);
             const editNameDiv = document.createElement("div");
-            editNameDiv.classList.add("edit-todo-name-div");
+            editNameDiv.classList.add("edit-name-and-description-div");
             const nameText = document.createElement("p");
             nameText.textContent = currentTodo.title;
             editNameDiv.appendChild(nameText);
             const editNameBtn = document.createElement("button");
-            editNameBtn.classList.add("edit-name-button");
+            editNameBtn.classList.add("edit-button");
             editNameBtn.setAttribute("type", "button");
             editNameBtn.textContent = `edit`;
             editNameDiv.appendChild(editNameBtn);
@@ -123,7 +135,27 @@ export function todoDialogController() {
                 dialogTodoName.value = currentTodo.title;
                 dialogTodoName.focus();
             });
-            dialogDescription.value = currentTodo.description;
+            const description = document.createElement("p");
+            description.textContent = `Description:`;
+            descriptionLine.appendChild(description);
+            const editDescriptionDiv = document.createElement("div");
+            editDescriptionDiv.classList.add("edit-name-and-description-div");
+            const descriptionText = document.createElement("p");
+            descriptionText.textContent = currentTodo.description;
+            editDescriptionDiv.appendChild(descriptionText);
+            const editDescriptionBtn = document.createElement("button");
+            editDescriptionBtn.classList.add("edit-button");
+            editDescriptionBtn.setAttribute("type", "button");
+            editDescriptionBtn.textContent = `edit`;
+            editDescriptionDiv.appendChild(editDescriptionBtn);
+            descriptionLine.appendChild(editDescriptionDiv);
+            editDescriptionBtn.addEventListener("click", () => {
+                descriptionLine.textContent = "";
+                createDescriptionTextArea();
+                const dialogDescription = todoDialog.querySelector("#description");
+                dialogDescription.value = currentTodo.description;
+                dialogDescription.focus();
+            })
             dialogDueDate.value = format(currentTodo.dueDate, 'yyyy-MM-dd');
             if (currentTodo.priority === 1) {
                 dialogPriority.value = '1 - High';
@@ -183,6 +215,7 @@ export function todoDialogController() {
 
         if (todoH4.textContent === "Add Todo") {
             const dialogTodoName = todoDialog.querySelector("#todoName");
+            const dialogDescription = todoDialog.querySelector("#description");
             if (todoDialog.returnValue === "cancel") {
                 return;
             } else {
@@ -204,7 +237,9 @@ export function todoDialogController() {
                 if (nameLine.lastElementChild.id === "todoName") {
                     targetedTodo.title = nameLine.lastElementChild.value;
                 };
-                targetedTodo.description = dialogDescription.value;
+                if (descriptionLine.lastElementChild.id === "description") {
+                    targetedTodo.description = descriptionLine.lastElementChild.value;
+                };
                 targetedTodo.dueDate = dueDateValue;
                 targetedTodo.priority = priorityValue;
                 if (targetedTodo.project !== dialogProject.value) {
