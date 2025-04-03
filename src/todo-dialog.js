@@ -197,9 +197,7 @@ export function todoDialogController() {
             deleteBtnSecondLine.textContent = `todo`;
             deleteTodoBtn.append(deleteBtnFirstLine, deleteBtnSecondLine);
             todoDialogBtns.appendChild(deleteTodoBtn);
-            deleteTodoBtn.addEventListener("click", () => {
-                confirmDeleteDialog.showModal();
-            });
+            deleteTodoBtn.addEventListener("click", () => confirmDeleteDialog.showModal());
         }
         todoDialog.showModal();
         console.log(todos.getAllTodos());
