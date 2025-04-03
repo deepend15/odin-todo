@@ -231,10 +231,15 @@ main h3 {
     background-color: rgb(0, 0, 0, 0.3);
 }
 
-#todo-dialog {
+#todo-dialog,
+#confirm-delete-dialog,
+#delete-confirmation-dialog {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+#todo-dialog {
     padding: 3rem;
     width: max(45rem, 40%);
 }
@@ -379,19 +384,28 @@ main h3 {
     align-items: center;
 }
 
-.todo-dialog-buttons > button:not(.delete-todo-btn) {
-    height: min-content;
-    padding: 0.6rem 3rem;
+.todo-dialog-buttons > button:not(.delete-todo-btn),
+.confirm-dialog-buttons > button,
+.delete-confirmation-ok-btn {
     background-color: var(--nav-gray);
     border-radius: 14px;
     border: 1px solid gray;
 }
 
-.todo-dialog-buttons > button:not(.delete-todo-btn):hover {
+.todo-dialog-buttons > button:not(.delete-todo-btn) {
+    padding: 0.6rem 3rem;
+    height: min-content;
+}
+
+.todo-dialog-buttons > button:not(.delete-todo-btn):hover,
+.confirm-dialog-buttons > button:hover,
+.delete-confirmation-ok-btn:hover {
     background-color: lightgray;
 }
 
-.todo-dialog-buttons > button:not(.delete-todo-btn):active {
+.todo-dialog-buttons > button:not(.delete-todo-btn):active,
+.confirm-dialog-buttons > button:active,
+.delete-confirmation-ok-btn:active {
     background-color: var(--nav-gray);
 }
 
@@ -411,6 +425,47 @@ main h3 {
 .delete-todo-btn:active {
     border-style: inset;
     background-color: rgb(200, 0, 0);
+}
+
+#confirm-delete-dialog {
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+#confirm-delete-dialog > p {
+    line-height: 1.5;
+}
+
+#confirm-delete-dialog > p:first-child {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.confirm-dialog-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 2.8rem;
+    justify-content: center;
+}
+
+.confirm-dialog-buttons > button {
+    padding: 0.5rem 2.2rem;
+}
+
+#delete-confirmation-dialog {
+    padding: 2rem 2rem 1.5rem 2rem;
+    font-size: 1.8rem;
+    text-align: center;
+    min-width: 200px;
+}
+
+#delete-confirmation-dialog > p {
+    margin-bottom: 2rem;
+}
+
+.delete-confirmation-ok-btn {
+    padding: 0.5rem 2rem;
 }
 
 .todo-container {
