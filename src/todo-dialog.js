@@ -121,7 +121,6 @@ export function todoDialogController() {
             const currentTodoArray = allTodos.filter(todo => todo.todoID === currentTodoID);
             const currentTodo = currentTodoArray[0];
             currentTodo.targeted = 'yes';
-            console.log(allTodos.indexOf(currentTodo));
             const name = document.createElement("p");
             name.textContent = `Name:`;
             nameLine.appendChild(name);
