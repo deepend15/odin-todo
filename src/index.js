@@ -2,6 +2,7 @@ import "./styles.css";
 import { projects } from "./projects.js";
 import { loadProjectRows } from "./project-rows.js";
 import { navButtons } from "./nav-button-fns.js";
+import { projectDialogController } from "./project-dialogs.js";
 import { todos } from "./todo-objects.js";
 import { loadToday } from "./today-page.js";
 import { todoDialogController } from "./todo-dialog.js";
@@ -23,6 +24,8 @@ const initialSiteLoad = (function () {
     navButtons().activateProjectBtns();
 
     navButtons().activateNavRowEventListener();
+
+    projectDialogController().activateAddProjectBtn();
 
     todos.addTodo('Call Mom', 'make sure to call Mom, she worries', new Date('2025-03-12T00:00:00'), 1, 'Personal', 'no', 'personal-1');
 
