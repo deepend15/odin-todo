@@ -50,7 +50,5 @@ const initialSiteLoad = (function () {
     todayBtn.parentElement.classList.add("todo-button-selected");
 
     todoDialogController().activateCancelBtn();
-    todoDialogController().activateConfirmDeleteBtns();
-    todoDialogController().activateDeleteConfirmationOKBtn();
     todoDialogController().activateDialogClose();
 })();

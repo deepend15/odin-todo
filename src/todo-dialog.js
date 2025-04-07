@@ -22,11 +22,6 @@ export function todoDialogController() {
     const radioNo = todoDialog.querySelector("#no");
     const cancelBtn = todoDialog.querySelector(".cancel-button");
     const okBtn = todoDialog.querySelector(".ok-button");
-    const confirmDeleteDialog = document.querySelector("#confirm-delete-dialog");
-    const confirmYesBtn = document.querySelector(".confirm-yes");
-    const confirmNoBtn = document.querySelector(".confirm-no");
-    const deleteConfirmationDialog = document.querySelector("#delete-confirmation-dialog");
-    const deleteConfirmationOKBtn = document.querySelector(".delete-confirmation-ok-btn");
 
     function addProjectSelections() {
         function getCurrentProject() {
@@ -196,8 +191,55 @@ export function todoDialogController() {
             deleteBtnSecondLine.textContent = `todo`;
             deleteTodoBtn.append(deleteBtnFirstLine, deleteBtnSecondLine);
             todoDialogBtns.appendChild(deleteTodoBtn);
-            deleteTodoBtn.addEventListener("click", () => confirmDeleteDialog.showModal());
-        }
+            deleteTodoBtn.addEventListener("click", () => {
+                const confirmDeleteDialog = document.createElement("dialog");
+                confirmDeleteDialog.id = "confirm-delete-dialog";
+                const warningSymbol = document.createElement("p");
+                warningSymbol.textContent = `\u2757`;
+                confirmDeleteDialog.appendChild(warningSymbol);
+                const warningText = document.createElement("p");
+                warningText.textContent = "Are you sure you want to delete this todo?";
+                confirmDeleteDialog.appendChild(warningText);
+                const confirmDeleteDialogBtnsDiv = document.createElement("div");
+                confirmDeleteDialogBtnsDiv.classList.add("confirm-dialog-buttons");
+                const confirmYesBtn = document.createElement("button");
+                confirmYesBtn.classList.add("confirm-yes");
+                confirmYesBtn.textContent = "Yes";
+                confirmDeleteDialogBtnsDiv.appendChild(confirmYesBtn);
+                const confirmNoBtn = document.createElement("button");
+                confirmNoBtn.classList.add("confirm-no");
+                confirmNoBtn.textContent = "No";
+                confirmDeleteDialogBtnsDiv.appendChild(confirmNoBtn);
+                confirmDeleteDialog.appendChild(confirmDeleteDialogBtnsDiv);
+                const body = document.querySelector("body");
+                body.appendChild(confirmDeleteDialog);
+                confirmDeleteDialog.showModal();
+                confirmNoBtn.addEventListener("click", () => {
+                    confirmDeleteDialog.close();
+                });
+                confirmYesBtn.addEventListener("click", () => {
+                    confirmDeleteDialog.close();
+                    todoDialog.close("delete");
+                    const deleteConfirmationDialog = document.createElement("dialog");
+                    deleteConfirmationDialog.id = "delete-confirmation-dialog";
+                    const deleteConfirmationTxt = document.createElement("p");
+                    deleteConfirmationTxt.textContent = "Todo deleted.";
+                    deleteConfirmationDialog.appendChild(deleteConfirmationTxt);
+                    const deleteConfirmationOKBtn = document.createElement("button");
+                    deleteConfirmationOKBtn.classList.add("delete-confirmation-ok-btn");
+                    deleteConfirmationOKBtn.setAttribute("autofocus", "");
+                    deleteConfirmationOKBtn.textContent = "OK";
+                    deleteConfirmationDialog.appendChild(deleteConfirmationOKBtn);
+                    body.appendChild(deleteConfirmationDialog);
+                    deleteConfirmationDialog.showModal();
+                    deleteConfirmationOKBtn.addEventListener("click", () => {
+                        deleteConfirmationDialog.close();
+                    });
+                    deleteConfirmationDialog.addEventListener("close", () => deleteConfirmationDialog.remove());
+                });
+                confirmDeleteDialog.addEventListener("close", () => confirmDeleteDialog.remove());
+            });
+        };
         todoDialog.showModal();
         console.log(todos.getAllTodos());
         window.addEventListener("keydown", dialogEscBtn);
@@ -216,19 +258,6 @@ export function todoDialogController() {
 
     function activateCancelBtn() {
         cancelBtn.addEventListener("click", () => todoDialog.close("cancel"));
-    };
-
-    function activateConfirmDeleteBtns() {
-        confirmNoBtn.addEventListener("click", () => confirmDeleteDialog.close());
-        confirmYesBtn.addEventListener("click", () => {
-            confirmDeleteDialog.close();
-            todoDialog.close("delete");
-            deleteConfirmationDialog.showModal();
-        });
-    };
-
-    function activateDeleteConfirmationOKBtn() {
-        deleteConfirmationOKBtn.addEventListener("click", () => deleteConfirmationDialog.close());
     };
 
     function closeDialog() {
@@ -347,8 +376,6 @@ export function todoDialogController() {
         activateAddTodoBtn,
         activateTodoButtons,
         activateCancelBtn,
-        activateDialogClose,
-        activateConfirmDeleteBtns,
-        activateDeleteConfirmationOKBtn
+        activateDialogClose
     };
 };
