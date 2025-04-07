@@ -23,17 +23,22 @@ const initialSiteLoad = (function () {
     navButtons().activateCompletedBtn();
     navButtons().activateProjectBtns();
 
-    navButtons().activateNavRowEventListener();
+    const todoNav = document.querySelector(".todo-nav");
+    const projectRowsDiv = document.querySelector(".project-rows");
+    navButtons().activateNavRowEventListener(todoNav);
+    navButtons().activateNavRowEventListener(projectRowsDiv);
 
     projectDialogController().activateAddProjectBtn();
+    projectDialogController().activateCancelBtn();
+    projectDialogController().activateDialogClose();
 
     todos.addTodo('Call Mom', 'make sure to call Mom, she worries', new Date('2025-03-12T00:00:00'), 1, 'Personal', 'no', 'personal-1');
 
-    todos.addTodo('Do Laundry', 'do your laundry you heathen', new Date('2025-04-04T00:00:00'), 2, 'Personal', 'no', 'personal-2');
+    todos.addTodo('Do Laundry', 'do your laundry you heathen', new Date('2025-04-11T00:00:00'), 2, 'Personal', 'no', 'personal-2');
 
-    todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-04-04T00:00:00'), 1, 'Work', 'no', 'work-1');
+    todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-04-07T00:00:00'), 1, 'Work', 'no', 'work-1');
 
-    todos.addTodo(`Shoot 100 3's`, 'gotta improve that stroke', new Date('2025-04-05T00:00:00'), 2, 'Hobbies', 'no', 'hobbies-1');
+    todos.addTodo(`Shoot 100 3's`, 'gotta improve that stroke', new Date('2025-04-12T00:00:00'), 2, 'Hobbies', 'no', 'hobbies-1');
 
     todos.addTodo('Feed the Dog', 'dog needs to be fed', new Date('2025-03-20T00:00:00'), 1, 'Personal', 'yes', 'personal-3');
 

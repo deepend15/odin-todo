@@ -31,8 +31,10 @@ export function loadProjectPage() {
     topLine.appendChild(legend);
 
     function getCurrentProject() {
-        const selectedProject = document.querySelector(".project-button-selected");
-        const selectedProjectName = selectedProject.firstElementChild.textContent.slice(2);
+        const selectedProject = document.querySelector(
+        ".project-button-selected");
+        const selectedProjectName =
+        selectedProject.firstElementChild.textContent.slice(2);
         return selectedProjectName;
     }
     const currentProject = getCurrentProject();

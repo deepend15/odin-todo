@@ -169,6 +169,37 @@ dialog {
     gap: 3rem;
 }
 
+#add-project-dialog > form > p:first-child {
+    display: grid;
+    gap: 1rem;
+}
+
+#add-project-dialog input {
+    margin: 0.5rem;
+    padding: 0.5rem 0.8rem;
+}
+
+.add-project-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.add-project-buttons > button {
+    background-color: var(--nav-gray);
+    border: 1px solid gray;
+    padding: 0.5rem 1.5rem;
+    border-radius: 12px;
+}
+
+.add-project-buttons > button:hover {
+    background-color: lightgray;
+}
+
+.add-project-buttons > button:active {
+    background-color: var(--nav-gray);
+}
+
 main {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
@@ -394,7 +425,8 @@ main h3 {
 
 .todo-dialog-buttons > button:not(.delete-todo-btn),
 .confirm-dialog-buttons > button,
-.delete-confirmation-ok-btn {
+.delete-confirmation-ok-btn,
+#dupe-project-dialog > button {
     background-color: var(--nav-gray);
     border-radius: 14px;
     border: 1px solid gray;
@@ -407,13 +439,15 @@ main h3 {
 
 .todo-dialog-buttons > button:not(.delete-todo-btn):hover,
 .confirm-dialog-buttons > button:hover,
-.delete-confirmation-ok-btn:hover {
+.delete-confirmation-ok-btn:hover,
+#dupe-project-dialog > button:hover {
     background-color: lightgray;
 }
 
 .todo-dialog-buttons > button:not(.delete-todo-btn):active,
 .confirm-dialog-buttons > button:active,
-.delete-confirmation-ok-btn:active {
+.delete-confirmation-ok-btn:active,
+#dupe-project-dialog > button:active {
     background-color: var(--nav-gray);
 }
 
@@ -435,19 +469,26 @@ main h3 {
     background-color: rgb(200, 0, 0);
 }
 
-#confirm-delete-dialog {
+#confirm-delete-dialog,
+#dupe-project-dialog {
     padding: 1rem 1.5rem 1.5rem 1.5rem;
     text-align: center;
     font-size: 1.8rem;
 }
 
-#confirm-delete-dialog > p {
+#confirm-delete-dialog > p,
+#dupe-project-dialog {
     line-height: 1.5;
 }
 
-#confirm-delete-dialog > p:first-child {
+#confirm-delete-dialog > p:first-child,
+#dupe-project-dialog > p:first-child {
     font-size: 2rem;
     margin-bottom: 0.5rem;
+}
+
+#dupe-project-dialog > button {
+    margin-top: 2rem;
 }
 
 .confirm-dialog-buttons {
@@ -472,7 +513,8 @@ main h3 {
     margin-bottom: 2rem;
 }
 
-.delete-confirmation-ok-btn {
+.delete-confirmation-ok-btn,
+#dupe-project-dialog > button {
     padding: 0.5rem 2rem;
 }
 

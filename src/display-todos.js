@@ -22,15 +22,21 @@ export function showTodos() {
 
         function getTodaysTodos(array) {
             return array
-                .filter(todo => isToday(todo.dueDate) || todo.dueDate <= yesterday)
-                .filter(todo => todo.isComplete === 'no');
+                .filter(
+                    todo => isToday(todo.dueDate) ||
+                    todo.dueDate <= yesterday
+                )
+                .filter(
+                    todo => todo.isComplete === 'no'
+                );
         }
         const todaysTodos = getTodaysTodos(allTodos);
 
         if (todaysTodos.length === 0) {
             const todosTextDiv = document.createElement("div");
             todosTextDiv.classList.add("todos-text-div");
-            todosTextDiv.textContent = `\u2705\u00A0 Nice! You don't have any todos for today.`;
+            todosTextDiv.textContent = 
+                `\u2705\u00A0 Nice! You don't have any todos for today.`;
             todoContainer.appendChild(todosTextDiv);
         } else {
             mainDiv.insertBefore(addTodoBtnContainer, todoContainer);
@@ -82,7 +88,8 @@ export function showTodos() {
         if (upcomingTodos.length === 0) {
             const todosTextDiv = document.createElement("div");
             todosTextDiv.classList.add("todos-text-div");
-            todosTextDiv.textContent = `\uD83D\uDE4C\u00A0 Woo-hoo! You don't have any upcoming todos.`;
+            todosTextDiv.textContent = 
+                `\uD83D\uDE4C\u00A0 Woo-hoo! You don't have any upcoming todos.`;
             todoContainer.appendChild(todosTextDiv);
         } else {
             mainDiv.insertBefore(addTodoBtnContainer, todoContainer);
@@ -128,7 +135,8 @@ export function showTodos() {
             todosTextLine1.textContent = "You don't have any new todos.";
             todosTextDiv.appendChild(todosTextLine1);
             const todosTextLine2 = document.createElement("p");
-            todosTextLine2.textContent = "\uD83D\uDCDD\u00A0 Add one now to get started!";
+            todosTextLine2.textContent = 
+                "\uD83D\uDCDD\u00A0 Add one now to get started!";
             todosTextDiv.appendChild(todosTextLine2);
             todoContainer.appendChild(todosTextDiv);
         } else {
@@ -257,5 +265,11 @@ export function showTodos() {
         todoDialogController().activateTodoButtons();
     };
 
-    return { showTodaysTodos, showUpcomingTodos, showAllTodos, showCompletedTodos, showProjectTodos };
+    return {
+        showTodaysTodos,
+        showUpcomingTodos,
+        showAllTodos,
+        showCompletedTodos,
+        showProjectTodos
+    };
 }

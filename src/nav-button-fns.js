@@ -9,12 +9,10 @@ export function navButtons() {
     const upcomingBtn = document.querySelector(".upcoming-btn");
     const allBtn = document.querySelector(".all-btn");
     const completedBtn = document.querySelector(".completed-btn");
-    const projectRowsDiv = document.querySelector(".project-rows");
-    const projectRowChildren = Array.from(projectRowsDiv.children);
-
-    const navListButtonWrappers = document.querySelectorAll(".nav-list-button-wrapper");
 
     function unselectCurrentTab() {
+        const navListButtonWrappers = document.querySelectorAll(
+        ".nav-list-button-wrapper");
         navListButtonWrappers.forEach((wrapper) => {
             wrapper.classList.remove("project-button-selected");
             wrapper.classList.remove("todo-button-selected");
@@ -62,6 +60,10 @@ export function navButtons() {
     };
 
     function activateProjectBtns() {
+        const projectRowsDiv = document.querySelector(
+        ".project-rows");
+        const projectRowChildren = Array.from(
+        projectRowsDiv.children);
         projectRowChildren.forEach((row) => {
             row.addEventListener("click", () => {
                 unselectCurrentTab();
@@ -75,14 +77,18 @@ export function navButtons() {
         e.target.classList.toggle("nav-list-button-highlighted");
     };
 
-    function activateNavRowEventListener() {
-        navListButtonWrappers.forEach((wrapper) => {
-            wrapper.addEventListener("mouseenter", toggleNavListButtonHighlighted);
-            wrapper.addEventListener("mouseleave", toggleNavListButtonHighlighted);
+    function activateNavRowEventListener(nav) {
+        const navRows = Array.from(nav.children);
+        navRows.forEach((row) => {
+            row.addEventListener(
+            "mouseenter", toggleNavListButtonHighlighted);
+            row.addEventListener(
+            "mouseleave", toggleNavListButtonHighlighted);
         });
     };
 
     return {
+        unselectCurrentTab,
         activateTodayBtn,
         activateUpcomingBtn,
         activateAllBtn,

@@ -30,10 +30,10 @@ export function todoDialogController() {
 
     function addProjectSelections() {
         function getCurrentProject() {
-            const projectNav = document.querySelector(".project-nav");
-            const projectNavChildren = Array.from(projectNav.children);
+            const projectRowsDiv = document.querySelector(".project-rows");
+            const projectRows = Array.from(projectRowsDiv.children);
             const selectedProjectRow = 
-                projectNavChildren
+                projectRows
                 .filter(div => div.classList.contains("project-button-selected"));
             if (selectedProjectRow.length !== 0) {
                 const selectedProject = document.querySelector(".project-button-selected");
@@ -343,5 +343,12 @@ export function todoDialogController() {
         todoDialog.addEventListener("close", closeDialog);
     };
 
-    return { activateAddTodoBtn, activateTodoButtons, activateCancelBtn, activateDialogClose, activateConfirmDeleteBtns, activateDeleteConfirmationOKBtn };
+    return {
+        activateAddTodoBtn,
+        activateTodoButtons,
+        activateCancelBtn,
+        activateDialogClose,
+        activateConfirmDeleteBtns,
+        activateDeleteConfirmationOKBtn
+    };
 };
