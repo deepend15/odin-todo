@@ -179,25 +179,73 @@ dialog {
     padding: 0.5rem 0.8rem;
 }
 
-.add-project-buttons {
+.add-project-buttons,
+.remove-project-buttons {
     display: flex;
-    gap: 2rem;
     justify-content: center;
 }
 
-.add-project-buttons > button {
-    background-color: var(--nav-gray);
-    border: 1px solid gray;
-    padding: 0.5rem 1.5rem;
-    border-radius: 12px;
+.add-project-buttons {
+    gap: 2rem;
 }
 
-.add-project-buttons > button:hover {
+.add-project-buttons > button,
+.remove-project-buttons > button {
+    background-color: var(--nav-gray);
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.add-project-buttons > button {
+    padding: 0.5rem 1.5rem;
+}
+
+.add-project-buttons > button:hover,
+.remove-project-buttons > button:hover {
     background-color: lightgray;
 }
 
-.add-project-buttons > button:active {
+.add-project-buttons > button:active,
+.remove-project-buttons > button:active {
     background-color: var(--nav-gray);
+}
+
+#remove-project-dialog {
+    padding: 3rem 3rem 2rem 3rem;
+    font-size: 1.8rem;
+}
+
+#remove-project-dialog > form {
+    display: grid;
+    gap: 2rem;
+}
+
+#remove-project-dialog fieldset {
+    padding: 3rem 2rem;
+}
+
+#remove-project-dialog ul {
+    display: grid;
+    gap: 1.5rem;
+}
+
+#remove-project-dialog li {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    font-size: 1.7rem;
+}
+
+#remove-project-dialog .disabled {
+    color: rgb(137, 137, 137);
+}
+
+.remove-project-buttons {
+    gap: 3rem;
+}
+
+.remove-project-buttons > button {
+    padding: 0.6rem 2.5rem;
 }
 
 main {

@@ -6,16 +6,23 @@ import { loadProjectPage } from "./projects-pages";
 export function projectDialogController() {
     const addAndRemoveProjectDiv = document.querySelector(".add-remove-project-buttons-wrapper");
     const addProjectBtn = addAndRemoveProjectDiv.firstElementChild;
-    const removeProjectBtn = addAndRemoveProjectDiv.lastElementChild;
     const addProjectDialog = document.querySelector("#add-project-dialog");
     const newProjectName = addProjectDialog.querySelector("#new-project-name");
-    const cancelBtn = addProjectDialog.querySelector(".cancel-button");
+    const addProjectCancelBtn = addProjectDialog.querySelector(".cancel-button");
+
+    const removeProjectBtn = addAndRemoveProjectDiv.lastElementChild;
+    const removeProjectDialog = document.querySelector("#remove-project-dialog");
+    const removeProjectCancelBtn = removeProjectDialog.querySelector(".cancel-button");
 
     function dialogEscBtn(e) {
         if (e.key === "Escape") {
-            addProjectDialog.close("cancel");
+            if (addProjectDialog.open === true) {
+                addProjectDialog.close("cancel");
+            } else {
+                removeProjectDialog.close("cancel");
+            }
         }
-    };
+    }
 
     function openAddProjectDialog() {
         addProjectDialog.returnValue = "";
@@ -25,12 +32,43 @@ export function projectDialogController() {
         addProjectDialog.addEventListener("close", () => window.removeEventListener("keydown", dialogEscBtn));
     }
 
-    function activateAddProjectBtn() {
-        addProjectBtn.addEventListener("click", openAddProjectDialog);
-    };
+    function openRemoveProjectDialog() {
+        removeProjectDialog.returnValue = "";
+        const projectList = removeProjectDialog.querySelector("ul");
+        projectList.textContent = "";
+        const allProjects = projects.getAllProjects();
+        for (const project of allProjects) {
+            const li = document.createElement("li");
+            const checkbox = document.createElement("input");
+            checkbox.setAttribute("type", "checkbox");
+            checkbox.id = project.title.toLowerCase();
+            checkbox.setAttribute("name", "project");
+            checkbox.setAttribute("value", project.title.toLowerCase());
+            li.appendChild(checkbox);
+            const label = document.createElement("label");
+            label.setAttribute("for", project.title.toLowerCase());
+            label.textContent = project.title;
+            if (project.title === "Personal") {
+                checkbox.setAttribute("disabled", "");
+                label.textContent += " (cannot be removed)";
+                label.classList.add("disabled");
+            };
+            li.appendChild(label);
+            projectList.appendChild(li);
+        };
+        removeProjectDialog.showModal();
+        window.addEventListener("keydown", dialogEscBtn);
+        removeProjectDialog.addEventListener("close", () => window.removeEventListener("keydown", dialogEscBtn));
+    }
 
-    function activateCancelBtn() {
-        cancelBtn.addEventListener("click", () => addProjectDialog.close("cancel"));
+    function activateAddAndRemoveProjectBtns() {
+        addProjectBtn.addEventListener("click", openAddProjectDialog);
+        removeProjectBtn.addEventListener("click", openRemoveProjectDialog);
+    }
+
+    function activateCancelBtns() {
+        addProjectCancelBtn.addEventListener("click", () => addProjectDialog.close("cancel"));
+        removeProjectCancelBtn.addEventListener("click", () => removeProjectDialog.close("cancel"));
     }
 
     function closeDialog(e) {
@@ -84,8 +122,8 @@ export function projectDialogController() {
     }
 
     return {
-        activateAddProjectBtn,
-        activateCancelBtn,
+        activateAddAndRemoveProjectBtns,
+        activateCancelBtns,
         activateDialogClose
     }
 }
