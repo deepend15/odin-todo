@@ -2,6 +2,11 @@ import { projects } from "./projects";
 import { loadProjectRows } from "./project-rows";
 import { navButtons } from "./nav-button-fns";
 import { loadProjectPage } from "./projects-pages";
+import { todos } from "./todo-objects.js";
+import { loadToday } from "./today-page";
+import { loadUpcoming } from "./upcoming-page.js";
+import { loadAll } from "./all-page";
+import { loadCompleted } from "./completed-page";
 
 export function projectDialogController() {
     const addAndRemoveProjectDiv = document.querySelector(".add-remove-project-buttons-wrapper");
@@ -71,6 +76,27 @@ export function projectDialogController() {
         removeProjectCancelBtn.addEventListener("click", () => removeProjectDialog.close("cancel"));
     }
 
+    function capitalizeString(string) {
+        function capitalize(str) {
+            const firstLetter = str.charAt(0).toUpperCase();
+            const rest = str.slice(1);
+            return firstLetter + rest;
+        }
+        const strArray = string.split(" ");
+        const strArrayCapitals = strArray.map(
+            word => capitalize(word)
+        );
+        const capitalizedString = strArrayCapitals.join(" ");
+        return capitalizedString;
+    }
+
+    // https://stackoverflow.com/questions/16974664/how-to-remove-the-extra-spaces-in-a-string
+
+    function removeWhiteSpaces(str) {
+        let newString = str.replace(/\s+/g,' ').trim();
+        return newString;
+    }
+
     function closeDialog(e) {
         if (e.currentTarget.returnValue === "cancel") {
             return;
@@ -99,7 +125,10 @@ export function projectDialogController() {
                     openAddProjectDialog();
                 });
             } else {
-                projects.addProject(newProjectName.value);
+                const newProjectNameNoExtraWhiteSpace = 
+                removeWhiteSpaces(newProjectName.value);
+                const capitalizedProjectName = capitalizeString(newProjectNameNoExtraWhiteSpace);
+                projects.addProject(capitalizedProjectName);
                 loadProjectRows();
                 console.log(projects.getAllProjects());
                 navButtons().activateProjectBtns();
@@ -108,17 +137,107 @@ export function projectDialogController() {
                 const projectRows = Array.from(projectRowsDiv.children);
                 const newProjectRowArray = projectRows.filter(
                     row => row.textContent.slice(2) ===
-                    newProjectName.value);
+                    capitalizedProjectName);
                 const newProjectRow = newProjectRowArray[0];
                 navButtons().unselectCurrentTab();
                 newProjectRow.classList.add("project-button-selected");
                 loadProjectPage();
+            }
+        } else {
+            const projectSelections = Array.from(removeProjectDialog.querySelectorAll("input[name=project]"));
+            const checkedProjectArr = projectSelections.filter(
+                selection => selection.checked === true
+            );
+            if (checkedProjectArr.length === 0) {
+                return;
+            } else {
+                const checkedProject = removeProjectDialog.
+                querySelector("input[name=project]:checked");
+                const checkedProjectName = 
+                    checkedProject.nextElementSibling.textContent;
+
+                const allTodos = todos.getAllTodos();
+                const checkedProjectTodos = allTodos.filter(
+                    todo => todo.project === checkedProjectName);
+                for (const todo of checkedProjectTodos) {
+                    const personalTodos = allTodos.filter(
+                        todo => todo.project === "Personal"
+                    );
+                    const numberOfPersonalTodos = personalTodos.length;
+                    const newID = numberOfPersonalTodos + 1;
+                    todo.project = "Personal";
+                    todo.todoID = "personal-" + newID.toString();
+                    console.log(todo);
+                };
+
+                const allProjects = projects.getAllProjects();
+                const matchingProjectArr = allProjects.filter(
+                    project => project.title === checkedProjectName);
+                const matchingProject = matchingProjectArr[0];
+                allProjects.splice(
+                    allProjects.indexOf(matchingProject), 1);
+                console.log(projects.getAllProjects());
+
+                const navRows = Array.from(
+                    document.querySelectorAll(
+                        ".nav-list-button-wrapper"));
+                const currentRowArray = navRows
+                    .filter(row =>
+                    row.classList.contains("todo-button-selected") ||
+                    row.classList.contains(
+                        "project-button-selected"));
+                const currentRow = currentRowArray[0];
+                const currentRowName = 
+                    currentRow.firstElementChild.textContent.slice(2);
+
+                loadProjectRows();
+                navButtons().activateProjectBtns();
+                const projectRowsDiv = document.querySelector(
+                    ".project-rows");
+                const projectRows = Array.from(projectRowsDiv.children);
+                navButtons().activateNavRowEventListener(
+                    projectRowsDiv);
+                if (currentRowName === checkedProjectName) {
+                    const personalRowArray = projectRows.filter(
+                        row => row.firstElementChild.textContent
+                        .slice(2) === "Personal"
+                    );
+                    const personalRow = personalRowArray[0];
+                    let clickEvent = new Event("click");
+                    personalRow.dispatchEvent(clickEvent);
+                } else {
+                    if (currentRow.classList.contains(
+                        "project-button-selected")) {
+                            const matchingRowArray = projectRows.filter(
+                                row => row.firstElementChild.textContent.slice(2) === currentRowName
+                            );
+                            const matchingRow = matchingRowArray[0];
+                            let clickEvent = new Event("click");
+                            matchingRow.dispatchEvent(clickEvent);
+                    } else {
+                        switch (currentRowName) {
+                            case 'Today':
+                                loadToday();
+                                break;
+                            case 'Upcoming':
+                                loadUpcoming();
+                                break;
+                            case 'All':
+                                loadAll();
+                                break;
+                            case 'Completed':
+                                loadCompleted();
+                                break;
+                        }
+                    }
+                }
             }
         }
     }
 
     function activateDialogClose() {
         addProjectDialog.addEventListener("close", closeDialog);
+        removeProjectDialog.addEventListener("close", closeDialog);
     }
 
     return {

@@ -36,7 +36,7 @@ const initialSiteLoad = (function () {
 
     todos.addTodo('Do Laundry', 'do your laundry you heathen', new Date('2025-04-11T00:00:00'), 2, 'Personal', 'no', 'personal-2');
 
-    todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-04-08T00:00:00'), 1, 'Work', 'no', 'work-1');
+    todos.addTodo('Meeting with Joe', 'discuss important business', new Date('2025-04-09T00:00:00'), 1, 'Work', 'no', 'work-1');
 
     todos.addTodo(`Shoot 100 3's`, 'gotta improve that stroke', new Date('2025-04-12T00:00:00'), 2, 'Hobbies', 'no', 'hobbies-1');
 
