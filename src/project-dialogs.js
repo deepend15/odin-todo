@@ -102,7 +102,7 @@ export function projectDialogController() {
                 be moved to the 'Personal' project. Do you wish to proceed?`;
                 confirmProjectRemoveDialog.appendChild(warningText);
                 const confirmProjectRemoveDialogBtnsDiv = document.createElement("div");
-                confirmProjectRemoveDialogBtnsDiv.classList.add("confirm-project-remove-buttons");
+                confirmProjectRemoveDialogBtnsDiv.classList.add("confirmation-dialog-buttons");
                 const confirmProjectRemoveNoBtn = document.createElement("button");
                 confirmProjectRemoveNoBtn.classList.add("confirm-project-remove-no");
                 confirmProjectRemoveNoBtn.textContent = "No";
@@ -117,13 +117,28 @@ export function projectDialogController() {
                 confirmProjectRemoveDialog.showModal();
                 confirmProjectRemoveNoBtn.addEventListener("click", () => {
                     confirmProjectRemoveDialog.close();
-                    confirmProjectRemoveDialog.remove();
                 });
                 confirmProjectRemoveYesBtn.addEventListener("click", () => {
                     confirmProjectRemoveDialog.close();
-                    confirmProjectRemoveDialog.remove();
                     removeProjectDialog.close();
+                    const deleteConfirmationDialog = document.createElement("dialog");
+                    deleteConfirmationDialog.id = "delete-confirmation-dialog";
+                    const deleteConfirmationTxt = document.createElement("p");
+                    deleteConfirmationTxt.textContent = "Project deleted.";
+                    deleteConfirmationDialog.appendChild(deleteConfirmationTxt);
+                    const deleteConfirmationOKBtn = document.createElement("button");
+                    deleteConfirmationOKBtn.classList.add("delete-confirmation-ok-btn");
+                    deleteConfirmationOKBtn.setAttribute("autofocus", "");
+                    deleteConfirmationOKBtn.textContent = "OK";
+                    deleteConfirmationDialog.appendChild(deleteConfirmationOKBtn);
+                    body.appendChild(deleteConfirmationDialog);
+                    deleteConfirmationDialog.showModal();
+                    deleteConfirmationOKBtn.addEventListener("click", () => {
+                        deleteConfirmationDialog.close();
+                    });
+                    deleteConfirmationDialog.addEventListener("close", () => deleteConfirmationDialog.remove());
                 });
+                confirmProjectRemoveDialog.addEventListener("close", () => confirmProjectRemoveDialog.remove());
             };
         });
     }

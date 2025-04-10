@@ -151,37 +151,6 @@ nav > h2 {
     box-shadow: 0 12px 8px -8px silver;
 }
 
-.add-project-buttons,
-.remove-project-buttons {
-    display: flex;
-    justify-content: center;
-}
-
-.add-project-buttons {
-    gap: 2rem;
-}
-
-.add-project-buttons > button,
-.remove-project-buttons > button {
-    background-color: var(--nav-gray);
-    border: 1px solid gray;
-    border-radius: 10px;
-}
-
-.add-project-buttons > button {
-    padding: 0.5rem 1.5rem;
-}
-
-.add-project-buttons > button:hover,
-.remove-project-buttons > button:hover {
-    background-color: lightgray;
-}
-
-.add-project-buttons > button:active,
-.remove-project-buttons > button:active {
-    background-color: var(--nav-gray);
-}
-
 main {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
@@ -566,9 +535,17 @@ dialog {
 #user-confirm-delete-todo-dialog,
 #dupe-project-dialog,
 #user-confirm-remove-project-dialog {
-    padding: 1rem 1.5rem 1.5rem 1.5rem;
     text-align: center;
     font-size: 1.8rem;
+}
+
+#user-confirm-delete-todo-dialog,
+#dupe-project-dialog {
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+}
+
+#user-confirm-remove-project-dialog {
+    padding: 1.5rem 2rem;
 }
 
 #user-confirm-delete-todo-dialog > p,
@@ -603,65 +580,96 @@ dialog {
     margin-bottom: 2rem;
 }
 
-/* ALL dialog cancel/ok btns */
+/* ALL dialog cancel/ok btn stuff below*/
 
-.todo-dialog-buttons > button:not(.delete-todo-btn),
-.confirm-dialog-buttons > button,
-.delete-confirmation-ok-btn,
-#dupe-project-dialog > button,
-.confirm-project-remove-buttons > button {
-    background-color: var(--nav-gray);
-    border-radius: 14px;
-    border: 1px solid gray;
-}
+/* button div formatting */
 
-.todo-dialog-buttons > button:not(.delete-todo-btn) {
-    padding: 0.6rem 3rem;
-    height: min-content;
-}
-
-.todo-dialog-buttons > button:not(.delete-todo-btn):hover,
-.confirm-dialog-buttons > button:hover,
-.delete-confirmation-ok-btn:hover,
-#dupe-project-dialog > button:hover,
-.confirm-project-remove-buttons > button:hover {
-    background-color: lightgray;
-}
-
-.todo-dialog-buttons > button:not(.delete-todo-btn):active,
-.confirm-dialog-buttons > button:active,
-.delete-confirmation-ok-btn:active,
-#dupe-project-dialog > button:active,
-.confirm-project-remove-buttons > button:active {
-    background-color: var(--nav-gray);
-}
-
-#dupe-project-dialog > button {
-    margin-top: 2rem;
-}
-
-.confirm-dialog-buttons,
-.confirm-project-remove-buttons {
-    margin-top: 2rem;
+.add-project-buttons,
+.remove-project-buttons,
+.confirmation-dialog-buttons {
     display: flex;
-    gap: 2.8rem;
     justify-content: center;
 }
 
-.confirm-dialog-buttons > button,
-.confirm-project-remove-buttons > button {
-    padding: 0.5rem 2.2rem;
-}
-
-.delete-confirmation-ok-btn,
-#dupe-project-dialog > button {
-    padding: 0.5rem 2rem;
+.add-project-buttons {
+    gap: 2rem;
 }
 
 .remove-project-buttons {
     gap: 3rem;
 }
 
+.confirmation-dialog-buttons {
+    margin-top: 2rem;
+    gap: 2.8rem;
+}
+
+/* button padding/margin/height */
+
+.todo-dialog-buttons > button:not(.delete-todo-btn) {
+    padding: 0.6rem 3rem;
+    height: min-content;
+}
+
+.add-project-buttons > button {
+    padding: 0.5rem 1.5rem;
+}
+
 .remove-project-buttons > button {
     padding: 0.6rem 2.5rem;
+}
+
+#dupe-project-dialog > button {
+    margin-top: 2rem;
+}
+
+.confirmation-dialog-buttons > button {
+    padding: 0.5rem 2.2rem;
+}
+
+#dupe-project-dialog > button,
+.delete-confirmation-ok-btn {
+    padding: 0.5rem 2rem;
+}
+
+/* button color/border */
+
+.todo-dialog-buttons > button:not(.delete-todo-btn),
+.add-project-buttons > button,
+.remove-project-buttons > button,
+#dupe-project-dialog > button,
+.confirmation-dialog-buttons > button,
+.delete-confirmation-ok-btn {
+    background-color: var(--nav-gray);
+    border: 1px solid gray;
+}
+
+.todo-dialog-buttons > button:not(.delete-todo-btn),
+#dupe-project-dialog > button,
+.confirmation-dialog-buttons > button,
+.delete-confirmation-ok-btn {
+    border-radius: 14px;
+}
+
+.add-project-buttons > button,
+.remove-project-buttons > button {
+    border-radius: 10px;
+}
+
+.todo-dialog-buttons > button:not(.delete-todo-btn):hover,
+.add-project-buttons > button:hover,
+.remove-project-buttons > button:hover,
+#dupe-project-dialog > button:hover,
+.confirmation-dialog-buttons > button:hover,
+.delete-confirmation-ok-btn:hover {
+    background-color: lightgray;
+}
+
+.todo-dialog-buttons > button:not(.delete-todo-btn):active,
+.add-project-buttons > button:active,
+.remove-project-buttons > button:active,
+#dupe-project-dialog > button:active,
+.confirmation-dialog-buttons > button:active,
+.delete-confirmation-ok-btn:active {
+    background-color: var(--nav-gray);
 }

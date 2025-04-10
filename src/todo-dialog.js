@@ -201,7 +201,7 @@ export function todoDialogController() {
                 warningText.textContent = "Are you sure you want to delete this todo?";
                 confirmDeleteDialog.appendChild(warningText);
                 const confirmDeleteDialogBtnsDiv = document.createElement("div");
-                confirmDeleteDialogBtnsDiv.classList.add("confirm-dialog-buttons");
+                confirmDeleteDialogBtnsDiv.classList.add("confirmation-dialog-buttons");
                 const confirmNoBtn = document.createElement("button");
                 confirmNoBtn.classList.add("confirm-no");
                 confirmNoBtn.textContent = "No";
