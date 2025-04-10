@@ -30,6 +30,7 @@ const initialSiteLoad = (function () {
 
     projectDialogController().activateAddAndRemoveProjectBtns();
     projectDialogController().activateCancelBtns();
+    projectDialogController().activateRemoveProjectOKBtn();
     projectDialogController().activateDialogClose();
 
     todos.addTodo('Call Mom', 'make sure to call Mom, she worries', new Date('2025-03-12T00:00:00'), 1, 'Personal', 'no', 'personal-1');

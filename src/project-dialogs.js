@@ -18,6 +18,7 @@ export function projectDialogController() {
     const removeProjectBtn = addAndRemoveProjectDiv.lastElementChild;
     const removeProjectDialog = document.querySelector("#remove-project-dialog");
     const removeProjectCancelBtn = removeProjectDialog.querySelector(".cancel-button");
+    const removeProjectOKBTn = removeProjectDialog.querySelector(".ok-button");
 
     function dialogEscBtn(e) {
         if (e.key === "Escape") {
@@ -61,6 +62,7 @@ export function projectDialogController() {
             li.appendChild(label);
             projectList.appendChild(li);
         };
+        
         removeProjectDialog.showModal();
         window.addEventListener("keydown", dialogEscBtn);
         removeProjectDialog.addEventListener("close", () => window.removeEventListener("keydown", dialogEscBtn));
@@ -74,6 +76,56 @@ export function projectDialogController() {
     function activateCancelBtns() {
         addProjectCancelBtn.addEventListener("click", () => addProjectDialog.close("cancel"));
         removeProjectCancelBtn.addEventListener("click", () => removeProjectDialog.close("cancel"));
+    }
+
+    function activateRemoveProjectOKBtn() {
+        removeProjectOKBTn.addEventListener("click", () => {
+            function getCheckedProject() {
+                const projectSelections = Array.from(
+                    removeProjectDialog.querySelectorAll("input[name=project]"));
+                const checkedProjectArr = projectSelections.filter(
+                    selection => selection.checked === true
+                );
+                return checkedProjectArr;
+            }
+            const checkedProjectArr = getCheckedProject();
+            if (checkedProjectArr.length === 0) {
+                removeProjectDialog.close("cancel");
+            } else {
+                const confirmProjectRemoveDialog = document.createElement("dialog");
+                confirmProjectRemoveDialog.id = "confirm-project-remove-dialog";
+                const warningSymbol = document.createElement("p");
+                warningSymbol.textContent = `\u2757`;
+                confirmProjectRemoveDialog.appendChild(warningSymbol);
+                const warningText = document.createElement("p");
+                warningText.textContent = `All todos currently under this project will
+                be moved to the 'Personal' project. Do you wish to proceed?`;
+                confirmProjectRemoveDialog.appendChild(warningText);
+                const confirmProjectRemoveDialogBtnsDiv = document.createElement("div");
+                confirmProjectRemoveDialogBtnsDiv.classList.add("confirm-project-remove-buttons");
+                const confirmProjectRemoveYesBtn = document.createElement("button");
+                confirmProjectRemoveYesBtn.classList.add("confirm-project-remove-yes");
+                confirmProjectRemoveYesBtn.textContent = "Yes";
+                confirmProjectRemoveDialogBtnsDiv.appendChild(confirmProjectRemoveYesBtn);
+                const confirmProjectRemoveNoBtn = document.createElement("button");
+                confirmProjectRemoveNoBtn.classList.add("confirm-project-remove-no");
+                confirmProjectRemoveNoBtn.textContent = "No";
+                confirmProjectRemoveDialogBtnsDiv.appendChild(confirmProjectRemoveNoBtn);
+                confirmProjectRemoveDialog.appendChild(confirmProjectRemoveDialogBtnsDiv);
+                const body = document.querySelector("body");
+                body.appendChild(confirmProjectRemoveDialog);
+                confirmProjectRemoveDialog.showModal();
+                confirmProjectRemoveNoBtn.addEventListener("click", () => {
+                    confirmProjectRemoveDialog.close();
+                    confirmProjectRemoveDialog.remove();
+                });
+                confirmProjectRemoveYesBtn.addEventListener("click", () => {
+                    confirmProjectRemoveDialog.close();
+                    confirmProjectRemoveDialog.remove();
+                    removeProjectDialog.close();
+                });
+            };
+        });
     }
 
     function capitalizeString(string) {
@@ -144,91 +196,83 @@ export function projectDialogController() {
                 loadProjectPage();
             }
         } else {
-            const projectSelections = Array.from(removeProjectDialog.querySelectorAll("input[name=project]"));
-            const checkedProjectArr = projectSelections.filter(
-                selection => selection.checked === true
-            );
-            if (checkedProjectArr.length === 0) {
-                return;
+            const checkedProject = removeProjectDialog.
+            querySelector("input[name=project]:checked");
+            const checkedProjectName = 
+                checkedProject.nextElementSibling.textContent;
+
+            const allTodos = todos.getAllTodos();
+            const checkedProjectTodos = allTodos.filter(
+                todo => todo.project === checkedProjectName);
+            for (const todo of checkedProjectTodos) {
+                const personalTodos = allTodos.filter(
+                    todo => todo.project === "Personal"
+                );
+                const numberOfPersonalTodos = personalTodos.length;
+                const newID = numberOfPersonalTodos + 1;
+                todo.project = "Personal";
+                todo.todoID = "personal-" + newID.toString();
+                console.log(todo);
+            };
+
+            const allProjects = projects.getAllProjects();
+            const matchingProjectArr = allProjects.filter(
+                project => project.title === checkedProjectName);
+            const matchingProject = matchingProjectArr[0];
+            allProjects.splice(
+                allProjects.indexOf(matchingProject), 1);
+            console.log(projects.getAllProjects());
+
+            const navRows = Array.from(
+                document.querySelectorAll(
+                    ".nav-list-button-wrapper"));
+            const currentRowArray = navRows
+                .filter(row =>
+                row.classList.contains("todo-button-selected") ||
+                row.classList.contains(
+                    "project-button-selected"));
+            const currentRow = currentRowArray[0];
+            const currentRowName = 
+                currentRow.firstElementChild.textContent.slice(2);
+
+            loadProjectRows();
+            navButtons().activateProjectBtns();
+            const projectRowsDiv = document.querySelector(
+                ".project-rows");
+            const projectRows = Array.from(projectRowsDiv.children);
+            navButtons().activateNavRowEventListener(
+                projectRowsDiv);
+            if (currentRowName === checkedProjectName) {
+                const personalRowArray = projectRows.filter(
+                    row => row.firstElementChild.textContent
+                    .slice(2) === "Personal"
+                );
+                const personalRow = personalRowArray[0];
+                let clickEvent = new Event("click");
+                personalRow.dispatchEvent(clickEvent);
             } else {
-                const checkedProject = removeProjectDialog.
-                querySelector("input[name=project]:checked");
-                const checkedProjectName = 
-                    checkedProject.nextElementSibling.textContent;
-
-                const allTodos = todos.getAllTodos();
-                const checkedProjectTodos = allTodos.filter(
-                    todo => todo.project === checkedProjectName);
-                for (const todo of checkedProjectTodos) {
-                    const personalTodos = allTodos.filter(
-                        todo => todo.project === "Personal"
-                    );
-                    const numberOfPersonalTodos = personalTodos.length;
-                    const newID = numberOfPersonalTodos + 1;
-                    todo.project = "Personal";
-                    todo.todoID = "personal-" + newID.toString();
-                    console.log(todo);
-                };
-
-                const allProjects = projects.getAllProjects();
-                const matchingProjectArr = allProjects.filter(
-                    project => project.title === checkedProjectName);
-                const matchingProject = matchingProjectArr[0];
-                allProjects.splice(
-                    allProjects.indexOf(matchingProject), 1);
-                console.log(projects.getAllProjects());
-
-                const navRows = Array.from(
-                    document.querySelectorAll(
-                        ".nav-list-button-wrapper"));
-                const currentRowArray = navRows
-                    .filter(row =>
-                    row.classList.contains("todo-button-selected") ||
-                    row.classList.contains(
-                        "project-button-selected"));
-                const currentRow = currentRowArray[0];
-                const currentRowName = 
-                    currentRow.firstElementChild.textContent.slice(2);
-
-                loadProjectRows();
-                navButtons().activateProjectBtns();
-                const projectRowsDiv = document.querySelector(
-                    ".project-rows");
-                const projectRows = Array.from(projectRowsDiv.children);
-                navButtons().activateNavRowEventListener(
-                    projectRowsDiv);
-                if (currentRowName === checkedProjectName) {
-                    const personalRowArray = projectRows.filter(
-                        row => row.firstElementChild.textContent
-                        .slice(2) === "Personal"
-                    );
-                    const personalRow = personalRowArray[0];
-                    let clickEvent = new Event("click");
-                    personalRow.dispatchEvent(clickEvent);
+                if (currentRow.classList.contains(
+                    "project-button-selected")) {
+                        const matchingRowArray = projectRows.filter(
+                            row => row.firstElementChild.textContent.slice(2) === currentRowName
+                        );
+                        const matchingRow = matchingRowArray[0];
+                        let clickEvent = new Event("click");
+                        matchingRow.dispatchEvent(clickEvent);
                 } else {
-                    if (currentRow.classList.contains(
-                        "project-button-selected")) {
-                            const matchingRowArray = projectRows.filter(
-                                row => row.firstElementChild.textContent.slice(2) === currentRowName
-                            );
-                            const matchingRow = matchingRowArray[0];
-                            let clickEvent = new Event("click");
-                            matchingRow.dispatchEvent(clickEvent);
-                    } else {
-                        switch (currentRowName) {
-                            case 'Today':
-                                loadToday();
-                                break;
-                            case 'Upcoming':
-                                loadUpcoming();
-                                break;
-                            case 'All':
-                                loadAll();
-                                break;
-                            case 'Completed':
-                                loadCompleted();
-                                break;
-                        }
+                    switch (currentRowName) {
+                        case 'Today':
+                            loadToday();
+                            break;
+                        case 'Upcoming':
+                            loadUpcoming();
+                            break;
+                        case 'All':
+                            loadAll();
+                            break;
+                        case 'Completed':
+                            loadCompleted();
+                            break;
                     }
                 }
             }
@@ -243,6 +287,7 @@ export function projectDialogController() {
     return {
         activateAddAndRemoveProjectBtns,
         activateCancelBtns,
+        activateRemoveProjectOKBtn,
         activateDialogClose
     }
 }
