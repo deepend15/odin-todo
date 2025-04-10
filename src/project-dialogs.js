@@ -103,14 +103,14 @@ export function projectDialogController() {
                 confirmProjectRemoveDialog.appendChild(warningText);
                 const confirmProjectRemoveDialogBtnsDiv = document.createElement("div");
                 confirmProjectRemoveDialogBtnsDiv.classList.add("confirm-project-remove-buttons");
-                const confirmProjectRemoveYesBtn = document.createElement("button");
-                confirmProjectRemoveYesBtn.classList.add("confirm-project-remove-yes");
-                confirmProjectRemoveYesBtn.textContent = "Yes";
-                confirmProjectRemoveDialogBtnsDiv.appendChild(confirmProjectRemoveYesBtn);
                 const confirmProjectRemoveNoBtn = document.createElement("button");
                 confirmProjectRemoveNoBtn.classList.add("confirm-project-remove-no");
                 confirmProjectRemoveNoBtn.textContent = "No";
                 confirmProjectRemoveDialogBtnsDiv.appendChild(confirmProjectRemoveNoBtn);
+                const confirmProjectRemoveYesBtn = document.createElement("button");
+                confirmProjectRemoveYesBtn.classList.add("confirm-project-remove-yes");
+                confirmProjectRemoveYesBtn.textContent = "Yes";
+                confirmProjectRemoveDialogBtnsDiv.appendChild(confirmProjectRemoveYesBtn);
                 confirmProjectRemoveDialog.appendChild(confirmProjectRemoveDialogBtnsDiv);
                 const body = document.querySelector("body");
                 body.appendChild(confirmProjectRemoveDialog);

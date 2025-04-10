@@ -202,14 +202,14 @@ export function todoDialogController() {
                 confirmDeleteDialog.appendChild(warningText);
                 const confirmDeleteDialogBtnsDiv = document.createElement("div");
                 confirmDeleteDialogBtnsDiv.classList.add("confirm-dialog-buttons");
-                const confirmYesBtn = document.createElement("button");
-                confirmYesBtn.classList.add("confirm-yes");
-                confirmYesBtn.textContent = "Yes";
-                confirmDeleteDialogBtnsDiv.appendChild(confirmYesBtn);
                 const confirmNoBtn = document.createElement("button");
                 confirmNoBtn.classList.add("confirm-no");
                 confirmNoBtn.textContent = "No";
                 confirmDeleteDialogBtnsDiv.appendChild(confirmNoBtn);
+                const confirmYesBtn = document.createElement("button");
+                confirmYesBtn.classList.add("confirm-yes");
+                confirmYesBtn.textContent = "Yes";
+                confirmDeleteDialogBtnsDiv.appendChild(confirmYesBtn);
                 confirmDeleteDialog.appendChild(confirmDeleteDialogBtnsDiv);
                 const body = document.querySelector("body");
                 body.appendChild(confirmDeleteDialog);
