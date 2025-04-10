@@ -90,7 +90,11 @@ export function projectDialogController() {
                     const deleteConfirmationDialog = document.createElement("dialog");
                     deleteConfirmationDialog.id = "delete-confirmation-dialog";
                     const deleteConfirmationTxt = document.createElement("p");
-                    deleteConfirmationTxt.textContent = "Project deleted.";
+                    if (checkedProjectArr.length > 1) {
+                        deleteConfirmationTxt.textContent = "Projects deleted.";
+                    } else {
+                        deleteConfirmationTxt.textContent = "Project deleted.";
+                    }
                     deleteConfirmationDialog.appendChild(deleteConfirmationTxt);
                     const deleteConfirmationOKBtn = document.createElement("button");
                     deleteConfirmationOKBtn.classList.add("delete-confirmation-ok-btn");
@@ -233,31 +237,78 @@ export function projectDialogController() {
                 loadProjectPage();
             }
         } else {
-            const checkedProject = removeProjectDialog.
-            querySelector("input[name=project]:checked");
-            const checkedProjectName = 
-                checkedProject.nextElementSibling.textContent;
+            const checkedProjectArr = Array.from(
+                removeProjectDialog.querySelectorAll(
+                "input[name=project]:checked"));
 
-            const allTodos = todos.getAllTodos();
-            const checkedProjectTodos = allTodos.filter(
-                todo => todo.project === checkedProjectName);
-            for (const todo of checkedProjectTodos) {
-                const personalTodos = allTodos.filter(
-                    todo => todo.project === "Personal"
-                );
-                const numberOfPersonalTodos = personalTodos.length;
-                const newID = numberOfPersonalTodos + 1;
-                todo.project = "Personal";
-                todo.todoID = "personal-" + newID.toString();
-                console.log(todo);
-            };
+            // const checkedProjectName = 
+            //     checkedProject.nextElementSibling.textContent;
+        
 
-            const allProjects = projects.getAllProjects();
-            const matchingProjectArr = allProjects.filter(
-                project => project.title === checkedProjectName);
-            const matchingProject = matchingProjectArr[0];
-            allProjects.splice(
-                allProjects.indexOf(matchingProject), 1);
+            function getSelectedProjectTodos() {
+                const allTodos = todos.getAllTodos();
+                const selectedProjectTodos = [];
+                for (const checkbox of checkedProjectArr) {
+                    const projectName = checkbox.nextElementSibling.textContent;
+                    const projectTodos = allTodos.filter(todo => todo.project === projectName);
+                    for (const todo of projectTodos) {
+                        selectedProjectTodos.push(todo);
+                    };
+                }
+                return selectedProjectTodos;
+            }
+
+            const checkedProjectTodos = getSelectedProjectTodos();
+            
+
+            // const allTodos = todos.getAllTodos();
+            // const checkedProjectTodos = allTodos.filter(
+            //     todo => todo.project === checkedProjectName);
+            function changeProjectTodoIds() {
+                const allTodos = todos.getAllTodos();
+                for (const todo of checkedProjectTodos) {
+                    const personalTodos = allTodos.filter(
+                        todo => todo.project === "Personal"
+                    );
+                    const numberOfPersonalTodos = personalTodos.length;
+                    const newID = numberOfPersonalTodos + 1;
+                    todo.project = "Personal";
+                    todo.todoID = "personal-" + newID.toString();
+                    console.log(todo);
+                };
+            }
+
+            changeProjectTodoIds();
+
+            // const allProjects = projects.getAllProjects();
+            // const matchingProjectArr = allProjects.filter(
+            //     project => project.title === checkedProjectName);
+            // const matchingProject = matchingProjectArr[0];
+            // allProjects.splice(
+            //     allProjects.indexOf(matchingProject), 1);
+            // console.log(projects.getAllProjects());
+
+            function getCheckedProjectNames() {
+                const checkedProjectNameArr = [];
+                for (const checkbox of checkedProjectArr) {
+                    checkedProjectNameArr.push(checkbox.nextElementSibling.textContent);
+                }
+                return checkedProjectNameArr;
+            }
+            const checkedProjectNameArr = getCheckedProjectNames();
+
+            function removeProjects() {
+                const allProjects = projects.getAllProjects();
+                for (const name of checkedProjectNameArr) {
+                    const matchingProjectArr = allProjects.filter(
+                        project => project.title === name);
+                    const matchingProject = matchingProjectArr[0];
+                    allProjects.splice(
+                        allProjects.indexOf(matchingProject), 1);
+                }
+            }
+
+            removeProjects();
             console.log(projects.getAllProjects());
 
             const navRows = Array.from(
@@ -279,7 +330,7 @@ export function projectDialogController() {
             const projectRows = Array.from(projectRowsDiv.children);
             navButtons().activateNavRowEventListener(
                 projectRowsDiv);
-            if (currentRowName === checkedProjectName) {
+            if (checkedProjectNameArr.includes(currentRowName)) {
                 const personalRowArray = projectRows.filter(
                     row => row.firstElementChild.textContent
                     .slice(2) === "Personal"
