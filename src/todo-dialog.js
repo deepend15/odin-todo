@@ -193,7 +193,7 @@ export function todoDialogController() {
             todoDialogBtns.appendChild(deleteTodoBtn);
             deleteTodoBtn.addEventListener("click", () => {
                 const confirmDeleteDialog = document.createElement("dialog");
-                confirmDeleteDialog.id = "confirm-delete-dialog";
+                confirmDeleteDialog.id = "user-confirm-delete-todo-dialog";
                 const warningSymbol = document.createElement("p");
                 warningSymbol.textContent = `\u2757`;
                 confirmDeleteDialog.appendChild(warningSymbol);

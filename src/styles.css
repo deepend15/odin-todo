@@ -151,36 +151,6 @@ nav > h2 {
     box-shadow: 0 12px 8px -8px silver;
 }
 
-dialog {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-::backdrop {
-    background-color: rgb(0, 0, 0, 0.3);
-}
-
-#add-project-dialog {
-    padding: 2rem;
-    font-size: 1.8rem;
-}
-
-#add-project-dialog > form {
-    display: grid;
-    gap: 3rem;
-}
-
-#add-project-dialog > form > p:first-child {
-    display: grid;
-    gap: 1rem;
-}
-
-#add-project-dialog input {
-    margin: 0.5rem;
-    padding: 0.5rem 0.8rem;
-}
-
 .add-project-buttons,
 .remove-project-buttons {
     display: flex;
@@ -210,44 +180,6 @@ dialog {
 .add-project-buttons > button:active,
 .remove-project-buttons > button:active {
     background-color: var(--nav-gray);
-}
-
-#remove-project-dialog {
-    padding: 3rem 3rem 2rem 3rem;
-    font-size: 1.8rem;
-}
-
-#remove-project-dialog > form {
-    display: grid;
-    gap: 2rem;
-}
-
-#remove-project-dialog fieldset {
-    padding: 3rem 2rem;
-}
-
-#remove-project-dialog ul {
-    display: grid;
-    gap: 1.5rem;
-}
-
-#remove-project-dialog li {
-    display: flex;
-    gap: 0.8rem;
-    align-items: center;
-    font-size: 1.7rem;
-}
-
-#remove-project-dialog .disabled {
-    color: rgb(137, 137, 137);
-}
-
-.remove-project-buttons {
-    gap: 3rem;
-}
-
-.remove-project-buttons > button {
-    padding: 0.6rem 2.5rem;
 }
 
 main {
@@ -328,6 +260,88 @@ main h3 {
     box-shadow: 0 0 8px rgb(193, 193, 193);
 }
 
+.todo-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.todo-div-container {
+    width: 215px;
+    height: 135px;
+    display: grid;
+    place-items: center;
+}
+
+.todo-div {
+    padding: 20px 10px;
+    width: 195px;
+    height: 115px;
+    border-color: lightblue;
+    border-style: solid;
+    border-top-width: 2px;
+    border-right-width: 3px;
+    border-left-width: 3px;
+    border-bottom-width: 5px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: 1fr min-content;
+    text-align: center;
+    background-color: rgb(243, 252, 255);
+}
+
+.todo-div:hover {
+    padding: 28px 18px;
+    cursor: pointer;
+    width: 215px;
+    height: 135px;
+    p:first-child {
+        font-size: 2.1rem;
+    }
+    p:last-child {
+        font-size: 1.6rem;
+    }
+    box-shadow: 0 0 10px 1px rgb(220, 220, 220);
+}
+
+.p1 {
+    border-color: rgb(247, 247, 0);
+    background-color: rgb(255, 254, 236);
+}
+
+.completed {
+    border-color: lightgreen;
+    background-color: rgb(237, 255, 237);
+}
+
+.overdue {
+    border-color: rgb(255, 75, 75);
+    background-color: rgb(255, 246, 248);
+}
+
+.todo-div > p:first-child {
+    font-size: 1.9rem;
+}
+
+.todo-div > p:last-child {
+    font-size: 1.4rem;
+}
+
+/* dialog stuff below */
+
+/* add & view/edit todo dialog stuff, sans cancel/ok btns */
+
+dialog {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+::backdrop {
+    background-color: rgb(0, 0, 0, 0.3);
+}
+
 #todo-dialog {
     padding: 3rem;
     width: max(45rem, 40%);
@@ -366,8 +380,8 @@ main h3 {
 }
 
 .add-todo-container > p > input,
-.add-todo-container > p > select,
 .add-todo-container > p > textarea,
+.add-todo-container > p > select,
 .edit-name-and-description-div,
 .radio-buttons {
     width: 70%;
@@ -445,6 +459,14 @@ main h3 {
     background-color: #4b8db0;
 }
 
+.todo-dialog-buttons {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* view/edit todo dialog specific stuff */
+
 .edit-name-and-description-div {
     display: flex;
     justify-content: space-between;
@@ -467,40 +489,6 @@ main h3 {
     cursor: pointer;
 }
 
-.todo-dialog-buttons {
-    display: flex;
-    gap: 4rem;
-    align-items: center;
-}
-
-.todo-dialog-buttons > button:not(.delete-todo-btn),
-.confirm-dialog-buttons > button,
-.delete-confirmation-ok-btn,
-#dupe-project-dialog > button {
-    background-color: var(--nav-gray);
-    border-radius: 14px;
-    border: 1px solid gray;
-}
-
-.todo-dialog-buttons > button:not(.delete-todo-btn) {
-    padding: 0.6rem 3rem;
-    height: min-content;
-}
-
-.todo-dialog-buttons > button:not(.delete-todo-btn):hover,
-.confirm-dialog-buttons > button:hover,
-.delete-confirmation-ok-btn:hover,
-#dupe-project-dialog > button:hover {
-    background-color: lightgray;
-}
-
-.todo-dialog-buttons > button:not(.delete-todo-btn):active,
-.confirm-dialog-buttons > button:active,
-.delete-confirmation-ok-btn:active,
-#dupe-project-dialog > button:active {
-    background-color: var(--nav-gray);
-}
-
 .delete-todo-btn {
     padding: 0.4rem 2.4rem;
     background-color: red;
@@ -519,38 +507,90 @@ main h3 {
     background-color: rgb(200, 0, 0);
 }
 
-#confirm-delete-dialog,
-#dupe-project-dialog {
+/* add project dialog stuff, sans cancel/ok btns */
+
+#add-project-dialog {
+    padding: 2rem;
+    font-size: 1.8rem;
+}
+
+#add-project-dialog > form {
+    display: grid;
+    gap: 3rem;
+}
+
+#add-project-dialog > form > p:first-child {
+    display: grid;
+    gap: 1rem;
+}
+
+#add-project-dialog input {
+    margin: 0.5rem;
+    padding: 0.5rem 0.8rem;
+}
+
+/* remove project dialog stuff, sans cancel/ok btns */
+
+#remove-project-dialog {
+    padding: 3rem 3rem 2rem 3rem;
+    font-size: 1.8rem;
+}
+
+#remove-project-dialog > form {
+    display: grid;
+    gap: 2rem;
+}
+
+#remove-project-dialog fieldset {
+    padding: 3rem 2rem;
+}
+
+#remove-project-dialog ul {
+    display: grid;
+    gap: 1.5rem;
+}
+
+#remove-project-dialog li {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    font-size: 1.7rem;
+}
+
+#remove-project-dialog .disabled {
+    color: rgb(137, 137, 137);
+}
+
+/* javascript-created dialog stuff, sans cancel/ok btns */
+
+#user-confirm-delete-todo-dialog,
+#dupe-project-dialog,
+#user-confirm-remove-project-dialog {
     padding: 1rem 1.5rem 1.5rem 1.5rem;
     text-align: center;
     font-size: 1.8rem;
 }
 
-#confirm-delete-dialog > p,
-#dupe-project-dialog {
+#user-confirm-delete-todo-dialog > p,
+#dupe-project-dialog,
+#user-confirm-remove-project-dialog > p {
     line-height: 1.5;
 }
 
-#confirm-delete-dialog > p:first-child,
-#dupe-project-dialog > p:first-child {
+#user-confirm-delete-todo-dialog > p:first-child,
+#dupe-project-dialog > p:first-child,
+#user-confirm-remove-project-dialog > p:first-child {
     font-size: 2rem;
     margin-bottom: 0.5rem;
 }
 
-#dupe-project-dialog > button {
-    margin-top: 2rem;
+/* user-confirm remove project dialog specific, sans btns */
+
+#user-confirm-remove-project-dialog {
+    width: min(40rem, 40%);
 }
 
-.confirm-dialog-buttons {
-    margin-top: 2rem;
-    display: flex;
-    gap: 2.8rem;
-    justify-content: center;
-}
-
-.confirm-dialog-buttons > button {
-    padding: 0.5rem 2.2rem;
-}
+/* delete confirmation dialog stuff, sans ok btn */
 
 #delete-confirmation-dialog {
     padding: 2rem 2rem 1.5rem 2rem;
@@ -563,75 +603,65 @@ main h3 {
     margin-bottom: 2rem;
 }
 
+/* ALL dialog cancel/ok btns */
+
+.todo-dialog-buttons > button:not(.delete-todo-btn),
+.confirm-dialog-buttons > button,
+.delete-confirmation-ok-btn,
+#dupe-project-dialog > button,
+.confirm-project-remove-buttons > button {
+    background-color: var(--nav-gray);
+    border-radius: 14px;
+    border: 1px solid gray;
+}
+
+.todo-dialog-buttons > button:not(.delete-todo-btn) {
+    padding: 0.6rem 3rem;
+    height: min-content;
+}
+
+.todo-dialog-buttons > button:not(.delete-todo-btn):hover,
+.confirm-dialog-buttons > button:hover,
+.delete-confirmation-ok-btn:hover,
+#dupe-project-dialog > button:hover,
+.confirm-project-remove-buttons > button:hover {
+    background-color: lightgray;
+}
+
+.todo-dialog-buttons > button:not(.delete-todo-btn):active,
+.confirm-dialog-buttons > button:active,
+.delete-confirmation-ok-btn:active,
+#dupe-project-dialog > button:active,
+.confirm-project-remove-buttons > button:active {
+    background-color: var(--nav-gray);
+}
+
+#dupe-project-dialog > button {
+    margin-top: 2rem;
+}
+
+.confirm-dialog-buttons,
+.confirm-project-remove-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 2.8rem;
+    justify-content: center;
+}
+
+.confirm-dialog-buttons > button,
+.confirm-project-remove-buttons > button {
+    padding: 0.5rem 2.2rem;
+}
+
 .delete-confirmation-ok-btn,
 #dupe-project-dialog > button {
     padding: 0.5rem 2rem;
 }
 
-.todo-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+.remove-project-buttons {
+    gap: 3rem;
 }
 
-.todo-div-container {
-    width: 215px;
-    height: 135px;
-    display: grid;
-    place-items: center;
-}
-
-.todo-div {
-    padding: 20px 10px;
-    width: 195px;
-    height: 115px;
-    border-color: lightblue;
-    border-style: solid;
-    border-top-width: 2px;
-    border-right-width: 3px;
-    border-left-width: 3px;
-    border-bottom-width: 5px;
-    border-radius: 10px;
-    display: grid;
-    grid-template-rows: 1fr min-content;
-    text-align: center;
-    background-color: rgb(243, 252, 255);
-}
-
-.todo-div:hover {
-    padding: 28px 18px;
-    cursor: pointer;
-    width: 215px;
-    height: 135px;
-    p:first-child {
-        font-size: 2.1rem;
-    }
-    p:last-child {
-        font-size: 1.6rem;
-    }
-    box-shadow: 0 0 10px 1px rgb(220, 220, 220);
-}
-
-.p1 {
-    border-color: rgb(247, 247, 0);
-    background-color: rgb(255, 254, 236);
-}
-
-.completed {
-    border-color: lightgreen;
-    background-color: rgb(237, 255, 237);
-}
-
-.overdue {
-    border-color: rgb(255, 75, 75);
-    background-color: rgb(255, 246, 248);
-}
-
-.todo-div > p:first-child {
-    font-size: 1.9rem;
-}
-
-.todo-div > p:last-child {
-    font-size: 1.4rem;
+.remove-project-buttons > button {
+    padding: 0.6rem 2.5rem;
 }

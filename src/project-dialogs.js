@@ -93,7 +93,7 @@ export function projectDialogController() {
                 removeProjectDialog.close("cancel");
             } else {
                 const confirmProjectRemoveDialog = document.createElement("dialog");
-                confirmProjectRemoveDialog.id = "confirm-project-remove-dialog";
+                confirmProjectRemoveDialog.id = "user-confirm-remove-project-dialog";
                 const warningSymbol = document.createElement("p");
                 warningSymbol.textContent = `\u2757`;
                 confirmProjectRemoveDialog.appendChild(warningSymbol);
