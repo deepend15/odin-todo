@@ -80,15 +80,9 @@ export function projectDialogController() {
 
     function activateRemoveProjectOKBtn() {
         removeProjectOKBTn.addEventListener("click", () => {
-            function getCheckedProjects() {
-                const projectSelections = Array.from(
-                    removeProjectDialog.querySelectorAll("input[name=project]"));
-                const checkedProjectArr = projectSelections.filter(
-                    selection => selection.checked === true
-                );
-                return checkedProjectArr;
-            }
-            const checkedProjectArr = getCheckedProjects();
+            const checkedProjectArr = Array.from(
+                removeProjectDialog.querySelectorAll(
+                "input[name=project]:checked"));
             if (checkedProjectArr.length === 0) {
                 removeProjectDialog.close("cancel");
             } else {
