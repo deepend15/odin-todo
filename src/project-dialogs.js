@@ -80,7 +80,7 @@ export function projectDialogController() {
 
     function activateRemoveProjectOKBtn() {
         removeProjectOKBTn.addEventListener("click", () => {
-            function getCheckedProject() {
+            function getCheckedProjects() {
                 const projectSelections = Array.from(
                     removeProjectDialog.querySelectorAll("input[name=project]"));
                 const checkedProjectArr = projectSelections.filter(
@@ -88,39 +88,11 @@ export function projectDialogController() {
                 );
                 return checkedProjectArr;
             }
-            const checkedProjectArr = getCheckedProject();
+            const checkedProjectArr = getCheckedProjects();
             if (checkedProjectArr.length === 0) {
                 removeProjectDialog.close("cancel");
             } else {
-                const confirmProjectRemoveDialog = document.createElement("dialog");
-                confirmProjectRemoveDialog.id = "user-confirm-remove-project-dialog";
-                const warningSymbol = document.createElement("p");
-                warningSymbol.textContent = `\u2757`;
-                confirmProjectRemoveDialog.appendChild(warningSymbol);
-                const warningText = document.createElement("p");
-                warningText.textContent = `All todos currently under this project will
-                be moved to the 'Personal' project. Do you wish to proceed?`;
-                confirmProjectRemoveDialog.appendChild(warningText);
-                const confirmProjectRemoveDialogBtnsDiv = document.createElement("div");
-                confirmProjectRemoveDialogBtnsDiv.classList.add("confirmation-dialog-buttons");
-                const confirmProjectRemoveNoBtn = document.createElement("button");
-                confirmProjectRemoveNoBtn.classList.add("confirm-project-remove-no");
-                confirmProjectRemoveNoBtn.textContent = "No";
-                confirmProjectRemoveDialogBtnsDiv.appendChild(confirmProjectRemoveNoBtn);
-                const confirmProjectRemoveYesBtn = document.createElement("button");
-                confirmProjectRemoveYesBtn.classList.add("confirm-project-remove-yes");
-                confirmProjectRemoveYesBtn.textContent = "Yes";
-                confirmProjectRemoveDialogBtnsDiv.appendChild(confirmProjectRemoveYesBtn);
-                confirmProjectRemoveDialog.appendChild(confirmProjectRemoveDialogBtnsDiv);
-                const body = document.querySelector("body");
-                body.appendChild(confirmProjectRemoveDialog);
-                confirmProjectRemoveDialog.showModal();
-                confirmProjectRemoveNoBtn.addEventListener("click", () => {
-                    confirmProjectRemoveDialog.close();
-                });
-                confirmProjectRemoveYesBtn.addEventListener("click", () => {
-                    confirmProjectRemoveDialog.close();
-                    removeProjectDialog.close();
+                function showDeleteConfirmation() {
                     const deleteConfirmationDialog = document.createElement("dialog");
                     deleteConfirmationDialog.id = "delete-confirmation-dialog";
                     const deleteConfirmationTxt = document.createElement("p");
@@ -131,14 +103,70 @@ export function projectDialogController() {
                     deleteConfirmationOKBtn.setAttribute("autofocus", "");
                     deleteConfirmationOKBtn.textContent = "OK";
                     deleteConfirmationDialog.appendChild(deleteConfirmationOKBtn);
+                    const body = document.querySelector("body");
                     body.appendChild(deleteConfirmationDialog);
                     deleteConfirmationDialog.showModal();
                     deleteConfirmationOKBtn.addEventListener("click", () => {
                         deleteConfirmationDialog.close();
                     });
                     deleteConfirmationDialog.addEventListener("close", () => deleteConfirmationDialog.remove());
-                });
-                confirmProjectRemoveDialog.addEventListener("close", () => confirmProjectRemoveDialog.remove());
+                }
+
+                function getSelectedProjectTodos() {
+                    const allTodos = todos.getAllTodos();
+                    const selectedProjectTodos = [];
+                    for (const checkbox of checkedProjectArr) {
+                        const projectName = checkbox.nextElementSibling.textContent;
+                        const projectTodos = allTodos.filter(todo => todo.project === projectName);
+                        for (const todo of projectTodos) {
+                            selectedProjectTodos.push(todo);
+                        };
+                    }
+                    return selectedProjectTodos;
+                }
+                const selectedProjectTodos = getSelectedProjectTodos();
+                if (selectedProjectTodos.length === 0) {
+                    removeProjectDialog.close();
+                    showDeleteConfirmation();
+                } else {
+                    const confirmProjectRemoveDialog = document.createElement("dialog");
+                    confirmProjectRemoveDialog.id = "user-confirm-remove-project-dialog";
+                    const warningSymbol = document.createElement("p");
+                    warningSymbol.textContent = `\u2757`;
+                    confirmProjectRemoveDialog.appendChild(warningSymbol);
+                    const warningText = document.createElement("p");
+                    let projectSpan;
+                    if (checkedProjectArr.length > 1) {
+                        projectSpan = ` these projects `;
+                    } else {
+                        projectSpan = ` this project `;
+                    }
+                    warningText.textContent = `All todos currently under` + projectSpan + `will be moved to the 'Personal' project. Do you wish to proceed?`;
+                    confirmProjectRemoveDialog.appendChild(warningText);
+                    const confirmProjectRemoveDialogBtnsDiv = document.createElement("div");
+                    confirmProjectRemoveDialogBtnsDiv.classList.add("confirmation-dialog-buttons");
+                    const confirmProjectRemoveNoBtn = document.createElement("button");
+                    confirmProjectRemoveNoBtn.classList.add("confirm-project-remove-no");
+                    confirmProjectRemoveNoBtn.textContent = "No";
+                    confirmProjectRemoveDialogBtnsDiv.appendChild(confirmProjectRemoveNoBtn);
+                    const confirmProjectRemoveYesBtn = document.createElement("button");
+                    confirmProjectRemoveYesBtn.classList.add("confirm-project-remove-yes");
+                    confirmProjectRemoveYesBtn.textContent = "Yes";
+                    confirmProjectRemoveDialogBtnsDiv.appendChild(confirmProjectRemoveYesBtn);
+                    confirmProjectRemoveDialog.appendChild(confirmProjectRemoveDialogBtnsDiv);
+                    const body = document.querySelector("body");
+                    body.appendChild(confirmProjectRemoveDialog);
+                    confirmProjectRemoveDialog.showModal();
+                    confirmProjectRemoveNoBtn.addEventListener("click", () => {
+                        confirmProjectRemoveDialog.close();
+                    });
+                    confirmProjectRemoveYesBtn.addEventListener("click", () => {
+                        confirmProjectRemoveDialog.close();
+                        removeProjectDialog.close();
+                        showDeleteConfirmation();
+                    });
+                    confirmProjectRemoveDialog.addEventListener("close", () => confirmProjectRemoveDialog.remove());
+                };
             };
         });
     }
