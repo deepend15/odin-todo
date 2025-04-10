@@ -239,11 +239,7 @@ export function projectDialogController() {
         } else {
             const checkedProjectArr = Array.from(
                 removeProjectDialog.querySelectorAll(
-                "input[name=project]:checked"));
-
-            // const checkedProjectName = 
-            //     checkedProject.nextElementSibling.textContent;
-        
+                "input[name=project]:checked"));        
 
             function getSelectedProjectTodos() {
                 const allTodos = todos.getAllTodos();
@@ -257,13 +253,8 @@ export function projectDialogController() {
                 }
                 return selectedProjectTodos;
             }
-
             const checkedProjectTodos = getSelectedProjectTodos();
             
-
-            // const allTodos = todos.getAllTodos();
-            // const checkedProjectTodos = allTodos.filter(
-            //     todo => todo.project === checkedProjectName);
             function changeProjectTodoIds() {
                 const allTodos = todos.getAllTodos();
                 for (const todo of checkedProjectTodos) {
@@ -279,14 +270,6 @@ export function projectDialogController() {
             }
 
             changeProjectTodoIds();
-
-            // const allProjects = projects.getAllProjects();
-            // const matchingProjectArr = allProjects.filter(
-            //     project => project.title === checkedProjectName);
-            // const matchingProject = matchingProjectArr[0];
-            // allProjects.splice(
-            //     allProjects.indexOf(matchingProject), 1);
-            // console.log(projects.getAllProjects());
 
             function getCheckedProjectNames() {
                 const checkedProjectNameArr = [];
