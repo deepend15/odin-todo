@@ -222,6 +222,8 @@ export function projectDialogController() {
                 removeWhiteSpaces(newProjectName.value);
                 const capitalizedProjectName = capitalizeString(newProjectNameNoExtraWhiteSpace);
                 projects.addProject(capitalizedProjectName);
+                let projectsJSON = JSON.stringify(projects.getAllProjects());
+                localStorage.setItem("projects", projectsJSON);
                 loadProjectRows();
                 console.log(projects.getAllProjects());
                 navButtons().activateProjectBtns();
@@ -292,6 +294,9 @@ export function projectDialogController() {
             }
 
             removeProjects();
+            let projectsJSON = JSON.stringify(projects.getAllProjects());
+            localStorage.setItem("projects", projectsJSON);
+            loadProjectRows();
             console.log(projects.getAllProjects());
 
             const navRows = Array.from(

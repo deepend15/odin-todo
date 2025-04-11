@@ -286,6 +286,8 @@ export function todoDialogController() {
                 const todoID = projectName + `-` + newID.toString();
                 todos.addTodo(dialogTodoName.value, dialogDescription.value, dueDateValue, priorityValue, dialogProject.value, checkedRadioBtn.value, todoID);
                 console.log(allTodos);
+                let todosJSON = JSON.stringify(allTodos);
+                localStorage.setItem("todos", todosJSON);
             } 
         } else {
             const targetedTodoArray = allTodos.filter(todo => todo.targeted === 'yes');
@@ -314,6 +316,12 @@ export function todoDialogController() {
                 adjustProjectTodoIDs();
                 allTodos.splice(allTodos.indexOf(targetedTodo), 1);
                 deleteTodoBtn.remove();
+                if (allTodos.length === 0) {
+                    localStorage.removeItem("todos");
+                } else {
+                    let todosJSON = JSON.stringify(allTodos);
+                    localStorage.setItem("todos", todosJSON);
+                }
                 console.log(allTodos);
             } else {
                 if (nameLine.lastElementChild.id === "todoName") {
@@ -338,6 +346,8 @@ export function todoDialogController() {
                 deleteTodoBtn.remove();
                 okBtn.removeAttribute("autofocus");
                 delete targetedTodo.targeted;
+                let todosJSON = JSON.stringify(allTodos);
+                localStorage.setItem("todos", todosJSON);
                 console.log(allTodos);
             }
         };
