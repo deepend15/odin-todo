@@ -225,7 +225,6 @@ export function projectDialogController() {
                 let projectsJSON = JSON.stringify(projects.getAllProjects());
                 localStorage.setItem("projects", projectsJSON);
                 loadProjectRows();
-                console.log(projects.getAllProjects());
                 navButtons().activateProjectBtns();
                 const projectRowsDiv = document.querySelector(".project-rows");
                 navButtons().activateNavRowEventListener(projectRowsDiv);
@@ -267,7 +266,6 @@ export function projectDialogController() {
                     const newID = numberOfPersonalTodos + 1;
                     todo.project = "Personal";
                     todo.todoID = "personal-" + newID.toString();
-                    console.log(todo);
                 };
             }
 
@@ -297,7 +295,6 @@ export function projectDialogController() {
             let projectsJSON = JSON.stringify(projects.getAllProjects());
             localStorage.setItem("projects", projectsJSON);
             loadProjectRows();
-            console.log(projects.getAllProjects());
 
             const navRows = Array.from(
                 document.querySelectorAll(

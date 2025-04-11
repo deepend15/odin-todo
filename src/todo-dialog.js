@@ -62,7 +62,6 @@ export function todoDialogController() {
     function dialogEscBtn(e) {
         if (e.key === "Escape") {
             todoDialog.close("cancel");
-            console.log(todoDialog.returnValue);
         }
     };
 
@@ -241,7 +240,6 @@ export function todoDialogController() {
             });
         };
         todoDialog.showModal();
-        console.log(todos.getAllTodos());
         window.addEventListener("keydown", dialogEscBtn);
         todoDialog.addEventListener("close", () => window.removeEventListener("keydown", dialogEscBtn));
     }
@@ -285,7 +283,6 @@ export function todoDialogController() {
                 const newID = numberOfProjectTodos + 1;
                 const todoID = projectName + `-` + newID.toString();
                 todos.addTodo(dialogTodoName.value, dialogDescription.value, dueDateValue, priorityValue, dialogProject.value, checkedRadioBtn.value, todoID);
-                console.log(allTodos);
                 let todosJSON = JSON.stringify(allTodos);
                 localStorage.setItem("todos", todosJSON);
             } 
@@ -322,7 +319,6 @@ export function todoDialogController() {
                     let todosJSON = JSON.stringify(allTodos);
                     localStorage.setItem("todos", todosJSON);
                 }
-                console.log(allTodos);
             } else {
                 if (nameLine.lastElementChild.id === "todoName") {
                     targetedTodo.title = nameLine.lastElementChild.value;
@@ -348,7 +344,6 @@ export function todoDialogController() {
                 delete targetedTodo.targeted;
                 let todosJSON = JSON.stringify(allTodos);
                 localStorage.setItem("todos", todosJSON);
-                console.log(allTodos);
             }
         };
 
