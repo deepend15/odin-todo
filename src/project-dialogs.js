@@ -294,7 +294,6 @@ export function projectDialogController() {
             removeProjects();
             let projectsJSON = JSON.stringify(projects.getAllProjects());
             localStorage.setItem("projects", projectsJSON);
-            loadProjectRows();
 
             const navRows = Array.from(
                 document.querySelectorAll(
