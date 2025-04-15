@@ -7,7 +7,7 @@ import { todos } from "./todo-objects.js";
 import { loadToday } from "./today-page.js";
 import { todoDialogController } from "./todo-dialog.js";
 
-const initialSiteLoad = (function () {
+(function initialSiteLoad() {
     function addInitialProjects() {
         projects.addProject("Personal");
         projects.addProject("Work");
