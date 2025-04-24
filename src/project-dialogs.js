@@ -195,7 +195,7 @@ export function projectDialogController() {
             return;
         } else if (e.currentTarget.id === "add-project-dialog") {
             const allProjects = projects.getAllProjects();
-            const dupeProjectArray = allProjects.filter(project => project.title === newProjectName.value);
+            const dupeProjectArray = allProjects.filter(project => project.title === capitalizeString(newProjectName.value));
             if (dupeProjectArray.length !== 0) {
                 const dupeProjectDialog = document.createElement("dialog");
                 dupeProjectDialog.id = "dupe-project-dialog";
