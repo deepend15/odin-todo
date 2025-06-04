@@ -270,6 +270,9 @@ export function projectDialogController() {
             }
 
             changeProjectTodoIds();
+            const allTodos = todos.getAllTodos();
+            let todosJSON = JSON.stringify(allTodos);
+            localStorage.setItem("todos", todosJSON);
 
             function getCheckedProjectNames() {
                 const checkedProjectNameArr = [];
